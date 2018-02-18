@@ -1,0 +1,23 @@
+{
+  "login": "Iniciar sesión",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "remember.me": "Recuérdame",
+  "not.have.account.yet": "{icon}¿Todavía no tienes una cuenta? pincha {link} para registrarte",
+  "register.here": "aquí",
+  "registration": "Registro",
+  "register": "Registrarse",
+  "registration.instructions": "Rellena los siguientes campos para registrar un nuevo usuario",
+  "password.confirmation": "Contraseña de confirmación",
+  "name": "Nombre",
+  "gender": "Género",
+  "male": "Hombre",
+  "female": "Mujer",
+  "home": "Página principal",
+  "language": "Idioma",
+  "english": "Inglés",
+  "spanish": "Español",
+  "french": "Francés",
+  "japanese": "Japonés",
+  "logout": "Cerrar sesión"
+}

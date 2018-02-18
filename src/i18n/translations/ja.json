@@ -1,0 +1,23 @@
+{
+  "login": "ログイン",
+  "email": "Eメール",
+  "password": "パスワード",
+  "remember.me": "思い出す",
+  "not.have.account.yet": "{icon}まだアカウントを持っていないのですか, 登録するには{link}をクリック",
+  "register.here": "ここ",
+  "registration": "登録",
+  "register": "登録",
+  "registration.instructions": "新しいユーザーを登録するには、以下のフィールドを入力してください",
+  "password.confirmation": "パスワード確認",
+  "name": "名",
+  "gender": "性別",
+  "male": "男性",
+  "female": "女性",
+  "home": "メインページ",
+  "language": "言語",
+  "english": "英語",
+  "spanish": "スペイン語",
+  "french": "フランス語",
+  "japanese": "日本語",
+  "logout": "ログアウト"
+}

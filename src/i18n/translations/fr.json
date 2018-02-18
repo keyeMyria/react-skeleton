@@ -1,0 +1,23 @@
+{
+  "login": "Connexion",
+  "email": "Email",
+  "password": "Mot de passe",
+  "remember.me": "Souvenir de",
+  "not.have.account.yet": "{icon}Vous n'avez pas encore de compte? cliquez {link} pour vous inscrire",
+  "register.here": "ici",
+  "registration": "Enregistrement",
+  "register": "Registre",
+  "registration.instructions": "Remplissez les champs suivants pour enregistrer un nouvel utilisateur",
+  "password.confirmation": "Confirmation mot de passe",
+  "name": "Prénom",
+  "gender": "La genre",
+  "male": "Mâle",
+  "female": "Femelle",
+  "home": "Page principal",
+  "language": "La langue",
+  "english": "Anglais",
+  "spanish": "Espanol",
+  "french": "Français",
+  "japanese": "Japonais",
+  "logout": "Connectez - Out"
+}

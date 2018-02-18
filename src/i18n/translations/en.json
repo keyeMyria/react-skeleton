@@ -1,0 +1,23 @@
+{
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "remember.me": "Remember me",
+  "not.have.account.yet": "{icon}Don't have an account yet? click {link} to register",
+  "register.here": "here",
+  "registration": "Registration",
+  "register": "Register",
+  "registration.instructions": "Fill the following fields in order to register a new user",
+  "password.confirmation": "Password confirmation",
+  "name": "Name",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "home": "Home",
+  "language": "Language",
+  "english": "English",
+  "spanish": "Spanish",
+  "french": "French",
+  "japanese": "Japanese",
+  "logout": "Logout"
+}
