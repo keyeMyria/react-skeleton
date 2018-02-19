@@ -12,12 +12,10 @@ import {
 } from '../../types/authentication';
 import {URI_LOGIN, URI_LOGOUT, URI_SIGN_UP} from '../../config';
 import {post} from '../../services/http';
-import {clearAuthStorage, setAuthStorage} from "../../utils/storage";
 
 export const signIn = credentials => {
     return dispatch => {
         post(URI_LOGIN, credentials, null).then(response => {
-            setAuthStorage(response, credentials.remember);
             dispatch({type: SIGN_IN_SUCCESS});
             dispatch(info({
                 message: response.data.message,
@@ -36,7 +34,6 @@ export const signIn = credentials => {
 export const logout = () => {
     return dispatch => {
         post(URI_LOGOUT).then(response => {
-            clearAuthStorage();
             dispatch({type: LOGOUT});
             dispatch(push('/login'));
             dispatch(info({
@@ -45,7 +42,6 @@ export const logout = () => {
             }));
         }).catch(response => {
             if (response.status === 400) {
-                clearAuthStorage();
                 dispatch(push('/login'));
             } else {
                 dispatch(error({

@@ -8,18 +8,8 @@ import {ROLE_ADMIN, ROLE_USER} from './config';
 import {WithAuth, WithoutAuth} from './utils/security';
 import {connect} from "react-redux";
 import Notifications from "react-notification-system-redux";
-import {clearAuthStorage, isUserLogged} from "./utils/storage";
-import {push} from "react-router-redux";
 
 class RoutesComponent extends Component {
-
-    componentDidMount() {
-        const {dispatch} = this.props;
-        if (!isUserLogged()) {
-            clearAuthStorage();
-            dispatch(push('/login'));
-        }
-    }
 
     render() {
         const {notifications} = this.props;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import {getUserRoles, isUserLogged} from "./storage";
+import {getUserRoles, isUserLogged} from "./user_info";
 
 export const WithAuth = (WrappedComponent, allowedRoles) => {
     return class BaseAuth extends Component {
@@ -8,8 +8,7 @@ export const WithAuth = (WrappedComponent, allowedRoles) => {
         userHasPermission() {
             let userRoles = getUserRoles();
             if (userRoles) {
-                let roleList = userRoles.split(',');
-                return roleList.filter(role => {
+                return userRoles.filter(role => {
                     return allowedRoles.indexOf(role) > -1;
                 }).length > 0;
             }

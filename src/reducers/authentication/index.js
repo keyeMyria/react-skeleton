@@ -9,12 +9,12 @@ import {
     COMPLETED_FORM,
     INCOMPLETE_FORM
 } from '../../types/authentication';
-import {getCookie} from '../../utils/cookies';
+import {isUserLogged} from "../../utils/user_info";
 
 const initState = {
     message: '',
     error: null,
-    logged: getCookie('ROLES') != null,
+    logged: isUserLogged(),
     isIncomplete: true,
     errors: []
 };

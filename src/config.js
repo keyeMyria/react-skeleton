@@ -7,6 +7,3 @@ export const URI_LOGOUT = URI_AUTH + '/logout';
 
 export const ROLE_ADMIN = 'ROLE_ADMIN';
 export const ROLE_USER = 'ROLE_USER';
-
-
-export const COOKIE_ROLES_NAME = 'ROLES';
