@@ -5,23 +5,22 @@ const ROLES_ATTRIBUTE = "ROLES";
 const LANGUAGE_ATTRIBUTE = "LANGUAGE";
 
 export const getUserRoles = () => {
-    let userAuthData = getCookie(USER_INFO_KEY);
-    if (userAuthData != null) {
-        let decodedCredentials = JSON.parse(window.atob(userAuthData));
-        return decodedCredentials[ROLES_ATTRIBUTE];
-    }
-    return null;
+    return getAttributeFromUserInfoCookie(ROLES_ATTRIBUTE);
 };
 
 export const getUserLanguage = () => {
-    let userAuthData = getCookie(USER_INFO_KEY);
-    if (userAuthData != null) {
-        let decodedCredentials = JSON.parse(window.atob(userAuthData));
-        return decodedCredentials[LANGUAGE_ATTRIBUTE];
-    }
-    return null;
+    return getAttributeFromUserInfoCookie(LANGUAGE_ATTRIBUTE);
 };
 
 export const isUserLogged = () => {
-    return getCookie(USER_INFO_KEY) !== null;
+    return getUserInfo() !== null;
+};
+
+const getAttributeFromUserInfoCookie = attribute => {
+    let userAuthData = getUserInfo();
+    return userAuthData != null ? JSON.parse(window.atob(userAuthData))[attribute] : null;
+};
+
+const getUserInfo = () => {
+    return getCookie(USER_INFO_KEY);
 };
