@@ -106,17 +106,17 @@ class SignUpContainer extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({authenticationReducer}) => {
     return {
-        email: state.authenticationReducer['email'],
-        password: state.authenticationReducer['password'],
-        passwordConfirmation: state.authenticationReducer['passwordConfirmation'],
-        name: state.authenticationReducer['name'],
-        gender: state.authenticationReducer['gender'],
-        isIncomplete: state.authenticationReducer.isIncomplete,
-        error: state.authenticationReducer.error,
-        errors: state.authenticationReducer.errors,
-        logged: state.authenticationReducer.logged
+        email: authenticationReducer['email'],
+        password: authenticationReducer['password'],
+        passwordConfirmation: authenticationReducer['passwordConfirmation'],
+        name: authenticationReducer['name'],
+        gender: authenticationReducer['gender'],
+        isIncomplete: authenticationReducer.isIncomplete,
+        error: authenticationReducer.error,
+        errors: authenticationReducer.errors,
+        logged: authenticationReducer.logged
     }
 };
 

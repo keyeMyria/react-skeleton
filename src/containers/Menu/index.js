@@ -44,9 +44,9 @@ class MenuContainer extends Component {
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({authenticationReducer}) => {
     return {
-        logged: state.authenticationReducer.logged
+        logged: authenticationReducer.logged
     }
 };
 

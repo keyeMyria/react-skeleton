@@ -25,9 +25,9 @@ class HomeContainer extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({authenticationReducer}) => {
     return {
-        userRoles: state.authenticationReducer.userRoles
+        userRoles: authenticationReducer.userRoles
     }
 };
 

@@ -4,7 +4,7 @@ import ja from 'react-intl/locale-data/ja';
 import en from 'react-intl/locale-data/en';
 import es from 'react-intl/locale-data/es';
 
-import {getUserLanguage} from "../utils/user_info";
+import {getUserLanguage} from "../utils/user-info";
 
 export const registerLocales = () => {
     addLocaleData([...en, ...es, ...ja, ...fr]);
@@ -24,4 +24,14 @@ export const getMessages = locale => {
     } catch (ex) {
         return require(`./translations/en.json`);
     }
+};
+
+
+export const getLocaleData = () => {
+    let locale = getLocale();
+    return {
+        locale: locale,
+        key: locale,
+        messages: getMessages(locale)
+    };
 };

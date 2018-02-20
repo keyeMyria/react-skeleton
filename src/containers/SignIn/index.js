@@ -85,13 +85,13 @@ class SignInContainer extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({authenticationReducer}) => {
     return {
-        email: state.authenticationReducer['email'],
-        password: state.authenticationReducer['password'],
-        remember: state.authenticationReducer['remember'],
-        isIncomplete: state.authenticationReducer.isIncomplete,
-        error: state.authenticationReducer.error
+        email: authenticationReducer['email'],
+        password: authenticationReducer['password'],
+        remember: authenticationReducer['remember'],
+        isIncomplete: authenticationReducer.isIncomplete,
+        error: authenticationReducer.error
 
     }
 };
