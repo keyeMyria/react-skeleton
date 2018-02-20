@@ -4,16 +4,22 @@ const USER_INFO_KEY = "USER_INFO";
 const ROLES_ATTRIBUTE = "ROLES";
 const LANGUAGE_ATTRIBUTE = "LANGUAGE";
 
-export const getUserRoles = () => {
-    return getAttributeFromUserInfoCookie(ROLES_ATTRIBUTE);
-};
-
 export const getUserLanguage = () => {
     return getAttributeFromUserInfoCookie(LANGUAGE_ATTRIBUTE);
 };
 
 export const isUserLogged = () => {
     return getUserInfo() !== null;
+};
+
+export const userHasRole = allowedRoles => {
+    let userRoles = getUserRoles();
+    if (userRoles) {
+        return userRoles.filter(role => {
+            return allowedRoles.indexOf(role) > -1;
+        }).length > 0;
+    }
+    return false;
 };
 
 const getAttributeFromUserInfoCookie = attribute => {
@@ -23,4 +29,8 @@ const getAttributeFromUserInfoCookie = attribute => {
 
 const getUserInfo = () => {
     return getCookie(USER_INFO_KEY);
+};
+
+const getUserRoles = () => {
+    return getAttributeFromUserInfoCookie(ROLES_ATTRIBUTE);
 };

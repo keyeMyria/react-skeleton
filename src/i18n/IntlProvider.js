@@ -12,8 +12,7 @@ class IntlProvider extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    const {localeReducer} = state;
+const mapStateToProps = ({localeReducer}) => {
     return {
         key: localeReducer.key,
         locale: localeReducer.locale,
