@@ -8,7 +8,7 @@ import {reducer as notifications} from 'react-notification-system-redux';
 import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
 
-let store = function (history) {
+export default history => {
     const reducer = combineReducers({
         localeReducer,
         authenticationReducer,
@@ -25,4 +25,3 @@ let store = function (history) {
     )
 
 };
-export default store;

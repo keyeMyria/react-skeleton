@@ -44,12 +44,6 @@ class MenuContainer extends Component {
 
 }
 
-const mapStateToProps = ({authenticationReducer}) => {
-    return {
-        logged: authenticationReducer.logged
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         dispatch
@@ -57,6 +51,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-    mapStateToProps,
     mapDispatchToProps
 )(MenuContainer);
