@@ -1,5 +1,8 @@
-import {getLocale, getMessages} from '../i18n/utils';
-import {LOGOUT, SIGN_IN_SUCCESS} from '../types/authentication';
+import {getLocale, getMessages} from '../../i18n/utils';
+import {APP_NAME} from "../../config";
+
+const SIGN_IN_SUCCESS = `${APP_NAME}/authentication/SIGN_IN_SUCCESS`;
+const LOGOUT = `${APP_NAME}/authentication/LOGOUT`;
 
 let locale = getLocale();
 const initState = {

@@ -30,6 +30,7 @@ class SelectComponent extends Component {
         });
         return (
             <SemanticSelect
+                {...this.props}
                 options={options}
                 placeholder={intl.formatMessage({id: placeholderid})}
                 onChange={(e, response) => onChange(response.name, response.value)}

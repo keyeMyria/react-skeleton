@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {CookiesProvider} from 'react-cookie';
 import AppRoutes from './routes';
 import {ConnectedRouter} from 'react-router-redux';
-import store from './store';
+import store from './redux/store';
 import createBrowserHistory from 'history/createBrowserHistory';
 import IntlProvider from './i18n/IntlProvider';
 

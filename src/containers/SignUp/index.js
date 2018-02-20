@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {GENDER_OPTIONS} from '../../types/authentication';
-import {signUp, setSignUpFormFieldValue} from '../../actions/authentication';
+import {signUp, setSignUpFormFieldValue} from '../../redux/modules/authentication';
 import Button from '../../components/Button';
 import Form, {FormField, FormGroup, Select, Input} from '../../components/Form';
 import Title from '../../components/Title';
@@ -10,6 +9,11 @@ import Grid, {GridColumn} from '../../components/Grid';
 import Container from '../../components/Container';
 import ErrorsContainer from '../../components/ErrorsContainer';
 import Text from '../../components/Text';
+
+const GENDER_OPTIONS = [
+    {key: 'male', value: 'MALE'},
+    {key: 'female', value: 'FEMALE'}
+];
 
 class SignUpContainer extends Component {
 

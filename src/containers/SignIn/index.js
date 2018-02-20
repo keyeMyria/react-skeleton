@@ -13,7 +13,7 @@ import Divider from '../../components/Divider';
 import Form, {Checkbox, FormField, FormGroup, Input} from '../../components/Form';
 import Title from '../../components/Title';
 
-import {signIn, setSignInFormFieldValue} from '../../actions/authentication';
+import {signIn, setSignInFormFieldValue} from '../../redux/modules/authentication';
 
 class SignInContainer extends React.Component {
 

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Menu, {MenuItem, MenuGroup} from '../../components/Menu';
 import Dropdown, {DropdownMenu, DropdownItem} from '../../components/Dropdown';
 
-import {logout} from '../../actions/authentication';
+import {logout} from '../../redux/modules/authentication';
 import Text from '../../components/Text';
 
 class MenuContainer extends Component {

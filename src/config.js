@@ -1,3 +1,5 @@
+export const APP_NAME = "react-skeleton";
+
 const URI_AUTH = '/auth';
 
 export const URI_LOGIN = URI_AUTH + '/login';
