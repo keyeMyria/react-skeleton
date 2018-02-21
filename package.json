@@ -35,9 +35,6 @@
     "/api": {
       "target": "http://localhost:8080"
     },
-    "/auth": {
-      "target": "http://localhost:8080"
-    },
     "/files": {
       "target": "http://localhost:8000"
     }
