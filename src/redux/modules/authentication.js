@@ -23,7 +23,9 @@ const initState = {
     error: null,
     logged: isUserLogged(),
     isIncomplete: true,
-    errors: []
+    errors: [],
+    signUpError: null,
+    signUpErrors: []
 };
 
 export default (state = initState, action) => {
@@ -35,7 +37,7 @@ export default (state = initState, action) => {
         case SIGN_UP_SUCCESS:
             return {...state, error: null, logged: true, errors: []};
         case SIGN_UP_ERROR:
-            return {...state, error: action.error, logged: false, errors: action.errors};
+            return {...state, signUpError: action.error, logged: false, signUpErrors: action.errors};
         case LOGOUT:
             return {...state, error: null, logged: false};
         case SET_AUTH_FORM_FIELD:
@@ -62,11 +64,7 @@ export const signIn = credentials => {
                 position: 'br'
             }));
         }).catch(response => {
-            dispatch({type: SIGN_IN_ERROR, error: response.data.message});
-            dispatch(error({
-                message: response.data.message,
-                position: 'br'
-            }));
+            dispatch({type: SIGN_IN_ERROR, error: response.message});
         });
     }
 };
@@ -75,17 +73,17 @@ export const logout = () => {
     return dispatch => {
         post(URI_LOGOUT).then(response => {
             dispatch({type: LOGOUT});
-            dispatch(push('/login'));
+            dispatch(push('/welcome'));
             dispatch(info({
                 message: response.data.message,
                 position: 'br'
             }));
         }).catch(response => {
             if (response.status === 400) {
-                dispatch(push('/login'));
+                dispatch(push('/welcome'));
             } else {
                 dispatch(error({
-                    message: response.data.message,
+                    message: response.message,
                     position: 'br'
                 }));
             }
@@ -108,11 +106,7 @@ export const signUp = fields => {
                 position: 'br'
             }));
         }).catch(response => {
-            dispatch({type: SIGN_UP_ERROR, error: response.data.message, errors: response.data.errors});
-            dispatch(error({
-                message: response.data.message,
-                position: 'br'
-            }));
+            dispatch({type: SIGN_UP_ERROR, error: response.message, errors: response.errors});
         });
 
     }

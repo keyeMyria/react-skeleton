@@ -17,7 +17,6 @@ export const getLocale = () => {
     return locale.toLowerCase().split(/[_-]+/)[0];
 };
 
-
 export const getMessages = locale => {
     try {
         return require(`./translations/${locale}.json`);

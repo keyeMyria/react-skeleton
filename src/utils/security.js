@@ -6,7 +6,7 @@ export const WithAuth = (WrappedComponent, allowedRoles) => {
     return class BaseAuth extends Component {
 
         render() {
-            return userHasRole(allowedRoles) ? <WrappedComponent {...this.props} /> : <Redirect to='/login'/>
+            return userHasRole(allowedRoles) ? <WrappedComponent {...this.props} /> : <Redirect to='/welcome'/>
         }
 
     }

@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {
-    editAccountInfo, exitEditAccountInfo,
-    setEditAccountFormFieldValue
+    editAccountInfo, setEditAccountFormFieldValue
 } from "../../redux/modules/account";
 import Button from "../../components/Button";
 import {FormField, FormGroup, Input, Select} from "../../components/Form";
 import Form from "../../components/Form";
 import ErrorsContainer from "../../components/ErrorsContainer";
-
+import EditAvatar from "./EditAvatar";
 
 const GENDER_OPTIONS = [
     {key: 'male', value: 'MALE'},
     {key: 'female', value: 'FEMALE'}
+];
+
+const LANGUAGE_OPTIONS = [
+    {key: 'english', value: 'en'},
+    {key: 'spanish', value: 'es'},
+    {key: 'japanese', value: 'ja'},
+    {key: 'french', value: 'fr'}
+
 ];
 
 class EditAccountInfoContainer extends Component {
@@ -36,14 +42,15 @@ class EditAccountInfoContainer extends Component {
     }
 
     onClickExitEditCredentialsButton() {
-        const {dispatch} = this.props;
-        dispatch(exitEditAccountInfo());
+        const {history} = this.props;
+        history.push('/account');
     }
 
     render() {
-        const {info, error, errors, incompleteForm} = this.props;
+        const {info, language, error, errors, incompleteForm} = this.props;
         return (
             <div>
+                <EditAvatar/>
                 {error && <ErrorsContainer errors={errors}/>}
                 <Form onSubmit={this.onSubmit}>
                     <FormGroup widths='equal'>
@@ -79,6 +86,16 @@ class EditAccountInfoContainer extends Component {
                                 onChange={this.onChange}
                             />
                         </FormField>
+                        <FormField>
+                            <Select
+                                type='select'
+                                name='language'
+                                value={language}
+                                placeholderid='language'
+                                options={LANGUAGE_OPTIONS}
+                                onChange={this.onChange}
+                            />
+                        </FormField>
                     </FormGroup>
                     <Button primary type='submit' onClick={this.onClickExitEditCredentialsButton}>Cancel</Button>
 
@@ -92,6 +109,7 @@ class EditAccountInfoContainer extends Component {
 const mapStateToProps = ({accountReducer}) => {
     return {
         info: accountReducer['info'],
+        language: accountReducer['language'],
         incompleteForm: accountReducer['incompleteForm']
     }
 };
@@ -102,7 +120,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default withRouter(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(EditAccountInfoContainer));
+)(EditAccountInfoContainer);

@@ -9,7 +9,6 @@ import Icon from '../../components/Icon';
 import Message from '../../components/Message';
 import Container from '../../components/Container';
 import Grid, {GridColumn} from '../../components/Grid';
-import Divider from '../../components/Divider';
 import Form, {Checkbox, FormField, FormGroup, Input} from '../../components/Form';
 import Title from '../../components/Title';
 
@@ -43,13 +42,13 @@ class SignInContainer extends React.Component {
 
         return (
             <Grid centered>
-                <GridColumn computer={6} tablet={12} mobile={14} textAlign='center'>
-                    <Title id='login'/>
+                <GridColumn textAlign='center'>
                     <Container>
                         {error && <Message negative>{error}</Message>}
                         <Form onSubmit={this.onSubmit.bind(this)}>
                             <FormGroup widths='equal'>
-                                <FormField width={6}>
+                                <Title id='login'/>
+                                <FormField width={2}>
                                     <Input
                                         type='email'
                                         name='email'
@@ -57,9 +56,7 @@ class SignInContainer extends React.Component {
                                         onChange={this.onChange}
                                     />
                                 </FormField>
-                            </FormGroup>
-                            <FormGroup widths='equal'>
-                                <FormField width={6}>
+                                <FormField width={2}>
                                     <Input
                                         type='password'
                                         name='password'
@@ -67,17 +64,22 @@ class SignInContainer extends React.Component {
                                         onChange={this.onChange}
                                     />
                                 </FormField>
+                                <FormField width={1}>
+                                    <Checkbox name='remember' labelid="remember.me" onChange={this.onChange}/>
+                                </FormField>
+                                <FormField width={1}>
+
+                                    <Button primary type='submit' disabled={isIncomplete} size="big"><Text id='login'/></Button>
+                                </FormField>
+                                <FormField width={1}>
+                                    <Text id='not.have.account.yet' values={{
+                                        icon: <Icon name='help'/>,
+                                        link: <Link to='/sign-up'><Text id='register.here'/></Link>
+                                    }}/>
+                                </FormField>
                             </FormGroup>
-                            <FormGroup widths='equal'>
-                                <Checkbox name='remember' labelid="remember.me" onChange={this.onChange}/>
-                            </FormGroup>
-                            <Button primary type='submit' disabled={isIncomplete}><Text id='login'/></Button>
+
                         </Form>
-                        <Divider section/>
-                        <Text id='not.have.account.yet' values={{
-                            icon: <Icon name='help'/>,
-                            link: <Link to='/sign-up'><Text id='register.here'/></Link>
-                        }}/>
                     </Container>
                 </GridColumn>
             </Grid>

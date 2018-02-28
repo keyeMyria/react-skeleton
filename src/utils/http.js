@@ -10,6 +10,16 @@ export const post = (endpoint, body, params) => {
     });
 };
 
+export const put = (endpoint, body, params) => {
+    return new Promise((resolve, reject) => {
+        axios.put(`/api${endpoint}`, body).then(response => {
+            resolve(response);
+        }).catch(error => {
+            reject(error.response.data);
+        });
+    });
+};
+
 export const patch = (endpoint, body, params) => {
     return new Promise((resolve, reject) => {
         axios.patch(`/api${endpoint}`, body).then(response => {
