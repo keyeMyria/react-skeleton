@@ -8,12 +8,14 @@ import {reducer as notifications} from 'react-notification-system-redux';
 import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
 import accountReducer from './modules/account';
+import confirmAccountReducer from './modules/confirmAccount';
 
 export default history => {
     const reducer = combineReducers({
         localeReducer,
         authenticationReducer,
         accountReducer,
+        confirmAccountReducer,
         form,
         notifications,
         router: routerReducer
