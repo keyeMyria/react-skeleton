@@ -17,7 +17,7 @@ class ConfirmAccountContainer extends Component {
         const {history} = this.props;
         setTimeout(() => {
             history.push('/welcome');
-        }, 7000)
+        }, 7000);
     }
 
     render() {

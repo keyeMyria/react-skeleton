@@ -74,7 +74,7 @@ class SignInContainer extends React.Component {
                                 <FormField width={1}>
                                     <Text id='not.have.account.yet' values={{
                                         icon: <Icon name='help'/>,
-                                        link: <Link to='/sign-up'><Text id='register.here'/></Link>
+                                        link: <Link to='/reset-password'><Text id='register.here'/></Link>
                                     }}/>
                                 </FormField>
                             </FormGroup>

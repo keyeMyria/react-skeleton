@@ -5,6 +5,8 @@ import HomeContainer from '../Home';
 import AccountContainer from '../Account';
 import WelcomeContainer from '../Welcome';
 import ConfirmAccountContainer from '../ConfirmAccount';
+import ResetPasswordContainer from '../ResetPassword';
+import ConfirmResetPasswordContainer from '../ResetPassword/ConfirmResetPassword';
 
 import {ROLE_ADMIN, ROLE_USER} from '../../config';
 import {WithAuth, WithoutAuth} from '../../utils/security';
@@ -15,5 +17,7 @@ export default () => (
         <Route path='/welcome' component={WithoutAuth(WelcomeContainer)}/>
         <Route path='/account' component={WithAuth(AccountContainer, [ROLE_ADMIN, ROLE_USER])}/>
         <Route path='/confirm-account/:token' component={WithoutAuth(ConfirmAccountContainer)}/>
+        <Route exact path='/reset-password' component={WithoutAuth(ResetPasswordContainer)}/>
+        <Route path='/reset-password/:token' component={WithoutAuth(ConfirmResetPasswordContainer)}/>
     </div>
 );

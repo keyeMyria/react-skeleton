@@ -9,6 +9,7 @@ import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
 import accountReducer from './modules/account';
 import confirmAccountReducer from './modules/confirmAccount';
+import resetPasswordReducer from './modules/resetPassword';
 
 export default history => {
     const reducer = combineReducers({
@@ -16,6 +17,7 @@ export default history => {
         authenticationReducer,
         accountReducer,
         confirmAccountReducer,
+        resetPasswordReducer,
         form,
         notifications,
         router: routerReducer
