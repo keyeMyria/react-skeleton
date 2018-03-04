@@ -9,6 +9,8 @@ import AccountInfo from "./AccountInfo";
 import EditAccountInfo from "./EditAccountInfo";
 import EditPassword from "./EditPassword";
 import {Route} from "../../utils/router";
+import DeleteAccountContainer from "./DeleteAccount";
+import ConfirmDeleteAccountContainer from "./ConfirmDeleteAccount";
 
 class AccountContainer extends Component {
 
@@ -27,6 +29,8 @@ class AccountContainer extends Component {
                         <Route exact match={match} path='/' component={AccountInfo}/>
                         <Route exact match={match} path='/edit' component={EditAccountInfo}/>
                         <Route exact match={match} path='/edit/password' component={EditPassword}/>
+                        <Route exact match={match} path='/delete' component={DeleteAccountContainer}/>
+                        <Route exact match={match} path='/delete/:token' component={ConfirmDeleteAccountContainer}/>
                     </Container>
                 </GridColumn>
             </Grid>

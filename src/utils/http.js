@@ -39,3 +39,13 @@ export const get = (endpoint, body, params) => {
         });
     });
 };
+
+export const del = (endpoint, body, params) => {
+    return new Promise((resolve, reject) => {
+        axios.delete(`/api${endpoint}`).then(response => {
+            resolve(response.data);
+        }).catch(error => {
+            reject(error.response.data);
+        });
+    });
+};

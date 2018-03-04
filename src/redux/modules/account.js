@@ -1,27 +1,32 @@
 import {APP_NAME} from "../../config";
 import {error, info} from "react-notification-system-redux";
-import {get, patch, post, put} from "../../utils/http";
+import {del, get, patch, post, put} from "../../utils/http";
 import {getLocale} from "../../i18n/utils";
 
 const URI_ACCOUNT = '/account';
 const URI_PASSWORD = '/password';
 
-const GET_ACCOUNT_INFO_SUCCESS = `${APP_NAME}/authentication/GET_ACCOUNT_INFO_SUCCESS`;
-const GET_ACCOUNT_INFO_ERROR = `${APP_NAME}/authentication/GET_ACCOUNT_INFO_ERROR`;
-const SET_ACCOUNT_FORM_FIELD = `${APP_NAME}/authentication/SET_ACCOUNT_FORM_FIELD`;
-const ACCOUNT_COMPLETED_FORM = `${APP_NAME}/authentication/ACCOUNT_COMPLETED_FORM`;
-const ACCOUNT_INCOMPLETE_FORM = `${APP_NAME}/authentication/ACCOUNT_INCOMPLETE_FORM`;
-const EDIT_ACCOUNT_SUCCESS = `${APP_NAME}/authentication/EDIT_ACCOUNT_SUCCESS`;
-const EDIT_ACCOUNT_ERROR = `${APP_NAME}/authentication/EDIT_ACCOUNT_ERROR`;
-const PASSWORD_FORM_COMPLETED = `${APP_NAME}/authentication/PASSWORD_FORM_COMPLETED`;
-const PASSWORD_FORM_INCOMPLETE = `${APP_NAME}/authentication/PASSWORD_FORM_INCOMPLETE`;
-const SET_PASSWORD_FORM_FIELD = `${APP_NAME}/authentication/SET_PASSWORD_FORM_FIELD`;
-const CHANGE_PASSWORD_SUCCESS = `${APP_NAME}/authentication/CHANGE_PASSWORD_SUCCESS`;
-const CHANGE_PASSWORD_ERROR = `${APP_NAME}/authentication/CHANGE_PASSWORD_ERROR`;
-const SET_NEW_AVATAR = `${APP_NAME}/authentication/SET_NEW_AVATAR`;
-const EDIT_AVATAR_SUCCESS = `${APP_NAME}/authentication/EDIT_AVATAR_SUCCESS`;
-const EDIT_AVATAR_ERROR = `${APP_NAME}/authentication/EDIT_AVATAR_ERROR`;
+const REDUCER_NAME = `${APP_NAME}/account/`;
 
+const GET_ACCOUNT_INFO_SUCCESS = `${REDUCER_NAME}/GET_ACCOUNT_INFO_SUCCESS`;
+const GET_ACCOUNT_INFO_ERROR = `${REDUCER_NAME}/GET_ACCOUNT_INFO_ERROR`;
+const SET_ACCOUNT_FORM_FIELD = `${REDUCER_NAME}/SET_ACCOUNT_FORM_FIELD`;
+const ACCOUNT_COMPLETED_FORM = `${REDUCER_NAME}/ACCOUNT_COMPLETED_FORM`;
+const ACCOUNT_INCOMPLETE_FORM = `${REDUCER_NAME}/ACCOUNT_INCOMPLETE_FORM`;
+const EDIT_ACCOUNT_SUCCESS = `${REDUCER_NAME}/EDIT_ACCOUNT_SUCCESS`;
+const EDIT_ACCOUNT_ERROR = `${REDUCER_NAME}/EDIT_ACCOUNT_ERROR`;
+const PASSWORD_FORM_COMPLETED = `${REDUCER_NAME}/PASSWORD_FORM_COMPLETED`;
+const PASSWORD_FORM_INCOMPLETE = `${REDUCER_NAME}/PASSWORD_FORM_INCOMPLETE`;
+const SET_PASSWORD_FORM_FIELD = `${REDUCER_NAME}/SET_PASSWORD_FORM_FIELD`;
+const CHANGE_PASSWORD_SUCCESS = `${REDUCER_NAME}/CHANGE_PASSWORD_SUCCESS`;
+const CHANGE_PASSWORD_ERROR = `${REDUCER_NAME}/CHANGE_PASSWORD_ERROR`;
+const SET_NEW_AVATAR = `${REDUCER_NAME}/SET_NEW_AVATAR`;
+const EDIT_AVATAR_SUCCESS = `${REDUCER_NAME}/EDIT_AVATAR_SUCCESS`;
+const EDIT_AVATAR_ERROR = `${REDUCER_NAME}/EDIT_AVATAR_ERROR`;
+const DELETE_ACCOUNT_REQUEST_SUCCESS = `${REDUCER_NAME}/DELETE_ACCOUNT_REQUEST_SUCCESS`;
+const DELETE_ACCOUNT_REQUEST_ERROR = `${REDUCER_NAME}/DELETE_ACCOUNT_REQUEST_ERROR`;
+const DELETE_ACCOUNT_SUCCESS = `${REDUCER_NAME}/DELETE_ACCOUNT_SUCCESS`;
+const DELETE_ACCOUNT_ERROR = `${REDUCER_NAME}/DELETE_ACCOUNT_ERROR`;
 
 const initState = {
     info: {
@@ -35,7 +40,9 @@ const initState = {
     editing: false,
     changingPassword: false,
     incompleteForm: false,
-    incompletePasswordForm: true
+    incompletePasswordForm: true,
+    successMessage: null,
+    errorMessage: null,
 };
 
 export default (state = initState, action) => {
@@ -63,6 +70,12 @@ export default (state = initState, action) => {
             return {...state, changingPassword: false};
         case SET_NEW_AVATAR:
             return {...state, newAvatar: action.value};
+        case DELETE_ACCOUNT_REQUEST_SUCCESS:
+        case DELETE_ACCOUNT_SUCCESS:
+            return {...state, successMessage: action.message};
+        case DELETE_ACCOUNT_REQUEST_ERROR:
+        case DELETE_ACCOUNT_ERROR:
+            return {...state, errorMessage: action.error};
         default:
             return state;
     }
@@ -164,6 +177,26 @@ export const editAvatar = credentials => {
                 message: response.data.message,
                 position: 'br'
             }));
+        });
+    }
+};
+
+export const deleteAccountRequest = () => {
+    return dispatch => {
+        del(URI_ACCOUNT, null).then(response => {
+            dispatch({type: DELETE_ACCOUNT_REQUEST_SUCCESS, message: response.message});
+        }).catch(response => {
+            dispatch({type: DELETE_ACCOUNT_REQUEST_ERROR, error: response.data.message});
+        });
+    }
+};
+
+export const deleteAccount = token => {
+    return dispatch => {
+        del(`${URI_ACCOUNT}/${token}`, null).then(response => {
+            dispatch({type: DELETE_ACCOUNT_SUCCESS, message: response.message});
+        }).catch(response => {
+            dispatch({type: DELETE_ACCOUNT_ERROR, error: response.data.message});
         });
     }
 };

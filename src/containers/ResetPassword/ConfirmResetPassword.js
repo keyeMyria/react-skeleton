@@ -99,13 +99,4 @@ const
         }
     };
 
-export default withRouter(connect
-
-(
-    mapStateToProps
-    ,
-    mapDispatchToProps
-)(
-    ConfirmResetPasswordContainer
-))
-;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ConfirmResetPasswordContainer));

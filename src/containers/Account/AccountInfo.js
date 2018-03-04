@@ -9,6 +9,7 @@ class AccountInfoContainer extends Component {
         super();
         this.onClickEditCredentialsButton = this.onClickEditCredentialsButton.bind(this);
         this.onClickChangePasswordButton = this.onClickChangePasswordButton.bind(this);
+        this.onClickDeleteAccountButton = this.onClickDeleteAccountButton.bind(this);
     }
 
     onClickEditCredentialsButton() {
@@ -19,6 +20,11 @@ class AccountInfoContainer extends Component {
     onClickChangePasswordButton() {
         const {history} = this.props;
         history.push('/account/edit/password');
+    }
+
+    onClickDeleteAccountButton() {
+        const {history} = this.props;
+        history.push('/account/delete');
     }
 
     render() {
@@ -33,6 +39,7 @@ class AccountInfoContainer extends Component {
                 <p>Created at: {new Date(info.createdAt).toString()}</p>
                 <Button primary type='submit' onClick={this.onClickEditCredentialsButton}>Edit credentials</Button>
                 <Button primary type='submit' onClick={this.onClickChangePasswordButton}>Change password</Button>
+                <Button color='red' type='submit' onClick={this.onClickDeleteAccountButton}>Delete account</Button>
             </div>
         );
     }
