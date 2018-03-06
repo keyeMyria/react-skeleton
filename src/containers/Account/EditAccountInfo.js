@@ -15,10 +15,10 @@ const GENDER_OPTIONS = [
 ];
 
 const LANGUAGE_OPTIONS = [
-    {key: 'english', value: 'en'},
-    {key: 'spanish', value: 'es'},
-    {key: 'japanese', value: 'ja'},
-    {key: 'french', value: 'fr'}
+    {key: 'english', value: 'EN'},
+    {key: 'spanish', value: 'ES'},
+    {key: 'japanese', value: 'JA'},
+    {key: 'french', value: 'FR'}
 
 ];
 

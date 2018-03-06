@@ -43,6 +43,7 @@ const initState = {
     incompletePasswordForm: true,
     successMessage: null,
     errorMessage: null,
+    refreshNeeded: false
 };
 
 export default (state = initState, action) => {
@@ -52,8 +53,10 @@ export default (state = initState, action) => {
         case EDIT_ACCOUNT_ERROR:
         case GET_ACCOUNT_INFO_ERROR:
             return {...state, error: action.error, errors: action.errors};
-        case SET_ACCOUNT_FORM_FIELD:
-            return {...state, info: {...state.info, [action.field]: action.value}};
+        case SET_ACCOUNT_FORM_FIELD: {
+            const refreshNeeded = action.refreshNeeded ? action.refreshNeeded : state.refreshNeeded
+            return {...state, info: {...state.info, [action.field]: action.value}, refreshNeeded: refreshNeeded};
+        }
         case SET_PASSWORD_FORM_FIELD:
             return {...state, newPasswordInfo: {...state.newPasswordInfo, [action.field]: action.value}};
         case ACCOUNT_COMPLETED_FORM:
@@ -98,7 +101,9 @@ export const getAccountInfo = () => {
 
 export const setEditAccountFormFieldValue = (field, value) => {
     return (dispatch, getState) => {
-        dispatch({type: SET_ACCOUNT_FORM_FIELD, field: field, value: value});
+        field === 'language' ?
+            dispatch({type: SET_ACCOUNT_FORM_FIELD, field: field, value: value, refreshNeeded: true})
+            : dispatch({type: SET_ACCOUNT_FORM_FIELD, field: field, value: value});
         let reducer = getState().accountReducer;
         let completed = reducer.info['email'] && reducer.info['name'] && reducer.info['gender'];
         completed ? dispatch({type: ACCOUNT_COMPLETED_FORM}) : dispatch({type: ACCOUNT_INCOMPLETE_FORM});
@@ -106,13 +111,16 @@ export const setEditAccountFormFieldValue = (field, value) => {
 };
 
 export const editAccountInfo = credentials => {
-    return dispatch => {
+    return (dispatch, getState) => {
         patch(URI_ACCOUNT, credentials, null).then(response => {
             dispatch({type: EDIT_ACCOUNT_SUCCESS});
             dispatch(info({
                 message: "YEAH",
                 position: 'br'
             }));
+            if (getState().accountReducer['refreshNeeded']) {
+                window.location.reload();
+            }
         }).catch(response => {
             dispatch({type: EDIT_ACCOUNT_ERROR, error: response.data.message});
             dispatch(error({
