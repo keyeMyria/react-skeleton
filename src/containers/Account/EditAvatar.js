@@ -33,10 +33,10 @@ class EditPasswordContainer extends Component {
         return (
             <div>
                 <Grid centered>
-                    <GridColumn computer={2} tablet={12} mobile={14} textAlign='center'>
-                        <Image src={info.avatar} size='tiny' alt="registration" avatar/>
+                    <GridColumn computer={8} tablet={12} mobile={14} textAlign='center'>
+                        <Image src={info.avatar} size='small' alt="registration" avatar/>
                     </GridColumn>
-                    <GridColumn computer={2} tablet={12} mobile={14} textAlign='center'>
+                    <GridColumn computer={4} tablet={12} mobile={14} textAlign='center'>
                         <Modal trigger={<Button>Edit avatar</Button>}>
                             <ModalHeader>Select a Photo</ModalHeader>
                             <ModalContent image>

@@ -1,7 +1,6 @@
-import {LOCATION_CHANGE, push} from 'react-router-redux';
+import {push} from 'react-router-redux';
 import {isUserLogged} from "../../utils/user-info";
 import {APP_NAME} from "../../config";
-import {error, info} from "react-notification-system-redux";
 import {post} from "../../utils/http";
 
 const URI_AUTH = '/auth';
@@ -15,14 +14,16 @@ const SIGN_UP_SUCCESS = `${APP_NAME}/authentication/SIGN_UP_SUCCESS`;
 const SIGN_UP_ERROR = `${APP_NAME}/authentication/SIGN_UP_ERROR`;
 const LOGOUT = `${APP_NAME}/authentication/LOGOUT`;
 const SET_AUTH_FORM_FIELD = `${APP_NAME}/authentication/SET_AUTH_FORM_FIELD`;
-const COMPLETED_FORM = `${APP_NAME}/authentication/COMPLETED_FORM`;
-const INCOMPLETE_FORM = `${APP_NAME}/authentication/INCOMPLETE_FORM`;
-
+const COMPLETED_SIGN_IN_FORM = `${APP_NAME}/authentication/COMPLETED_SIGN_IN_FORM`;
+const INCOMPLETE_SIGN_IN_FORM = `${APP_NAME}/authentication/INCOMPLETE_SIGN_IN_FORM`;
+const COMPLETED_SIGN_UP_FORM = `${APP_NAME}/authentication/COMPLETED_SIGN_UP_FORM`;
+const INCOMPLETE_SIGN_UP_FORM = `${APP_NAME}/authentication/INCOMPLETE_SIGN_UP_FORM`;
 const initState = {
     message: '',
     error: null,
     logged: isUserLogged(),
-    isIncomplete: true,
+    incompleteSignInForm: true,
+    incompleteSignUpForm: true,
     errors: [],
     signUpError: null,
     signUpErrors: []
@@ -42,15 +43,16 @@ export default (state = initState, action) => {
             return {...state, error: null, logged: false};
         case SET_AUTH_FORM_FIELD:
             return {...state, [action.field]: action.value};
-        case COMPLETED_FORM:
-            return {...state, isIncomplete: false};
-        case INCOMPLETE_FORM:
-            return {...state, isIncomplete: true};
-        case LOCATION_CHANGE: {
-            return initState;
-        }
+        case COMPLETED_SIGN_IN_FORM:
+            return {...state, incompleteSignInForm: false};
+        case COMPLETED_SIGN_UP_FORM:
+            return {...state, incompleteSignUpForm: false};
+        case INCOMPLETE_SIGN_IN_FORM:
+            return {...state, incompleteSignInForm: true};
+        case INCOMPLETE_SIGN_UP_FORM:
+            return {...state, incompleteSignUpForm: true};
         default :
-            return state
+            return {...initState, logged: isUserLogged()};
     }
 }
 
@@ -59,10 +61,6 @@ export const signIn = credentials => {
     return dispatch => {
         post(URI_LOGIN, credentials, null).then(response => {
             dispatch({type: SIGN_IN_SUCCESS});
-            dispatch(info({
-                message: response.data.message,
-                position: 'br'
-            }));
         }).catch(response => {
             dispatch({type: SIGN_IN_ERROR, error: response.message});
         });
@@ -74,18 +72,10 @@ export const logout = () => {
         post(URI_LOGOUT).then(response => {
             dispatch({type: LOGOUT});
             dispatch(push('/welcome'));
-            dispatch(info({
-                message: response.data.message,
-                position: 'br'
-            }));
         }).catch(response => {
             if (response.status === 400) {
                 dispatch(push('/welcome'));
             } else {
-                dispatch(error({
-                    message: response.message,
-                    position: 'br'
-                }));
             }
         });
     }
@@ -101,10 +91,6 @@ export const signUp = fields => {
         }, null).then(response => {
             dispatch({type: SIGN_UP_SUCCESS});
             dispatch(push('/'));
-            dispatch(info({
-                message: response.data.message,
-                position: 'br'
-            }));
         }).catch(response => {
             dispatch({type: SIGN_UP_ERROR, error: response.message, errors: response.errors});
         });
@@ -117,7 +103,7 @@ export const setSignInFormFieldValue = (field, value) => {
         dispatch({type: SET_AUTH_FORM_FIELD, field: field, value: value});
         let reducer = getState().authenticationReducer;
         let completed = reducer['email'] && reducer['password'];
-        completed ? dispatch({type: COMPLETED_FORM}) : dispatch({type: INCOMPLETE_FORM});
+        completed ? dispatch({type: COMPLETED_SIGN_IN_FORM}) : dispatch({type: INCOMPLETE_SIGN_IN_FORM});
     }
 };
 
@@ -126,7 +112,7 @@ export const setSignUpFormFieldValue = (field, value) => {
         dispatch({type: SET_AUTH_FORM_FIELD, field: field, value: value});
         let reducer = getState().authenticationReducer;
         let completed = reducer['email'] && reducer['password'] && reducer['passwordConfirmation'] && reducer['name'] && reducer['gender'];
-        completed ? dispatch({type: COMPLETED_FORM}) : dispatch({type: INCOMPLETE_FORM});
+        completed ? dispatch({type: COMPLETED_SIGN_UP_FORM}) : dispatch({type: INCOMPLETE_SIGN_UP_FORM});
     }
 };
 

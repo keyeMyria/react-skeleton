@@ -1,12 +1,11 @@
 import {APP_NAME} from "../../config";
-import {error, info} from "react-notification-system-redux";
 import {del, get, patch, post, put} from "../../utils/http";
 import {getLocale} from "../../i18n/utils";
 
 const URI_ACCOUNT = '/account';
 const URI_PASSWORD = '/password';
 
-const REDUCER_NAME = `${APP_NAME}/account/`;
+const REDUCER_NAME = `${APP_NAME}/account`;
 
 const GET_ACCOUNT_INFO_SUCCESS = `${REDUCER_NAME}/GET_ACCOUNT_INFO_SUCCESS`;
 const GET_ACCOUNT_INFO_ERROR = `${REDUCER_NAME}/GET_ACCOUNT_INFO_ERROR`;
@@ -91,10 +90,6 @@ export const getAccountInfo = () => {
             dispatch({type: GET_ACCOUNT_INFO_SUCCESS, info: response});
         }).catch(response => {
             dispatch({type: GET_ACCOUNT_INFO_ERROR, error: response.data.message});
-            dispatch(error({
-                message: response.data.message,
-                position: 'br'
-            }));
         });
     }
 };
@@ -114,19 +109,11 @@ export const editAccountInfo = credentials => {
     return (dispatch, getState) => {
         patch(URI_ACCOUNT, credentials, null).then(response => {
             dispatch({type: EDIT_ACCOUNT_SUCCESS});
-            dispatch(info({
-                message: "YEAH",
-                position: 'br'
-            }));
             if (getState().accountReducer['refreshNeeded']) {
                 window.location.reload();
             }
         }).catch(response => {
             dispatch({type: EDIT_ACCOUNT_ERROR, error: response.data.message});
-            dispatch(error({
-                message: response.data.message,
-                position: 'br'
-            }));
         });
     }
 };
@@ -147,16 +134,8 @@ export const changePassword = credentials => {
             password: credentials.password
         }, null).then(response => {
             dispatch({type: CHANGE_PASSWORD_SUCCESS});
-            dispatch(info({
-                message: "YEAH",
-                position: 'br'
-            }));
         }).catch(response => {
             dispatch({type: CHANGE_PASSWORD_ERROR, error: response.message});
-            dispatch(error({
-                message: response.message,
-                position: 'br'
-            }));
         });
     }
 };
@@ -175,16 +154,8 @@ export const editAvatar = credentials => {
             headers: {'content-type': 'multipart/form-data'}
         }).then(response => {
             dispatch({type: EDIT_AVATAR_SUCCESS});
-            dispatch(info({
-                message: "YEAH",
-                position: 'br'
-            }));
         }).catch(response => {
             dispatch({type: EDIT_AVATAR_ERROR, error: response.data.message});
-            dispatch(error({
-                message: response.data.message,
-                position: 'br'
-            }));
         });
     }
 };

@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {confirmAccount} from "../../redux/modules/confirmAccount";
 import Grid, {GridColumn} from "../../components/Grid";
 import Container from "../../components/Container";
 import Message from "../../components/Message";
-import DeleteAccount from "./DeleteAccount";
 import {deleteAccount} from "../../redux/modules/account";
 
 class ConfirmDeleteAccountContainer extends Component {

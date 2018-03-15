@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AppRoutes from '../AppRoutes';
-import {withRouter} from "react-router-dom";
-import Notifications from "react-notification-system-redux";
+import {withRouter} from 'react-router-dom';
+import Notifications from 'react-notification-system-redux';
+import MenuContainer from '../Menu';
 
 class App extends Component {
     render() {
-        const {notifications} = this.props;
+        const {notifications, logged} = this.props;
         return (
             <div>
+                {logged && <MenuContainer/> }
                 <AppRoutes/>
                 <Notifications notifications={notifications}/>
             </div>
@@ -16,9 +18,10 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = ({notifications}) => {
+const mapStateToProps = ({notifications, authenticationReducer}) => {
     return {
-        notifications: notifications
+        notifications: notifications,
+        logged: authenticationReducer.logged
     }
 };
 

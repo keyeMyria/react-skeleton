@@ -39,7 +39,7 @@ class SignUpContainer extends Component {
     }
 
     render() {
-        const {signUpError, signUpErrors, isIncomplete} = this.props;
+        const {signUpError, signUpErrors, incompleteSignUpForm} = this.props;
         return (
             <div>
                 <Title id='registration'/>
@@ -93,7 +93,7 @@ class SignUpContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button primary type='submit' disabled={isIncomplete} size="big"><Text id='register'/></Button>
+                    <Button primary type='submit' disabled={incompleteSignUpForm} size="big"><Text id='register'/></Button>
                 </Form>
             </div>
         );
@@ -107,7 +107,7 @@ const mapStateToProps = ({authenticationReducer}) => {
         passwordConfirmation: authenticationReducer['passwordConfirmation'],
         name: authenticationReducer['name'],
         gender: authenticationReducer['gender'],
-        isIncomplete: authenticationReducer.isIncomplete,
+        incompleteSignUpForm: authenticationReducer.incompleteSignUpForm,
         signUpError: authenticationReducer.signUpError,
         signUpErrors: authenticationReducer.signUpErrors,
         logged: authenticationReducer.logged

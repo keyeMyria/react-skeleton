@@ -9,6 +9,7 @@ import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
 import accountReducer from './modules/account';
 import confirmAccountReducer from './modules/confirmAccount';
+import menuReducer from './modules/menu';
 import resetPasswordReducer from './modules/resetPassword';
 
 export default history => {
@@ -18,6 +19,7 @@ export default history => {
         accountReducer,
         confirmAccountReducer,
         resetPasswordReducer,
+        menuReducer,
         form,
         notifications,
         router: routerReducer

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Button from "../../components/Button";
+import Image from "../../components/Image";
 
 class AccountInfoContainer extends Component {
 
@@ -31,6 +32,7 @@ class AccountInfoContainer extends Component {
         const {info, language} = this.props;
         return (
             <div>
+                <Image src={info.avatar} size='small' alt="registration" avatar/>
                 <b>{info.name}</b>
                 <p>Name: {info.name}</p>
                 <p>Email: {info.email}</p>

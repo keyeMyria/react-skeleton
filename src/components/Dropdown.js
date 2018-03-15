@@ -3,7 +3,7 @@ import {Dropdown} from 'semantic-ui-react';
 import {injectIntl} from 'react-intl';
 
 export default injectIntl(props => (
-    <Dropdown {...props} text={props.intl.formatMessage({id: props.text})}/>
+    <Dropdown {...props} text={props.text && props.intl.formatMessage({id: props.text})}/>
 ));
 
 export const DropdownMenu = props => (

@@ -38,7 +38,7 @@ class SignInContainer extends React.Component {
     }
 
     render() {
-        const {error, isIncomplete} = this.props;
+        const {error, incompleteSignInForm} = this.props;
 
         return (
             <Grid centered>
@@ -69,7 +69,7 @@ class SignInContainer extends React.Component {
                                 </FormField>
                                 <FormField width={1}>
 
-                                    <Button primary type='submit' disabled={isIncomplete} size="big"><Text id='login'/></Button>
+                                    <Button primary type='submit' disabled={incompleteSignInForm} size="big"><Text id='login'/></Button>
                                 </FormField>
                                 <FormField width={1}>
                                     <Text id='not.have.account.yet' values={{
@@ -92,7 +92,7 @@ const mapStateToProps = ({authenticationReducer}) => {
         email: authenticationReducer['email'],
         password: authenticationReducer['password'],
         remember: authenticationReducer['remember'],
-        isIncomplete: authenticationReducer.isIncomplete,
+        incompleteSignInForm: authenticationReducer.incompleteSignInForm,
         error: authenticationReducer.error
 
     }
