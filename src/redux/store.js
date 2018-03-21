@@ -3,10 +3,11 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import {reducer as form} from 'redux-form';
 import {routerReducer, routerMiddleware} from 'react-router-redux';
-import {reducer as notifications} from 'react-notification-system-redux';
 
 import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
+import adminUsersReducer from './modules/adminUsers';
+import adminUserReducer from './modules/adminUser';
 import accountReducer from './modules/account';
 import confirmAccountReducer from './modules/confirmAccount';
 import menuReducer from './modules/menu';
@@ -16,12 +17,13 @@ export default history => {
     const reducer = combineReducers({
         localeReducer,
         authenticationReducer,
+        adminUsersReducer,
+        adminUserReducer,
         accountReducer,
         confirmAccountReducer,
         resetPasswordReducer,
         menuReducer,
         form,
-        notifications,
         router: routerReducer
     });
 

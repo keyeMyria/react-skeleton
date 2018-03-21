@@ -97,7 +97,7 @@ class EditAccountInfoContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button primary type='submit' onClick={this.onClickExitEditCredentialsButton}>Cancel</Button>
+                    <Button type='submit' onClick={this.onClickExitEditCredentialsButton}>Cancel</Button>
 
                     <Button primary type='submit' disabled={incompleteForm}>Confirm</Button>
                 </Form>
@@ -109,7 +109,7 @@ class EditAccountInfoContainer extends Component {
 const mapStateToProps = ({accountReducer}) => {
     return {
         info: accountReducer['info'],
-        language: accountReducer['language'],
+        language: accountReducer['language'].toUpperCase(),
         incompleteForm: accountReducer['incompleteForm']
     }
 };

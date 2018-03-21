@@ -4,9 +4,8 @@ import {connect} from 'react-redux';
 import {editAvatar, onChangeAvatar} from "../../redux/modules/account";
 import Button from "../../components/Button";
 import Modal, {ModalContent, ModalDescription, ModalHeader} from "../../components/Modal";
-import {GridColumn} from "../../components/Grid";
-import Grid from "../../components/Grid";
 import Image from "../../components/Image";
+import Header, {HeaderContent} from "../../components/Header";
 
 class EditPasswordContainer extends Component {
 
@@ -32,12 +31,10 @@ class EditPasswordContainer extends Component {
         const {newAvatar, info} = this.props;
         return (
             <div>
-                <Grid centered>
-                    <GridColumn computer={8} tablet={12} mobile={14} textAlign='center'>
-                        <Image src={info.avatar} size='small' alt="registration" avatar/>
-                    </GridColumn>
-                    <GridColumn computer={4} tablet={12} mobile={14} textAlign='center'>
-                        <Modal trigger={<Button>Edit avatar</Button>}>
+                <Header size="huge" textAlign='center'>
+                    <HeaderContent>
+                        <Image src={info.avatar} size='small' alt='Avatar' avatar/>
+                        <Modal trigger={<Button primary content='Edit avatar' icon='edit'/>}>
                             <ModalHeader>Select a Photo</ModalHeader>
                             <ModalContent image>
                                 <ModalDescription>
@@ -47,8 +44,8 @@ class EditPasswordContainer extends Component {
                                 </ModalDescription>
                             </ModalContent>
                         </Modal>
-                    </GridColumn>
-                </Grid>
+                    </HeaderContent>
+                </Header>
             </div>
         );
     }

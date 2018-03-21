@@ -8,42 +8,36 @@ import {GridColumn} from "../../components/Grid";
 import Grid from "../../components/Grid";
 import Date from "../../components/Date";
 import Header, {HeaderContent} from "../../components/Header";
+import {getUser} from "../../redux/modules/adminUser";
 
-class AccountInfoContainer extends Component {
+class UserInfoContainer extends Component {
 
     constructor() {
         super();
-        this.onClickEditCredentialsButton = this.onClickEditCredentialsButton.bind(this);
-        this.onClickChangePasswordButton = this.onClickChangePasswordButton.bind(this);
         this.onClickDeleteAccountButton = this.onClickDeleteAccountButton.bind(this);
         this.getFormattedGender = this.getFormattedGender.bind(this);
     }
 
-    onClickEditCredentialsButton() {
-        const {history} = this.props;
-        history.push('/account/edit');
+    componentWillMount() {
+        const {dispatch, match} = this.props;
+        dispatch(getUser(match.params.id));
     }
 
-    onClickChangePasswordButton() {
-        const {history} = this.props;
-        history.push('/account/edit/password');
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errorCode === 400) {
+            nextProps.history.push('/admin-panel/users');
+        }
     }
-
     onClickDeleteAccountButton() {
-        const {history} = this.props;
-        history.push('/account/delete');
     }
 
     getFormattedGender() {
         const {gender} = this.props.info;
-        return gender.charAt(0) + gender.slice(1).toLowerCase();
-
+        return gender ? gender.charAt(0) + gender.slice(1).toLowerCase() : '';
     }
 
     render() {
-        const {info, language} = this.props;
-        const languageImage = `/images/languages/${language}.png`;
-        const gender = this.getFormattedGender();
+        const {info} = this.props;
         return (
             <div>
                 <Header size="huge" textAlign='center'>
@@ -60,12 +54,8 @@ class AccountInfoContainer extends Component {
                             <b>Email</b>: {info.email}
                         </p>
                         <p>
-                            <b>Gender</b>: {gender}
+                            <b>Gender</b>: {this.getFormattedGender()}
                         </p>
-                    </GridColumn>
-                    <GridColumn computer={4} tablet={4} mobile={14}>
-                        <b>Language</b>:
-                        <Image bordered src={languageImage} size='tiny' alt="Language"/>
                     </GridColumn>
                 </Grid>
                 <Grid>
@@ -78,19 +68,16 @@ class AccountInfoContainer extends Component {
                         <b>Updated at</b>: <Date value={info.updatedAt} year='numeric' month='long' day='numeric' weekday='long'/>
                     </GridColumn>
                 </Grid>
-                <Button primary icon='edit' content='Edit credentials' type='submit' onClick={this.onClickEditCredentialsButton}/>
-                <Button primary icon='edit' type='submit' content='Edit password' onClick={this.onClickChangePasswordButton}/>
                 <Button color='red' icon='remove user' type='submit' content='Delete account' onClick={this.onClickDeleteAccountButton}/>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({adminUserReducer}) => {
     return {
-        info: accountReducer['info'],
-        language: accountReducer['language']
-
+        info: adminUserReducer['info'],
+        errorCode: adminUserReducer['errorCode']
     }
 };
 
@@ -103,4 +90,4 @@ const mapDispatchToProps = dispatch => {
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(AccountInfoContainer));
+)(UserInfoContainer));
