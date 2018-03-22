@@ -8,6 +8,7 @@ const REDUCER_NAME = `${APP_NAME}/admin-users`;
 
 const GET_USERS_SUCCESS = `${REDUCER_NAME}/GET_USERS_SUCCESS`;
 const GET_USERS_ERROR = `${REDUCER_NAME}/GET_USERS_ERROR`;
+const SET_EMAIL_VALUE = `${REDUCER_NAME}/SET_EMAIL_VALUE`;
 
 
 const initState = {
@@ -16,7 +17,8 @@ const initState = {
     size: 20,
     isFirst: true,
     isLast: false,
-    numberOfPages: 1
+    numberOfPages: 1,
+    email: null
 };
 
 export default (state = initState, action) => {
@@ -31,21 +33,28 @@ export default (state = initState, action) => {
             };
         case GET_USERS_ERROR:
             return {...state, error: action.error};
+        case SET_EMAIL_VALUE:
+            return {...state, email: action.value};
         default :
             return state
     }
 }
 
-export const getUsers = (page, size) => {
+export const getUsers = (page, size, email) => {
     const params = {
         page: page,
-        size: size
+        size: size,
+        email: email
     };
     return dispatch => {
-        get(`${URI_USERS}`, null, params).then(response => {
+        get(`${URI_USERS}`, params).then(response => {
             dispatch({type: GET_USERS_SUCCESS, response: response});
         }).catch(response => {
             dispatch({type: GET_USERS_ERROR, error: response.error});
         });
     }
+};
+
+export const setEmailValue = email => {
+    return {type: SET_EMAIL_VALUE, value: email};
 };

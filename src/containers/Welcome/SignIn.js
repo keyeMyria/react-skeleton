@@ -45,7 +45,7 @@ class SignInContainer extends React.Component {
                 <GridColumn textAlign='center'>
                     <Container>
                         {error && <Message negative>{error}</Message>}
-                        <Form onSubmit={this.onSubmit.bind(this)}>
+                        <Form onSubmit={this.onSubmit}>
                             <FormGroup widths='equal'>
                                 <Title id='login'/>
                                 <FormField width={2}>

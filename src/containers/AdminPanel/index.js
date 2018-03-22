@@ -10,10 +10,15 @@ import UsersContainer from './Users';
 import UserInfoContainer from './UserInfo';
 import {Route} from '../../utils/router';
 import {changeTitle} from '../../redux/modules/menu';
-import Menu, {MenuItem} from '../../components/Menu';
-import Icon from '../../components/Icon';
+import AdminMenu from "./AdminMenu";
 
 class AdminPanelContainer extends Component {
+
+    constructor() {
+        super();
+        this.onClickMainPageButton = this.onClickMainPageButton.bind(this);
+        this.onClickUserMenuOption = this.onClickUserMenuOption.bind(this);
+    }
 
     componentWillMount() {
         const {dispatch} = this.props;
@@ -21,19 +26,23 @@ class AdminPanelContainer extends Component {
         dispatch(changeTitle('account'));
     }
 
+    onClickMainPageButton() {
+        const {history} = this.props;
+        history.push('/admin-panel');
+    }
+
+    onClickUserMenuOption() {
+        const {history} = this.props;
+        history.push('/admin-panel/users');
+    }
+
     render() {
         const {match} = this.props;
         return (
             <Grid centered>
-
                 <GridColumn computer={8} tablet={12} mobile={14}>
                     <Title id='account'/>
-                    <Menu icon='labeled'>
-                        <MenuItem>
-                            <Icon name='user' />
-                            Users
-                        </MenuItem>
-                    </Menu>
+                    <AdminMenu/>
                     <Container>
                         <Route exact match={match} path='/' component={MainPageContainer}/>
                         <Route exact match={match} path='/users' component={UsersContainer}/>

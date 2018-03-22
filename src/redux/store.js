@@ -8,6 +8,7 @@ import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
 import adminUsersReducer from './modules/adminUsers';
 import adminUserReducer from './modules/adminUser';
+import adminMenuReducer from './modules/adminMenu';
 import accountReducer from './modules/account';
 import confirmAccountReducer from './modules/confirmAccount';
 import menuReducer from './modules/menu';
@@ -19,6 +20,7 @@ export default history => {
         authenticationReducer,
         adminUsersReducer,
         adminUserReducer,
+        adminMenuReducer,
         accountReducer,
         confirmAccountReducer,
         resetPasswordReducer,

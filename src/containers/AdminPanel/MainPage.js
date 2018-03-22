@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Button from "../../components/Button";
+import {changeActivePage} from "../../redux/modules/adminMenu";
 
 class MainPageContainer extends Component {
 
@@ -13,6 +14,11 @@ class MainPageContainer extends Component {
     onClickAdminUsersButton() {
         const {history} = this.props;
         history.push('/admin-panel/users');
+    }
+
+    componentWillMount() {
+        const {dispatch} = this.props;
+        dispatch(changeActivePage('home'));
     }
 
     render() {

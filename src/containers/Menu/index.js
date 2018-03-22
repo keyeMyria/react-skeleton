@@ -7,6 +7,7 @@ import Dropdown, {DropdownMenu, DropdownItem} from '../../components/Dropdown';
 import {logout} from '../../redux/modules/authentication';
 import Text from '../../components/Text';
 import {withRouter} from "react-router-dom";
+import {isAdmin} from "../../utils/user-info";
 
 class MenuContainer extends Component {
 
@@ -15,6 +16,7 @@ class MenuContainer extends Component {
         this.logout = this.logout.bind(this);
         this.onClickAccountOption = this.onClickAccountOption.bind(this);
         this.onClickHomeOption = this.onClickHomeOption.bind(this);
+        this.onClickAdminPanelOption = this.onClickAdminPanelOption.bind(this);
     }
 
     logout() {
@@ -32,6 +34,11 @@ class MenuContainer extends Component {
         history.push('/');
     }
 
+    onClickAdminPanelOption() {
+        const {history} = this.props;
+        history.push('/admin-panel');
+    }
+
     render() {
         const {title} = this.props;
         return (
@@ -44,6 +51,7 @@ class MenuContainer extends Component {
                         <DropdownMenu>
                             <DropdownItem onClick={this.onClickHomeOption}><Text id='home'/></DropdownItem>
                             <DropdownItem onClick={this.onClickAccountOption}><Text id='account'/></DropdownItem>
+                            {isAdmin() && <DropdownItem onClick={this.onClickAdminPanelOption}><Text id='adminpanel'/></DropdownItem>}
                             <DropdownItem onClick={this.logout}><Text id='logout'/></DropdownItem>
                         </DropdownMenu>
                     </Dropdown>

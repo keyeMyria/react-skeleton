@@ -8,7 +8,8 @@ import {GridColumn} from "../../components/Grid";
 import Grid from "../../components/Grid";
 import Date from "../../components/Date";
 import Header, {HeaderContent} from "../../components/Header";
-import {getUser} from "../../redux/modules/adminUser";
+import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from "../../redux/modules/adminUser";
+import ConfirmationModal from "../../components/ConfirmationModal";
 
 class UserInfoContainer extends Component {
 
@@ -16,6 +17,8 @@ class UserInfoContainer extends Component {
         super();
         this.onClickDeleteAccountButton = this.onClickDeleteAccountButton.bind(this);
         this.getFormattedGender = this.getFormattedGender.bind(this);
+        this.handleConfirmDelete = this.handleConfirmDelete.bind(this);
+        this.handleCancelDelete = this.handleCancelDelete.bind(this);
     }
 
     componentWillMount() {
@@ -24,11 +27,13 @@ class UserInfoContainer extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.errorCode === 400) {
+        if (nextProps.errorCode === 400 || nextProps.deleted) {
             nextProps.history.push('/admin-panel/users');
         }
     }
     onClickDeleteAccountButton() {
+        const {dispatch} = this.props;
+        dispatch(openDeleteUserModal());
     }
 
     getFormattedGender() {
@@ -36,8 +41,18 @@ class UserInfoContainer extends Component {
         return gender ? gender.charAt(0) + gender.slice(1).toLowerCase() : '';
     }
 
+    handleConfirmDelete() {
+        const {dispatch, match} = this.props;
+        dispatch(deleteUser(match.params.id));
+    }
+
+    handleCancelDelete() {
+        const {dispatch} = this.props;
+        dispatch(closeDeleteUserModal());
+    }
+
     render() {
-        const {info} = this.props;
+        const {info, deleteUserModalOpened} = this.props;
         return (
             <div>
                 <Header size="huge" textAlign='center'>
@@ -69,6 +84,12 @@ class UserInfoContainer extends Component {
                     </GridColumn>
                 </Grid>
                 <Button color='red' icon='remove user' type='submit' content='Delete account' onClick={this.onClickDeleteAccountButton}/>
+                <ConfirmationModal
+                    open={deleteUserModalOpened}
+                    content='Are you sure you want to delete this user?'
+                    onCancel={this.handleCancelDelete}
+                    onConfirm={this.handleConfirmDelete}
+                />
             </div>
         );
     }
@@ -77,7 +98,9 @@ class UserInfoContainer extends Component {
 const mapStateToProps = ({adminUserReducer}) => {
     return {
         info: adminUserReducer['info'],
-        errorCode: adminUserReducer['errorCode']
+        errorCode: adminUserReducer['errorCode'],
+        deleteUserModalOpened: adminUserReducer['deleteUserModalOpened'],
+        deleted: adminUserReducer['deleted']
     }
 };
 

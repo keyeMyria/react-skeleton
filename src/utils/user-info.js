@@ -1,4 +1,5 @@
 import {getCookie} from './cookies';
+import {ROLE_ADMIN} from "../config";
 
 const USER_INFO_KEY = "USER_INFO";
 const ROLES_ATTRIBUTE = "ROLES";
@@ -20,6 +21,10 @@ export const userHasRole = allowedRoles => {
         }).length > 0;
     }
     return false;
+};
+
+export const isAdmin = () => {
+    return userHasRole(ROLE_ADMIN);
 };
 
 const getAttributeFromUserInfoCookie = attribute => {

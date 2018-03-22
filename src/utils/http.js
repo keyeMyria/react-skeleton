@@ -30,9 +30,9 @@ export const patch = (endpoint, body, params) => {
     });
 };
 
-export const get = (endpoint, body, params) => {
+export const get = (endpoint, params) => {
     return new Promise((resolve, reject) => {
-        axios.get(`/api${endpoint}`).then(response => {
+        axios.get(`/api${endpoint}`, {params: params}).then(response => {
             resolve(response.data);
         }).catch(error => {
             reject(error.response.data);
