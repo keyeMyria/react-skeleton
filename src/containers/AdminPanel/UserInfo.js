@@ -10,6 +10,7 @@ import Date from "../../components/Date";
 import Header, {HeaderContent} from "../../components/Header";
 import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from "../../redux/modules/adminUser";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import Loader from "../../components/Loader";
 
 class UserInfoContainer extends Component {
 
@@ -31,6 +32,7 @@ class UserInfoContainer extends Component {
             nextProps.history.push('/admin-panel/users');
         }
     }
+
     onClickDeleteAccountButton() {
         const {dispatch} = this.props;
         dispatch(openDeleteUserModal());
@@ -52,46 +54,51 @@ class UserInfoContainer extends Component {
     }
 
     render() {
-        const {info, deleteUserModalOpened} = this.props;
-        return (
-            <div>
-                <Header size="huge" textAlign='center'>
-                    <HeaderContent>
-                        <Image src={info.avatar} size='small' alt="Avatar" avatar/>
-                        <br/>
-                        <b>{info.name}</b>
-                    </HeaderContent>
-                </Header>
-                <Divider/>
-                <Grid>
-                    <GridColumn computer={8} tablet={8} mobile={14}>
-                        <p>
-                            <b>Email</b>: {info.email}
-                        </p>
-                        <p>
-                            <b>Gender</b>: {this.getFormattedGender()}
-                        </p>
-                    </GridColumn>
-                </Grid>
-                <Grid>
-                    <GridColumn computer={8} tablet={8} mobile={14}>
-                        <b>Created at</b>: <Date value={info.createdAt} year='numeric' month='long' day='numeric' weekday='long'/>
+        const {info, deleteUserModalOpened, loading} = this.props;
+        return loading
+            ? <Loader active inline='centered'/>
+            : (
+                <div>
+                    <Header size="huge" textAlign='center'>
+                        <HeaderContent>
+                            <Image src={info.avatar} size='small' alt="avatar" avatar/>
+                            <br/>
+                            <b>{info.name}</b>
+                        </HeaderContent>
+                    </Header>
+                    <Divider/>
+                    <Grid>
+                        <GridColumn computer={8} tablet={8} mobile={14}>
+                            <p>
+                                <b>Email</b>: {info.email}
+                            </p>
+                            <p>
+                                <b>Gender</b>: {this.getFormattedGender()}
+                            </p>
+                        </GridColumn>
+                    </Grid>
+                    <Grid>
+                        <GridColumn computer={8} tablet={8} mobile={14}>
+                            <b>Created at</b>: <Date value={info.createdAt} year='numeric' month='long'
+                                                     day='numeric' weekday='long'/>
 
-                    </GridColumn>
-                    <GridColumn computer={8} tablet={8} mobile={14}>
+                        </GridColumn>
+                        <GridColumn computer={8} tablet={8} mobile={14}>
 
-                        <b>Updated at</b>: <Date value={info.updatedAt} year='numeric' month='long' day='numeric' weekday='long'/>
-                    </GridColumn>
-                </Grid>
-                <Button color='red' icon='remove user' type='submit' content='Delete account' onClick={this.onClickDeleteAccountButton}/>
-                <ConfirmationModal
-                    open={deleteUserModalOpened}
-                    content='Are you sure you want to delete this user?'
-                    onCancel={this.handleCancelDelete}
-                    onConfirm={this.handleConfirmDelete}
-                />
-            </div>
-        );
+                            <b>Updated at</b>: <Date value={info.updatedAt} year='numeric' month='long'
+                                                     day='numeric' weekday='long'/>
+                        </GridColumn>
+                    </Grid>
+                    <Button color='red' icon='remove user' type='submit' content='Delete account'
+                            onClick={this.onClickDeleteAccountButton}/>
+                    <ConfirmationModal
+                        open={deleteUserModalOpened}
+                        content='Are you sure you want to delete this user?'
+                        onCancel={this.handleCancelDelete}
+                        onConfirm={this.handleConfirmDelete}
+                    />
+                </div>
+            );
     }
 }
 
@@ -100,7 +107,8 @@ const mapStateToProps = ({adminUserReducer}) => {
         info: adminUserReducer['info'],
         errorCode: adminUserReducer['errorCode'],
         deleteUserModalOpened: adminUserReducer['deleteUserModalOpened'],
-        deleted: adminUserReducer['deleted']
+        deleted: adminUserReducer['deleted'],
+        loading: adminUserReducer['loading']
     }
 };
 

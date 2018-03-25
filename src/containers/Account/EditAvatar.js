@@ -33,7 +33,7 @@ class EditPasswordContainer extends Component {
             <div>
                 <Header size="huge" textAlign='center'>
                     <HeaderContent>
-                        <Image src={info.avatar} size='small' alt='Avatar' avatar/>
+                        <Image src={info.avatar} size='small' alt='avatar' avatar/>
                         <Modal trigger={<Button primary content='Edit avatar' icon='edit'/>}>
                             <ModalHeader>Select a Photo</ModalHeader>
                             <ModalContent image>

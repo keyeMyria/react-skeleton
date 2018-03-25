@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getUsers, setEmailValue} from '../../redux/modules/adminUsers';
+import {cleanFilters, getUsers, setEmailValue} from '../../redux/modules/adminUsers';
 import {List} from 'semantic-ui-react';
 import Button from '../../components/Button';
 import Image from '../../components/Image';
@@ -11,6 +11,7 @@ import Form from '../../components/Form';
 import Container from "../../components/Container";
 import {changeActivePage} from "../../redux/modules/adminMenu";
 import Loader from "../../components/Loader";
+import Icon from "../../components/Icon";
 
 class UsersContainer extends Component {
 
@@ -20,6 +21,7 @@ class UsersContainer extends Component {
         this.loadMoreUsers = this.loadMoreUsers.bind(this);
         this.onChangeEmailInput = this.onChangeEmailInput.bind(this);
         this.onSubmitSearch = this.onSubmitSearch.bind(this);
+        this.onClickCleanFilters = this.onClickCleanFilters.bind(this);
     }
 
     componentWillMount() {
@@ -48,8 +50,16 @@ class UsersContainer extends Component {
         dispatch(getUsers(page, size, email));
     }
 
+    onClickCleanFilters() {
+        const {dispatch} = this.props;
+        dispatch(cleanFilters());
+    }
+
     render() {
-        const {isLast, users} = this.props;
+        const {isLast, users, filtered, email} = this.props;
+        const searchIcon = filtered
+            ? <Icon name='delete' link onClick={this.onClickCleanFilters} />
+            : <Icon name='search' link onClick={this.onSubmitSearch} />;
         return (
             <InfiniteScroll
                 page={0}
@@ -60,13 +70,14 @@ class UsersContainer extends Component {
                 <Container>
                     Search
                     <Form onSubmit={this.onSubmitSearch}>
-                        <Input onChange={this.onChangeEmailInput} icon='search' placeholderid='search'/>
+                        <Input value={email} onChange={this.onChangeEmailInput} icon={searchIcon} placeholderid='search'/>
                     </Form>
                 </Container>
                 {users.length === 0 ?
                     <span>No users</span>
                     :
                     <div>
+                        {filtered && <p>Result of users filtered by email: '{email}'</p>}
                         <List animated celled verticalAlign='middle' size='big'>
                             {
                                 users.map(user => (
@@ -97,7 +108,8 @@ const mapStateToProps = ({adminUsersReducer}) => {
         size: adminUsersReducer['newAvatar'],
         numberOfPages: adminUsersReducer['numberOfPages'],
         isLast: adminUsersReducer['isLast'],
-        email: adminUsersReducer['email']
+        email: adminUsersReducer['email'],
+        filtered: adminUsersReducer['filtered']
     }
 };
 

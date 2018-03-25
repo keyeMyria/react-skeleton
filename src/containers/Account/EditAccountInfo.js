@@ -15,10 +15,10 @@ const GENDER_OPTIONS = [
 ];
 
 const LANGUAGE_OPTIONS = [
-    {key: 'english', value: 'EN'},
-    {key: 'spanish', value: 'ES'},
-    {key: 'japanese', value: 'JA'},
-    {key: 'french', value: 'FR'}
+    {key: 'english', value: 'EN', flag: 'gb'},
+    {key: 'spanish', value: 'ES', flag: 'es'},
+    {key: 'japanese', value: 'JA', flag: 'jp'},
+    {key: 'french', value: 'FR', flag: 'fr'}
 
 ];
 
@@ -98,7 +98,6 @@ class EditAccountInfoContainer extends Component {
                         </FormField>
                     </FormGroup>
                     <Button type='submit' onClick={this.onClickExitEditCredentialsButton}>Cancel</Button>
-
                     <Button primary type='submit' disabled={incompleteForm}>Confirm</Button>
                 </Form>
             </div>

@@ -18,15 +18,16 @@ const initState = {
     errorCode: null,
     deleteUserModalOpened: false,
     deleted: false,
-    errorDeleteUser: null
+    errorDeleteUser: null,
+    loading: true
 };
 
 export default (state = initState, action) => {
     switch (action.type) {
         case GET_USER_SUCCESS:
-            return {...state, info: action.response};
+            return {...state, info: action.response, loading: false};
         case GET_USER_ERROR:
-            return {...state, errors: action.error, errorCode: action.errorCode};
+            return {...state, errors: action.error, errorCode: action.errorCode, loading: false};
         case CHANGE_DELETE_USER_MODAL_VISIBILITY:
             return {...state, deleteUserModalOpened: action.visible};
         case DELETE_USER_SUCCESS:

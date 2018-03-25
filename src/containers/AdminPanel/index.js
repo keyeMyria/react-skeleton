@@ -23,7 +23,7 @@ class AdminPanelContainer extends Component {
     componentWillMount() {
         const {dispatch} = this.props;
         dispatch(getAccountInfo());
-        dispatch(changeTitle('account'));
+        dispatch(changeTitle('admin.panel'));
     }
 
     onClickMainPageButton() {

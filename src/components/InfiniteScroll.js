@@ -3,9 +3,11 @@ import ReactInfiniteScroll from 'react-infinite-scroller';
 
 export default props => (
     <ReactInfiniteScroll
-        {...props}
         pageStart={props.page}
-        hasMore={!props.last}
+        hasMore={props.last}
         loadMore={props.loadMore}
-    />
+        loader={props.loader}
+    >
+        {props.children}
+    </ReactInfiniteScroll>
 );
