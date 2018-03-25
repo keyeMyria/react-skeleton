@@ -20,5 +20,8 @@
   "french": "フランス語",
   "japanese": "日本語",
   "logout": "ログアウト",
-  "account": "アカウント"
+  "account": "アカウント",
+  "avatar": "アバター",
+  "admin.panel": "管理パネル",
+  "search": "サーチ"
 }

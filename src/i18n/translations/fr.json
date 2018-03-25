@@ -20,5 +20,8 @@
   "french": "Français",
   "japanese": "Japonais",
   "logout": "Connectez - Out",
-  "account": "Compte"
+  "account": "Compte",
+  "avatar": "Avatar",
+  "admin.panel": "Panneau d'administration",
+  "search": "Chercher"
 }

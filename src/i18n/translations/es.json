@@ -20,6 +20,8 @@
   "french": "Francés",
   "japanese": "Japonés",
   "logout": "Cerrar sesión",
-  "account": "Cuenta"
-
+  "account": "Cuenta",
+  "avatar": "Avatar",
+  "admin.panel": "Panel de administración",
+  "search": "Buscar"
 }

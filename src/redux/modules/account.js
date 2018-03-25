@@ -33,8 +33,10 @@ const initState = {
         name: '',
         gender: '',
         avatar: '',
+        createdAt: '',
+        updatedAt: ''
     },
-    language: getLocale(),
+    language: getLocale().toUpperCase(),
     newPasswordInfo: {},
     editing: false,
     changingPassword: false,
@@ -42,18 +44,19 @@ const initState = {
     incompletePasswordForm: true,
     successMessage: null,
     errorMessage: null,
-    refreshNeeded: false
+    refreshNeeded: false,
+    loading: true
 };
 
 export default (state = initState, action) => {
     switch (action.type) {
         case GET_ACCOUNT_INFO_SUCCESS:
-            return {...state, info: action.info, language: getLocale()};
+            return {...state, info: action.info, language: getLocale().toUpperCase(), loading: false};
         case EDIT_ACCOUNT_ERROR:
         case GET_ACCOUNT_INFO_ERROR:
-            return {...state, error: action.error, errors: action.errors};
+            return {...state, error: action.error, errors: action.errors, loading: false};
         case SET_ACCOUNT_FORM_FIELD: {
-            const refreshNeeded = action.refreshNeeded ? action.refreshNeeded : state.refreshNeeded
+            const refreshNeeded = action.refreshNeeded ? action.refreshNeeded : state.refreshNeeded;
             return {...state, info: {...state.info, [action.field]: action.value}, refreshNeeded: refreshNeeded};
         }
         case SET_PASSWORD_FORM_FIELD:

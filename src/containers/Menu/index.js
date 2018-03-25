@@ -51,7 +51,7 @@ class MenuContainer extends Component {
                         <DropdownMenu>
                             <DropdownItem onClick={this.onClickHomeOption}><Text id='home'/></DropdownItem>
                             <DropdownItem onClick={this.onClickAccountOption}><Text id='account'/></DropdownItem>
-                            {isAdmin() && <DropdownItem onClick={this.onClickAdminPanelOption}><Text id='adminpanel'/></DropdownItem>}
+                            {isAdmin() && <DropdownItem onClick={this.onClickAdminPanelOption}><Text id='admin.panel'/></DropdownItem>}
                             <DropdownItem onClick={this.logout}><Text id='logout'/></DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
