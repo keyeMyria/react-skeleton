@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {
-    editAccountInfo, setEditAccountFormFieldValue
-} from "../../redux/modules/account";
+import {editAccountInfo, setEditAccountFormFieldValue} from "../../redux/modules/account";
 import Button from "../../components/Button";
 import {FormField, FormGroup, Input, Select} from "../../components/Form";
 import Form from "../../components/Form";
