@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import Modal, {ModalContent, ModalDescription, ModalHeader} from "../../components/Modal";
 import Image from "../../components/Image";
 import Header, {HeaderContent} from "../../components/Header";
+import Text from "../../components/Text";
 
 class EditPasswordContainer extends Component {
 
@@ -35,12 +36,12 @@ class EditPasswordContainer extends Component {
                     <HeaderContent>
                         <Image src={info.avatar} size='small' alt='avatar' avatar/>
                         <Modal trigger={<Button primary content='Edit avatar' icon='edit'/>}>
-                            <ModalHeader>Select a Photo</ModalHeader>
+                            <ModalHeader><Text id='select.a.photo'/></ModalHeader>
                             <ModalContent image>
                                 <ModalDescription>
                                     <input type="file" onChange={this.onChangeAvatar}/>
-                                    <p>Is it okay to use this photo?</p>
-                                    <Button primary onClick={this.onEditAvatar} disabled={!newAvatar}>OK</Button>
+                                    <p>{newAvatar &&<Text id="photo.confirmation"/>}</p>
+                                    <Button primary onClick={this.onEditAvatar} disabled={!newAvatar}><Text id="confirm"/></Button>
                                 </ModalDescription>
                             </ModalContent>
                         </Modal>

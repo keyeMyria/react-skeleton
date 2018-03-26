@@ -23,5 +23,18 @@
   "account": "Cuenta",
   "avatar": "Avatar",
   "admin.panel": "Panel de administración",
-  "search": "Buscar"
+  "users.search": "Búsqueda de usuarios",
+  "filter.by.email": "Filtrar por correo electrónico",
+  "old.password": "Contraseña antigua",
+  "new.password": "Contraseña nueva",
+  "new.password.confirmation": "Confirmación de la contraseña nueva",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "select.a.photo": "Selecciona una foto",
+  "photo.confirmation": "Quieres usar esta foto?",
+  "delete.account": "Eliminar cuenta",
+  "delete.account.warning.header": "Vas a eliminar tu cuenta de usuario",
+  "delete.account.warning.content": "Si así lo decides, te enviaremos una confirmación al correo electrónico de tu cuenta para finalizar el proceso",
+  "redirecting": "Redireccionando...",
+  "delete.user.confirmation": "Estás seguro de eliminar este usuario?"
 }

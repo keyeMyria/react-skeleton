@@ -5,6 +5,7 @@ import Grid, {GridColumn} from "../../components/Grid";
 import Container from "../../components/Container";
 import Message from "../../components/Message";
 import {deleteAccount} from "../../redux/modules/account";
+import Text from "../../components/Text";
 
 class ConfirmDeleteAccountContainer extends Component {
 
@@ -28,7 +29,7 @@ class ConfirmDeleteAccountContainer extends Component {
                     <Container>
                         {successMessage && <Message success>{successMessage}</Message>}
                         {errorMessage && <Message error>{errorMessage}</Message>}
-                        <div>Redirecting...</div>
+                        <div><Text id='redirecting'/></div>
                     </Container>
                 </GridColumn>
             </Grid>

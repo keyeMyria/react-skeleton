@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import {FormField, FormGroup, Input} from "../../components/Form";
 import Form from "../../components/Form";
 import ErrorsContainer from "../../components/ErrorsContainer";
+import Text from "../../components/Text";
 
 
 class EditPasswordContainer extends Component {
@@ -41,11 +42,11 @@ class EditPasswordContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='lock'
                                 type='password'
-                                ref="password"
                                 label='Old password'
                                 name='oldPassword'
-                                placeholderid='password'
+                                placeholderid='old.password'
                                 onChange={this.onChange}
                             />
                         </FormField>
@@ -53,10 +54,11 @@ class EditPasswordContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='lock'
                                 type='password'
                                 label='New password'
                                 name='password'
-                                placeholderid='password'
+                                placeholderid='new.password'
                                 onChange={this.onChange}
                             />
                         </FormField>
@@ -64,17 +66,17 @@ class EditPasswordContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='lock'
                                 type='password'
                                 label='New password confirmation'
                                 name='passwordConfirmation'
-                                placeholderid='password'
+                                placeholderid='new.password.confirmation'
                                 onChange={this.onChange}
                             />
                         </FormField>
                     </FormGroup>
-                    <Button type='submit' onClick={this.onClickExitChangePassword}>Cancel</Button>
-
-                    <Button primary type='submit' disabled={incompletePasswordForm}>Confirm</Button>
+                    <Button type='submit' onClick={this.onClickExitChangePassword}><Text id="cancel"/></Button>
+                    <Button primary type='submit' disabled={incompletePasswordForm}><Text id="confirm"/></Button>
                 </Form>
             </div>
         );

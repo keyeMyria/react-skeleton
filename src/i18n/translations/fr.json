@@ -23,5 +23,18 @@
   "account": "Compte",
   "avatar": "Avatar",
   "admin.panel": "Panneau d'administration",
-  "search": "Chercher"
+  "users.search": "Recherche d'utilisateurs",
+  "filter.by.email": "Filtrer par email",
+  "old.password": "Ancien mot de passe",
+  "new.password": "Nouveau mot de passe",
+  "new.password.confirmation": "Confirmation du nouveau mot de passe",
+  "cancel": "Annuler",
+  "confirm": "Confirmer",
+  "select.a.photo": "Sélectionnez une photo",
+  "photo.confirmation": "Voulez-vous utiliser cette photo?",
+  "delete.account": "Supprimer le compte",
+  "delete.account.warning.header": "Vous êtes sur le point de supprimer votre compte",
+  "delete.account.warning.content": "Si vous le décidez, nous vous enverrons une confirmation à l'adresse e-mail de votre compte afin de terminer le processus",
+  "redirecting": "Rediriger...",
+  "delete.user.confirmation": "Êtes-vous sûr de vouloir supprimer cet utilisateur?"
 }

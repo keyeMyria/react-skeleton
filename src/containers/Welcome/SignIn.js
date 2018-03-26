@@ -50,6 +50,7 @@ class SignInContainer extends React.Component {
                                 <Title id='login'/>
                                 <FormField width={2}>
                                     <Input
+                                        icon='at'
                                         type='email'
                                         name='email'
                                         placeholderid='email'
@@ -58,6 +59,7 @@ class SignInContainer extends React.Component {
                                 </FormField>
                                 <FormField width={2}>
                                     <Input
+                                        icon='lock'
                                         type='password'
                                         name='password'
                                         placeholderid='password'

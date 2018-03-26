@@ -8,10 +8,11 @@ import {FormField, FormGroup, Input, Select} from "../../components/Form";
 import Form from "../../components/Form";
 import ErrorsContainer from "../../components/ErrorsContainer";
 import EditAvatar from "./EditAvatar";
+import Text from "../../components/Text";
 
 const GENDER_OPTIONS = [
-    {key: 'male', value: 'MALE'},
-    {key: 'female', value: 'FEMALE'}
+    {key: 'male', value: 'MALE', icon: 'man'},
+    {key: 'female', value: 'FEMALE', icon: 'woman'}
 ];
 
 const LANGUAGE_OPTIONS = [
@@ -56,6 +57,7 @@ class EditAccountInfoContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='at'
                                 type='email'
                                 name='email'
                                 value={info.email}
@@ -67,6 +69,7 @@ class EditAccountInfoContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='info'
                                 type='text'
                                 name='name'
                                 value={info.name}
@@ -97,8 +100,8 @@ class EditAccountInfoContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button type='submit' onClick={this.onClickExitEditCredentialsButton}>Cancel</Button>
-                    <Button primary type='submit' disabled={incompleteForm}>Confirm</Button>
+                    <Button type='submit' onClick={this.onClickExitEditCredentialsButton}><Text id='cancel'/></Button>
+                    <Button primary type='submit' disabled={incompleteForm}><Text id='confirm'/></Button>
                 </Form>
             </div>
         );

@@ -12,6 +12,7 @@ import Container from "../../components/Container";
 import {changeActivePage} from "../../redux/modules/adminMenu";
 import Loader from "../../components/Loader";
 import Icon from "../../components/Icon";
+import Text from "../../components/Text";
 
 class UsersContainer extends Component {
 
@@ -68,9 +69,9 @@ class UsersContainer extends Component {
                 loader={<Loader active inline='centered' key={0}/>}
             >
                 <Container>
-                    Search
+                    <Text id='users.search'/>
                     <Form onSubmit={this.onSubmitSearch}>
-                        <Input value={email} onChange={this.onChangeEmailInput} icon={searchIcon} placeholderid='search'/>
+                        <Input value={email} onChange={this.onChangeEmailInput} icon={searchIcon} placeholderid='filter.by.email'/>
                     </Form>
                 </Container>
                 {users.length === 0 ?

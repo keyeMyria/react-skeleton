@@ -23,5 +23,19 @@
   "account": "アカウント",
   "avatar": "アバター",
   "admin.panel": "管理パネル",
-  "search": "サーチ"
+  "users.search": "ユーザーの検索",
+  "filter.by.email": "メールでフィルタリングする",
+  "old.password": "以前のパスワード",
+  "new.password": "新しいパスワード",
+  "new.password.confirmation": "新しいパスワード確認",
+  "cancel": "キャンセル",
+  "confirm": "確認する",
+  "select.a.photo": "写真を選択",
+  "photo.confirmation": "この写真を使用しますか？",
+  "delete.account": "アカウントを削除する",
+  "delete.account.warning.header": "あなたはあなたのアカウントを削除しようとしています",
+  "delete.account.warning.content": "決定された場合は、プロセスを終了するためにアカウントのメールに確認メールを送信します",
+  "redirecting": "リダイレクト中...",
+  "delete.user.confirmation": "このユーザーを削除してもよろしいですか？"
+
 }

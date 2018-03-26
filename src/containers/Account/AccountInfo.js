@@ -10,6 +10,8 @@ import Date from "../../components/Date";
 import Header, {HeaderContent} from "../../components/Header";
 import Flag from "../../components/Flag";
 import Loader from "../../components/Loader";
+import Icon from "../../components/Icon";
+import GenderIcon from "../../components/GenderIcon";
 
 class AccountInfoContainer extends Component {
 
@@ -59,29 +61,27 @@ class AccountInfoContainer extends Component {
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
                             <p>
-                                <b>Email</b>: {info.email}
+                                <b><Icon name="mail"/>Email</b>: {info.email}
                             </p>
-                            <p>
-                                <b>Gender</b>: {gender}
-                            </p>
+                            <b><Icon name="intergender"/>Gender</b>: {gender}<GenderIcon title="PACO" gender={gender}/>
                         </GridColumn>
                         <GridColumn computer={4} tablet={4} mobile={14}>
-                            <b>Language</b>:
+                            <b><Icon name="world"/>Language</b>:&nbsp;
                             <Flag name={language}/>
                         </GridColumn>
                     </Grid>
+                    <Divider/>
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <b>Created at</b>: <Date value={info.createdAt} year='numeric' month='long'
+                            <b><Icon name="clock"/>Created at</b>: <Date value={info.createdAt} year='numeric' month='long'
                                                      day='numeric' weekday='long'/>
-
                         </GridColumn>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-
-                            <b>Updated at</b>: <Date value={info.updatedAt} year='numeric' month='long'
+                            <b><Icon name="clock"/>Updated at</b>: <Date value={info.updatedAt} year='numeric' month='long'
                                                      day='numeric' weekday='long'/>
                         </GridColumn>
                     </Grid>
+                    <Divider/>
                     <Button primary icon='edit' content='Edit credentials' type='submit'
                             onClick={this.onClickEditCredentialsButton}/>
                     <Button primary icon='edit' type='submit' content='Edit password'

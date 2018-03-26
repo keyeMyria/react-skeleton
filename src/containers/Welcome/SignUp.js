@@ -9,8 +9,8 @@ import ErrorsContainer from '../../components/ErrorsContainer';
 import Text from '../../components/Text';
 
 const GENDER_OPTIONS = [
-    {key: 'male', value: 'MALE'},
-    {key: 'female', value: 'FEMALE'}
+    {key: 'male', value: 'MALE', icon: 'man'},
+    {key: 'female', value: 'FEMALE', icon: 'woman'}
 ];
 
 class SignUpContainer extends Component {
@@ -49,6 +49,7 @@ class SignUpContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='at'
                                 type='email'
                                 name='email'
                                 placeholderid='email'
@@ -57,6 +58,7 @@ class SignUpContainer extends Component {
                         </FormField>
                         <FormField width={6}>
                             <Input
+                                icon='info'
                                 type='text'
                                 name='name'
                                 placeholderid='name'
@@ -67,6 +69,7 @@ class SignUpContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                icon='lock'
                                 type='password'
                                 name='password'
                                 placeholderid='password'
@@ -75,6 +78,7 @@ class SignUpContainer extends Component {
                         </FormField>
                         <FormField width={6}>
                             <Input
+                                icon='lock'
                                 type='password'
                                 name='passwordConfirmation'
                                 placeholderid='password.confirmation'

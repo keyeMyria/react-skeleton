@@ -11,6 +11,8 @@ import Header, {HeaderContent} from "../../components/Header";
 import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from "../../redux/modules/adminUser";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import Loader from "../../components/Loader";
+import Icon from "../../components/Icon";
+import GenderIcon from "../../components/GenderIcon";
 
 class UserInfoContainer extends Component {
 
@@ -55,6 +57,7 @@ class UserInfoContainer extends Component {
 
     render() {
         const {info, deleteUserModalOpened, loading} = this.props;
+        const gender = this.getFormattedGender();
         return loading
             ? <Loader active inline='centered'/>
             : (
@@ -69,33 +72,37 @@ class UserInfoContainer extends Component {
                     <Divider/>
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <p>
-                                <b>Email</b>: {info.email}
-                            </p>
-                            <p>
-                                <b>Gender</b>: {this.getFormattedGender()}
-                            </p>
+                            <b><Icon name="mail"/>Email</b>: {info.email}
+                        </GridColumn>
+                        <GridColumn computer={8} tablet={8} mobile={14}>
+                            <b><Icon name='intergender'/>Gender</b>: {gender}<GenderIcon gender={gender}/>
                         </GridColumn>
                     </Grid>
+                    <Divider/>
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <b>Created at</b>: <Date value={info.createdAt} year='numeric' month='long'
-                                                     day='numeric' weekday='long'/>
+                            <b><Icon name='clock'/>Created at</b>: <Date value={info.createdAt} year='numeric'
+                                                                         month='long'
+                                                                         day='numeric' weekday='long'/>
 
                         </GridColumn>
                         <GridColumn computer={8} tablet={8} mobile={14}>
 
-                            <b>Updated at</b>: <Date value={info.updatedAt} year='numeric' month='long'
-                                                     day='numeric' weekday='long'/>
+                            <b><Icon name='clock'/>Updated at</b>: <Date value={info.updatedAt} year='numeric'
+                                                                         month='long'
+                                                                         day='numeric' weekday='long'/>
                         </GridColumn>
                     </Grid>
+                    <Divider/>
                     <Button color='red' icon='remove user' type='submit' content='Delete account'
                             onClick={this.onClickDeleteAccountButton}/>
                     <ConfirmationModal
                         open={deleteUserModalOpened}
-                        content='Are you sure you want to delete this user?'
+                        content='delete.user.confirmation'
                         onCancel={this.handleCancelDelete}
                         onConfirm={this.handleConfirmDelete}
+                        cancelButton='cancel'
+                        confirmButton='confirm'
                     />
                 </div>
             );
