@@ -44,7 +44,7 @@ class EditPasswordContainer extends Component {
                             <Input
                                 icon='lock'
                                 type='password'
-                                label='Old password'
+                                labelid='old.password'
                                 name='oldPassword'
                                 placeholderid='old.password'
                                 onChange={this.onChange}
@@ -56,7 +56,7 @@ class EditPasswordContainer extends Component {
                             <Input
                                 icon='lock'
                                 type='password'
-                                label='New password'
+                                labelid='new.password'
                                 name='password'
                                 placeholderid='new.password'
                                 onChange={this.onChange}
@@ -68,7 +68,7 @@ class EditPasswordContainer extends Component {
                             <Input
                                 icon='lock'
                                 type='password'
-                                label='New password confirmation'
+                                labelid='new.password.confirmation'
                                 name='passwordConfirmation'
                                 placeholderid='new.password.confirmation'
                                 onChange={this.onChange}

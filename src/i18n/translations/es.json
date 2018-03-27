@@ -36,5 +36,15 @@
   "delete.account.warning.header": "Vas a eliminar tu cuenta de usuario",
   "delete.account.warning.content": "Si así lo decides, te enviaremos una confirmación al correo electrónico de tu cuenta para finalizar el proceso",
   "redirecting": "Redireccionando...",
-  "delete.user.confirmation": "Estás seguro de eliminar este usuario?"
+  "delete.user.confirmation": "Estás seguro de eliminar este usuario?",
+  "created.at": "Creado en",
+  "updated.at": "Actualizado en",
+  "main.page": "Página principal",
+  "users": "Usuarios",
+  "no.users": "No hay ningún usuario registrado en la aplicación",
+  "no.users.with.data.provided": "No hay ningún usuario con los datos introducidos",
+  "send.email": "Enviar correo",
+  "delete.user": "Eliminar usuario",
+  "result.users.filtered": "Resultado de la búsqueda de usuarios filtrados por correo '{email}':"
+
 }

@@ -13,6 +13,7 @@ import {changeActivePage} from "../../redux/modules/adminMenu";
 import Loader from "../../components/Loader";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
+import Message from "../../components/Message";
 
 class UsersContainer extends Component {
 
@@ -75,10 +76,12 @@ class UsersContainer extends Component {
                     </Form>
                 </Container>
                 {users.length === 0 ?
-                    <span>No users</span>
+                    <Message info>
+                        <p><Icon name='info'/>{filtered ? <Text id='no.users.with.data.provided'/> : <Text id='no.users'/>}</p>
+                    </Message>
                     :
                     <div>
-                        {filtered && <p>Result of users filtered by email: '{email}'</p>}
+                        {filtered && <p><Text id='result.users.filtered' values={{email: email}}/></p>}
                         <List animated celled verticalAlign='middle' size='big'>
                             {
                                 users.map(user => (

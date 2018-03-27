@@ -13,6 +13,7 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 import Loader from "../../components/Loader";
 import Icon from "../../components/Icon";
 import GenderIcon from "../../components/GenderIcon";
+import Text from "../../components/Text";
 
 class UserInfoContainer extends Component {
 
@@ -72,30 +73,31 @@ class UserInfoContainer extends Component {
                     <Divider/>
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <b><Icon name="mail"/>Email</b>: {info.email}
+                            <b><Icon name="mail"/><Text id='email'/></b>: {info.email}
                         </GridColumn>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <b><Icon name='intergender'/>Gender</b>: {gender}<GenderIcon gender={gender}/>
+                            <b><Icon name='intergender'/><Text id='gender'/></b>: {gender}<GenderIcon gender={gender}/>
                         </GridColumn>
                     </Grid>
                     <Divider/>
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <b><Icon name='clock'/>Created at</b>: <Date value={info.createdAt} year='numeric'
+                            <b><Icon name='clock'/><Text id='created.at'/></b>: <Date value={info.createdAt} year='numeric'
                                                                          month='long'
                                                                          day='numeric' weekday='long'/>
 
                         </GridColumn>
                         <GridColumn computer={8} tablet={8} mobile={14}>
 
-                            <b><Icon name='clock'/>Updated at</b>: <Date value={info.updatedAt} year='numeric'
+                            <b><Icon name='clock'/><Text id='updated.at'/></b>: <Date value={info.updatedAt} year='numeric'
                                                                          month='long'
                                                                          day='numeric' weekday='long'/>
                         </GridColumn>
                     </Grid>
                     <Divider/>
-                    <Button color='red' icon='remove user' type='submit' content='Delete account'
-                            onClick={this.onClickDeleteAccountButton}/>
+                    <Button color='red' icon='remove user' type='submit' onClick={this.onClickDeleteAccountButton}>
+                        <Text id='delete.user'/>
+                    </Button>
                     <ConfirmationModal
                         open={deleteUserModalOpened}
                         content='delete.user.confirmation'

@@ -5,6 +5,7 @@ import {confirmAccount} from "../../redux/modules/confirmAccount";
 import Grid, {GridColumn} from "../../components/Grid";
 import Container from "../../components/Container";
 import Message from "../../components/Message";
+import Text from "../../components/Text";
 
 class ConfirmAccountContainer extends Component {
 
@@ -27,7 +28,7 @@ class ConfirmAccountContainer extends Component {
                 <GridColumn computer={8} tablet={12} mobile={14} textAlign='center'>
                     <Container>
                         {confirmed ? <Message success>{successMessage}</Message> : <Message error>{errorMessage}</Message>}
-                        <div>Redirecting...</div>
+                        <div><Text id='redirecting'/></div>
                     </Container>
                 </GridColumn>
             </Grid>

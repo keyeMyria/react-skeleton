@@ -16,13 +16,14 @@ const initState = {
     email: null,
     successMessage: null,
     errors: [],
-    isIncomplete: true
+    isIncomplete: true,
+    errorMessage: null
 };
 
 export default (state = initState, action) => {
     switch (action.type) {
         case RESET_PASSWORD_REQUEST_SUCCESS:
-            return {...state, successMessage: action.message};
+            return {...state, successMessage: action.message, errorMessage: null};
         case RESET_PASSWORD_REQUEST_ERROR:
             return {...state, errors: action.errors};
         case SET_EMAIL_FIELD:

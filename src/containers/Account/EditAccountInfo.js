@@ -55,6 +55,7 @@ class EditAccountInfoContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                labelid='email'
                                 icon='at'
                                 type='email'
                                 name='email'
@@ -67,6 +68,7 @@ class EditAccountInfoContainer extends Component {
                     <FormGroup widths='equal'>
                         <FormField width={6}>
                             <Input
+                                labelid='name'
                                 icon='info'
                                 type='text'
                                 name='name'
@@ -78,6 +80,7 @@ class EditAccountInfoContainer extends Component {
                     </FormGroup>
                     <FormGroup widths='equal'>
                         <FormField>
+                            <b><Text id='gender'/></b>
                             <Select
                                 type='select'
                                 name='gender'
@@ -88,6 +91,7 @@ class EditAccountInfoContainer extends Component {
                             />
                         </FormField>
                         <FormField>
+                            <b><Text id='language'/></b>
                             <Select
                                 type='select'
                                 name='language'

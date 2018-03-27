@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Select as SemanticSelect, Checkbox as SemanticCheckbox} from 'semantic-ui-react';
 import {injectIntl} from 'react-intl';
+import Text from "./Text";
 
 export default props => (
     <Form {...props}/>
@@ -11,11 +12,14 @@ export const FormField = props => (
 );
 
 export const Input = injectIntl(props => (
+    <div>
+    {props.labelid && <b><Text id={props.labelid}/></b>}
     <Form.Input
         {...props}
         placeholder={props.intl.formatMessage({id: props.placeholderid})}
         onChange={e => props.onChange(e.target.name, e.target.value)}
     />
+    </div>
 ));
 
 export const FormGroup = props => (

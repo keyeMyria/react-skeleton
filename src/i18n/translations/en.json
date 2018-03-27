@@ -36,5 +36,14 @@
   "delete.account.warning.header": "You are about to delete your account",
   "delete.account.warning.content": "If you decide so, we will send you a confirmation to your account email in order to finish the process",
   "redirecting": "Redirecting...",
-  "delete.user.confirmation": "Are you sure you want to delete this user?"
+  "delete.user.confirmation": "Are you sure you want to delete this user?",
+  "created.at": "Created at",
+  "updated.at": "Updated at",
+  "main.page": "Main page",
+  "users": "Users",
+  "no.users": "There's no users registered in the application",
+  "no.users.with.data.provided": "There's no users with the data provided",
+  "send.email": "Send email",
+  "delete.user": "Delete user",
+  "result.users.filtered": "Result of users filtered by email '{email}':"
 }

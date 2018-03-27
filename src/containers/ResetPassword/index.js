@@ -9,6 +9,8 @@ import Message from "../../components/Message";
 import {onChangeResetPasswordEmailField, requestResetPassword} from "../../redux/modules/resetPassword";
 import Button from "../../components/Button";
 import ErrorsContainer from "../../components/ErrorsContainer";
+import Text from "../../components/Text";
+import Icon from "../../components/Icon";
 
 class ResetPasswordContainer extends Component {
 
@@ -31,23 +33,24 @@ class ResetPasswordContainer extends Component {
         const {successMessage, errors, isIncomplete} = this.props;
         return (
             <Grid centered>
-                <GridColumn computer={8} tablet={12} mobile={14} textAlign='center'>
+                <GridColumn computer={8} tablet={12} mobile={14}>
                     <Container>
-                        {successMessage && <Message success>{successMessage}</Message>}
+                        <Title id='login'/>
+                        {successMessage && <Message info><Icon name='info'/>{successMessage}</Message>}
                         {errors && <ErrorsContainer errors={errors}/>}
                         <Form onSubmit={this.onSubmit.bind(this)}>
                             <FormGroup widths='equal'>
-                                <Title id='login'/>
                                 <FormField width={2}>
                                     <Input
+                                        labelid='email'
                                         type='email'
                                         name='email'
                                         placeholderid='email'
                                         onChange={this.onChange}
                                     />
-                                    <Button primary type='submit' disabled={isIncomplete} size="big">Send email</Button>
                                 </FormField>
                             </FormGroup>
+                            <Button primary type='submit' disabled={isIncomplete}><Text id='send.email'/></Button>
                         </Form>
                     </Container>
                 </GridColumn>

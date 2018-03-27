@@ -36,5 +36,15 @@
   "delete.account.warning.header": "Vous êtes sur le point de supprimer votre compte",
   "delete.account.warning.content": "Si vous le décidez, nous vous enverrons une confirmation à l'adresse e-mail de votre compte afin de terminer le processus",
   "redirecting": "Rediriger...",
-  "delete.user.confirmation": "Êtes-vous sûr de vouloir supprimer cet utilisateur?"
+  "delete.user.confirmation": "Êtes-vous sûr de vouloir supprimer cet utilisateur?",
+  "created.at": "Créé à",
+  "updated.at": "Mis à jour à",
+  "main.page": "Page d'accueil",
+  "users": "Utilisateurs",
+  "no.users": "Aucun utilisateur enregistré dans l'application",
+  "no.users.with.data.provided": "Il n'y a pas d'utilisateurs avec les données fournies",
+  "send.email": "Envoyer un email",
+  "delete.user": "Supprimer l'utilisateur",
+  "result.users.filtered": "Résultat des utilisateurs filtrés par email '{email}':"
+
 }

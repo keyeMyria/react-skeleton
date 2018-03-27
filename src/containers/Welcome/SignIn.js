@@ -70,8 +70,7 @@ class SignInContainer extends React.Component {
                                     <Checkbox name='remember' labelid="remember.me" onChange={this.onChange}/>
                                 </FormField>
                                 <FormField width={1}>
-
-                                    <Button primary type='submit' disabled={incompleteSignInForm} size="big"><Text id='login'/></Button>
+                                    <Button primary type='submit' disabled={incompleteSignInForm}><Text id='login'/></Button>
                                 </FormField>
                                 <FormField width={1}>
                                     <Text id='not.have.account.yet' values={{

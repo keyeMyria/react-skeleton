@@ -9,6 +9,8 @@ import Title from "../../components/Title";
 import Button from "../../components/Button";
 import {onChangeResetPasswordPasswordField} from "../../redux/modules/resetPassword";
 import {resetPassword} from "../../redux/modules/resetPassword";
+import Text from "../../components/Text";
+import Icon from "../../components/Icon";
 
 class ConfirmResetPasswordContainer extends Component {
 
@@ -38,21 +40,22 @@ class ConfirmResetPasswordContainer extends Component {
         const {successMessage, errorMessage, isIncomplete} = this.props;
         return (
             <Grid centered>
-                <GridColumn computer={8} tablet={12} mobile={14} textAlign='center'>
+                <GridColumn computer={8} tablet={12} mobile={14}>
                     <Container>
+                        <Title id='login'/>
                         {successMessage &&
                         <div>
-                            <Message success>{successMessage}</Message>
-                            <div>Redirecting...</div>
+                            <Message success><Icon name='info'/>{successMessage}</Message>
+                            <div><Text id='redirecting'/></div>
                         </div>
                         }
                         {errorMessage && <Message error>{errorMessage}</Message>}
                         {!successMessage &&
                         <Form onSubmit={this.onSubmit.bind(this)}>
-                            <Title id='login'/>
                             <FormGroup widths='equal'>
                                 <FormField>
                                     <Input
+                                        labelid='password'
                                         type='password'
                                         name='password'
                                         placeholderid='password'
@@ -63,15 +66,16 @@ class ConfirmResetPasswordContainer extends Component {
                             <FormGroup widths='equal'>
                                 <FormField>
                                     <Input
+                                        labelid='password.confirmation'
                                         type='password'
                                         name='passwordConfirmation'
                                         placeholderid='password.confirmation'
                                         onChange={this.onChange}
                                     />
-                                    <Button primary type='submit' disabled={isIncomplete} size="big">Change
-                                        password</Button>
                                 </FormField>
                             </FormGroup>
+                            <Button primary type='submit' disabled={isIncomplete}>Change
+                                password</Button>
                         </Form>
                         }
                     </Container>

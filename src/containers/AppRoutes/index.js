@@ -16,7 +16,7 @@ export default () => (
         <Route exact path='/' component={WithAuth(HomeContainer, [ROLE_ADMIN, ROLE_USER])}/>
         <Route path='/welcome' component={WithoutAuth(WelcomeContainer)}/>
         <Route path='/admin-panel' component={WithAuth(AdminPanelContainer, [ROLE_ADMIN])}/>
-            <Route path='/account' component={WithAuth(AccountContainer, [ROLE_ADMIN, ROLE_USER])}/>
+        <Route path='/account' component={WithAuth(AccountContainer, [ROLE_ADMIN, ROLE_USER])}/>
         <Route path='/confirm-account/:token' component={WithoutAuth(ConfirmAccountContainer)}/>
         <Route exact path='/reset-password' component={WithoutAuth(ResetPasswordContainer)}/>
         <Route path='/reset-password/:token' component={WithoutAuth(ConfirmResetPasswordContainer)}/>

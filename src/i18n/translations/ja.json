@@ -36,6 +36,14 @@
   "delete.account.warning.header": "あなたはあなたのアカウントを削除しようとしています",
   "delete.account.warning.content": "決定された場合は、プロセスを終了するためにアカウントのメールに確認メールを送信します",
   "redirecting": "リダイレクト中...",
-  "delete.user.confirmation": "このユーザーを削除してもよろしいですか？"
-
+  "delete.user.confirmation": "このユーザーを削除してもよろしいですか？",
+  "created.at": "作成場所",
+  "updated.at": "更新日",
+  "main.page": "メインページ",
+  "users": "ユーザー",
+  "no.users": "アプリケーションに登録されているユーザーはいません",
+  "no.users.with.data.provided": "データが提供されているユーザーはいません",
+  "send.email": "メールを送る",
+  "delete.user": "ユーザーを削除",
+  "result.users.filtered": "{email}メールでフィルタリングされたユーザーの結果:"
 }

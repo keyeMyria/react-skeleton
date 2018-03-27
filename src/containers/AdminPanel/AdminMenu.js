@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Menu, {MenuItem} from '../../components/Menu';
 import Icon from '../../components/Icon';
+import Text from "../../components/Text";
 
 class AdminMenu extends Component {
 
@@ -28,11 +29,11 @@ class AdminMenu extends Component {
             <Menu icon='labeled'>
                 <MenuItem active={title === 'home'} onClick={this.onClickMainPageButton}>
                     <Icon name='home'/>
-                    Main page
+                    <Text id='main.page'/>
                 </MenuItem>
                 <MenuItem active={title === 'users'} onClick={this.onClickUserMenuOption}>
                     <Icon name='user'/>
-                    Users
+                    <Text id='users'/>
                 </MenuItem>
             </Menu>
         );
