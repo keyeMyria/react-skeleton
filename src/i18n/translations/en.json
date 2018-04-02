@@ -45,5 +45,6 @@
   "no.users.with.data.provided": "There's no users with the data provided",
   "send.email": "Send email",
   "delete.user": "Delete user",
-  "result.users.filtered": "Result of users filtered by email '{email}':"
+  "result.users.filtered": "Result of users filtered by email '{email}':",
+  "upload.image": "Upload image"
 }

@@ -16,3 +16,7 @@ export const ModalContent = props => (
 export const ModalDescription = props => (
     <SemanticModal.Description {...props}/>
 );
+
+export const ModalActions = props => (
+    <SemanticModal.Actions {...props}/>
+);

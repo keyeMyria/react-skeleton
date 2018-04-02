@@ -45,6 +45,6 @@
   "no.users.with.data.provided": "No hay ningún usuario con los datos introducidos",
   "send.email": "Enviar correo",
   "delete.user": "Eliminar usuario",
-  "result.users.filtered": "Resultado de la búsqueda de usuarios filtrados por correo '{email}':"
-
+  "result.users.filtered": "Resultado de la búsqueda de usuarios filtrados por correo '{email}':",
+  "upload.image": "Subir imagen"
 }

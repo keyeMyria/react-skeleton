@@ -22,6 +22,8 @@ const CHANGE_PASSWORD_ERROR = `${REDUCER_NAME}/CHANGE_PASSWORD_ERROR`;
 const SET_NEW_AVATAR = `${REDUCER_NAME}/SET_NEW_AVATAR`;
 const EDIT_AVATAR_SUCCESS = `${REDUCER_NAME}/EDIT_AVATAR_SUCCESS`;
 const EDIT_AVATAR_ERROR = `${REDUCER_NAME}/EDIT_AVATAR_ERROR`;
+const OPEN_EDIT_AVATAR_MODAL = `${REDUCER_NAME}/OPEN_EDIT_AVATAR_MODAL`;
+const CLOSE_EDIT_AVATAR_MODAL = `${REDUCER_NAME}/CLOSE_EDIT_AVATAR_MODAL`;
 const DELETE_ACCOUNT_REQUEST_SUCCESS = `${REDUCER_NAME}/DELETE_ACCOUNT_REQUEST_SUCCESS`;
 const DELETE_ACCOUNT_REQUEST_ERROR = `${REDUCER_NAME}/DELETE_ACCOUNT_REQUEST_ERROR`;
 const DELETE_ACCOUNT_SUCCESS = `${REDUCER_NAME}/DELETE_ACCOUNT_SUCCESS`;
@@ -45,7 +47,9 @@ const initState = {
     successMessage: null,
     errorMessage: null,
     refreshNeeded: false,
-    loading: true
+    loading: true,
+    newAvatar: null,
+    isEditAvatarModalOpened: false
 };
 
 export default (state = initState, action) => {
@@ -75,12 +79,17 @@ export default (state = initState, action) => {
             return {...state, changingPassword: false};
         case SET_NEW_AVATAR:
             return {...state, newAvatar: action.value};
+        case OPEN_EDIT_AVATAR_MODAL:
+            return {...state, isEditAvatarModalOpened: true};
+        case CLOSE_EDIT_AVATAR_MODAL:
+            return {...state, isEditAvatarModalOpened: false};
         case DELETE_ACCOUNT_REQUEST_SUCCESS:
         case DELETE_ACCOUNT_SUCCESS:
             return {...state, successMessage: action.message};
         case DELETE_ACCOUNT_REQUEST_ERROR:
         case DELETE_ACCOUNT_ERROR:
             return {...state, errorMessage: action.error};
+        case EDIT_AVATAR_SUCCESS:
         default:
             return state;
     }
@@ -156,11 +165,21 @@ export const editAvatar = credentials => {
         post(URI_ACCOUNT + "/avatar", formData, {
             headers: {'content-type': 'multipart/form-data'}
         }).then(response => {
-            dispatch({type: EDIT_AVATAR_SUCCESS});
+            window.location.reload();
         }).catch(response => {
             dispatch({type: EDIT_AVATAR_ERROR, error: response.data.message});
         });
     }
+};
+
+
+
+export const openEditAvatarModal = () => {
+    return {type: OPEN_EDIT_AVATAR_MODAL};
+};
+
+export const closeEditAvatarModal = () => {
+    return {type: CLOSE_EDIT_AVATAR_MODAL};
 };
 
 export const deleteAccountRequest = () => {

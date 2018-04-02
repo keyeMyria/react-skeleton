@@ -67,7 +67,7 @@ class AccountInfoContainer extends Component {
                             <b><Icon name="world"/><Text id='language'/></b>:&nbsp;
                             <Flag name={language}/>
                         </GridColumn>
-                        <GridColumn computer={4} tablet={4} mobile={14}>
+                        <GridColumn computer={8} tablet={8} mobile={14}>
                             <b><Icon name="intergender"/><Text id='gender'/></b>: {gender}<GenderIcon gender={gender}/>
                         </GridColumn>
                     </Grid>

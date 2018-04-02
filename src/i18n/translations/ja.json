@@ -45,5 +45,6 @@
   "no.users.with.data.provided": "データが提供されているユーザーはいません",
   "send.email": "メールを送る",
   "delete.user": "ユーザーを削除",
-  "result.users.filtered": "{email}メールでフィルタリングされたユーザーの結果:"
+  "result.users.filtered": "{email}メールでフィルタリングされたユーザーの結果:",
+  "upload.image": "画像をアップロードする"
 }
