@@ -4,7 +4,7 @@ import {Flag} from 'semantic-ui-react';
 
 const countryLanguages = {
     'ES': 'es',
-    'JA': 'ja',
+    'JA': 'jp',
     'EN': 'gb',
     'FR': 'fr'
 };

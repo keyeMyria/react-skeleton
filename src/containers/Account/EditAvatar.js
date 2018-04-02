@@ -66,7 +66,7 @@ class EditPasswordContainer extends Component {
                                     <Grid centered>
                                         <GridColumn computer={7} tablet={7} mobile={14}>
                                             <p>Text here</p>
-                                            <InputFile accept='image/png,image/jpeg' onChange={this.onChangeAvatar}/>
+                                            <InputFile accept='image/png,image/jpeg' onChange={this.onChangeAvatar} text='upload.image'/>
                                         </GridColumn>
                                         <GridColumn computer={7} tablet={7} mobile={14}>
                                             {newAvatar &&

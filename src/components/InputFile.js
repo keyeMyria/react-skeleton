@@ -8,11 +8,11 @@ const FileInput = styled.input`
     display: none;
 `;
 
-export default ({accept, onChange}) => (
+export default ({accept, onChange, text}) => (
     <div>
         <label htmlFor='imageUpload'>
             <Label as='a' color='blue' size='large'>
-                <Icon name='file image outline'/> <Text id='upload.image'/>
+                <Icon name='file image outline'/> <Text id={text}/>
             </Label>
         </label>
         <FileInput type='file' id='imageUpload'
