@@ -20,7 +20,8 @@ const initState = {
     isLast: false,
     numberOfPages: 1,
     email: '',
-    filtered: false
+    filtered: false,
+    loading: true
 };
 
 export default (state = initState, action) => {
@@ -28,11 +29,12 @@ export default (state = initState, action) => {
         case GET_USERS_SUCCESS:
             return {
                 ...state,
-                users: state.page > 0 ? state.users.concat(action.response.content) : action.response.content,
+                users: action.page > 0 ? state.users.concat(action.response.content) : action.response.content,
                 isFirst: action.response.first,
                 isLast: action.response.last,
                 numberOfPages: action.response.totalPages,
-                filtered: state.email !== ''
+                filtered: state.email !== '',
+                loading: false
             };
         case GET_USERS_ERROR:
             return {...state, error: action.error};
@@ -60,7 +62,7 @@ export const getUsers = (page, size, email) => {
     };
     return dispatch => {
         get(`${URI_USERS}`, params).then(response => {
-            dispatch({type: GET_USERS_SUCCESS, response: response});
+            dispatch({type: GET_USERS_SUCCESS, response: response, page: page});
         }).catch(response => {
             dispatch({type: GET_USERS_ERROR, error: response.error});
         });

@@ -102,8 +102,8 @@ class EditAccountInfoContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button type='submit' onClick={this.onClickExitEditCredentialsButton}><Text id='cancel'/></Button>
                     <Button primary type='submit' disabled={incompleteForm}><Text id='confirm'/></Button>
+                    <Button type='submit' onClick={this.onClickExitEditCredentialsButton}><Text id='cancel'/></Button>
                 </Form>
             </div>
         );

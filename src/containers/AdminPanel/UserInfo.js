@@ -23,6 +23,7 @@ class UserInfoContainer extends Component {
         this.getFormattedGender = this.getFormattedGender.bind(this);
         this.handleConfirmDelete = this.handleConfirmDelete.bind(this);
         this.handleCancelDelete = this.handleCancelDelete.bind(this);
+        this.onClickBackButton = this.onClickBackButton.bind(this);
     }
 
     componentWillMount() {
@@ -54,6 +55,11 @@ class UserInfoContainer extends Component {
     handleCancelDelete() {
         const {dispatch} = this.props;
         dispatch(closeDeleteUserModal());
+    }
+
+    onClickBackButton() {
+        const {history} = this.props;
+        history.push('/admin-panel/users');
     }
 
     render() {
@@ -97,6 +103,9 @@ class UserInfoContainer extends Component {
                     <Divider/>
                     <Button color='red' icon='remove user' type='submit' onClick={this.onClickDeleteAccountButton}>
                         <Text id='delete.user'/>
+                    </Button>
+                    <Button type='submit' onClick={this.onClickBackButton}>
+                        <Text id='cancel'/>
                     </Button>
                     <ConfirmationModal
                         open={deleteUserModalOpened}

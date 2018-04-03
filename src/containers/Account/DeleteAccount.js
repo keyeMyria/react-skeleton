@@ -36,8 +36,8 @@ class DeleteAccountContainer extends Component {
                     <MessageHeader><Icon name='warning'/><Text id='delete.account.warning.header'/></MessageHeader>
                     <p><Text id='delete.account.warning.content'/></p>
                 </Message>
-                <Button type='submit' onClick={this.onClickExitDeleteAccount}><Text id='cancel'/></Button>
                 <Button color='red' onClick={this.onSubmit}><Text id='delete.account'/></Button>
+                <Button type='submit' onClick={this.onClickExitDeleteAccount}><Text id='cancel'/></Button>
             </div>
         );
     }

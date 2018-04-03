@@ -75,8 +75,8 @@ class EditPasswordContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button type='submit' onClick={this.onClickExitChangePassword}><Text id="cancel"/></Button>
                     <Button primary type='submit' disabled={incompletePasswordForm}><Text id="confirm"/></Button>
+                    <Button type='submit' onClick={this.onClickExitChangePassword}><Text id="cancel"/></Button>
                 </Form>
             </div>
         );

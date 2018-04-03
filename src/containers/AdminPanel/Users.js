@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {cleanFilters, getUsers, setEmailValue} from '../../redux/modules/adminUsers';
-import {List} from 'semantic-ui-react';
+import {Item, Rail, Sticky} from 'semantic-ui-react';
 import Button from '../../components/Button';
-import Image from '../../components/Image';
 import InfiniteScroll from '../../components/InfiniteScroll';
 import {Input} from '../../components/Form';
 import Form from '../../components/Form';
@@ -14,6 +13,8 @@ import Loader from "../../components/Loader";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
 import Message from "../../components/Message";
+import Image from "../../components/Image";
+import Header from "../../components/Header";
 
 class UsersContainer extends Component {
 
@@ -27,9 +28,9 @@ class UsersContainer extends Component {
     }
 
     componentWillMount() {
-        const {dispatch, page, size, email} = this.props;
-        dispatch(getUsers(page, size, email));
+        const {dispatch, pageToLoad, size, email} = this.props;
         dispatch(changeActivePage('users'));
+        dispatch(getUsers(pageToLoad, size, email));
     }
 
     onClickOpenUserDetails(userId) {
@@ -37,9 +38,9 @@ class UsersContainer extends Component {
         history.push(`/admin-panel/users/${userId}`);
     }
 
-    loadMoreUsers(pageToLoad) {
-        const {dispatch, size, email, page} = this.props;
-        pageToLoad === page && dispatch(getUsers(pageToLoad, size, email));
+    loadMoreUsers() {
+        const {dispatch, size, email, users, page} = this.props;
+        users.length > 0 && dispatch(getUsers(page + 1, size, email));
     }
 
     onChangeEmailInput(field, value) {
@@ -58,15 +59,15 @@ class UsersContainer extends Component {
     }
 
     render() {
-        const {isLast, users, filtered, email} = this.props;
+        const {isLast, users, filtered, email, loading} = this.props;
         const searchIcon = filtered
             ? <Icon name='delete' link onClick={this.onClickCleanFilters} />
             : <Icon name='search' link onClick={this.onSubmitSearch} />;
         return (
             <InfiniteScroll
-                page={0}
+                page={-1}
                 loadMore={this.loadMoreUsers}
-                last={!isLast}
+                last={isLast}
                 loader={<Loader active inline='centered' key={0}/>}
             >
                 <Container>
@@ -75,29 +76,34 @@ class UsersContainer extends Component {
                         <Input value={email} onChange={this.onChangeEmailInput} icon={searchIcon} placeholderid='filter.by.email'/>
                     </Form>
                 </Container>
-                {users.length === 0 ?
+                {users.length === 0 && !loading ?
                     <Message info>
                         <p><Icon name='info'/>{filtered ? <Text id='no.users.with.data.provided'/> : <Text id='no.users'/>}</p>
                     </Message>
                     :
                     <div>
                         {filtered && <p><Text id='result.users.filtered' values={{email: email}}/></p>}
-                        <List animated celled verticalAlign='middle' size='big'>
+                        <Item.Group divided>
                             {
                                 users.map(user => (
-                                    <List.Item key={user.id}>
-                                        <List.Content floated='right'>
-                                            <Button onClick={() => this.onClickOpenUserDetails(user.id)}>View
-                                                details</Button>
-                                        </List.Content>
-                                        <Image avatar src={user.avatar} alt='avatar'/>
-                                        <List.Content>
-                                            {user.name} - {user.email}
-                                        </List.Content>
-                                    </List.Item>
+                                    <Item key={user.id}>
+                                        <Item.Image avatar size='tiny' src={user.avatar} alt='avatar'/>
+                                        <Item.Content floated='right'>
+                                            <Item.Header as='a' onClick={() => this.onClickOpenUserDetails(user.id)}>
+                                                {user.name}
+                                            </Item.Header>
+                                            <Item.Meta>
+                                                <span>{user.email}</span>
+                                            </Item.Meta>
+                                            <Button icon labelPosition='left' floated='right' primary onClick={() => this.onClickOpenUserDetails(user.id)}>
+                                                <Icon name='info' />
+                                                View details
+                                            </Button>
+                                        </Item.Content>
+                                    </Item>
                                 ))
                             }
-                        </List>
+                        </Item.Group>
                     </div>
                 }
             </InfiniteScroll>
@@ -108,12 +114,13 @@ class UsersContainer extends Component {
 const mapStateToProps = ({adminUsersReducer}) => {
     return {
         users: adminUsersReducer['users'],
-        page: adminUsersReducer['info'],
-        size: adminUsersReducer['newAvatar'],
+        page: adminUsersReducer['page'],
+        size: adminUsersReducer['size'],
         numberOfPages: adminUsersReducer['numberOfPages'],
         isLast: adminUsersReducer['isLast'],
         email: adminUsersReducer['email'],
-        filtered: adminUsersReducer['filtered']
+        filtered: adminUsersReducer['filtered'],
+        loading: adminUsersReducer['loading']
     }
 };
 
