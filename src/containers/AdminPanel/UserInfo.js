@@ -8,7 +8,7 @@ import {GridColumn} from "../../components/Grid";
 import Grid from "../../components/Grid";
 import Date from "../../components/Date";
 import Header, {HeaderContent} from "../../components/Header";
-import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from "../../redux/modules/adminUser";
+import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from "../../redux/modules/administration/adminUser";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import Loader from "../../components/Loader";
 import Icon from "../../components/Icon";
@@ -101,7 +101,8 @@ class UserInfoContainer extends Component {
                         </GridColumn>
                     </Grid>
                     <Divider/>
-                    <Button color='red' icon='remove user' type='submit' onClick={this.onClickDeleteAccountButton}>
+                    <Button color='red' type='submit' onClick={this.onClickDeleteAccountButton}>
+                        <Icon name='remove user'/>
                         <Text id='delete.user'/>
                     </Button>
                     <Button type='submit' onClick={this.onClickBackButton}>
@@ -120,7 +121,8 @@ class UserInfoContainer extends Component {
     }
 }
 
-const mapStateToProps = ({adminUserReducer}) => {
+const mapStateToProps = ({adminReducers}) => {
+    const {adminUserReducer} = adminReducers;
     return {
         info: adminUserReducer['info'],
         errorCode: adminUserReducer['errorCode'],

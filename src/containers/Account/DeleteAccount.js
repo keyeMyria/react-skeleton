@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {deleteAccountRequest,} from "../../redux/modules/account";
 import Button from "../../components/Button";
 import Message, {MessageHeader} from "../../components/Message";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
+import {deleteAccountRequest} from "../../redux/modules/account/deleteAccount";
 
 
 class DeleteAccountContainer extends Component {
@@ -43,10 +43,11 @@ class DeleteAccountContainer extends Component {
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {deleteAccountReducer} = accountReducers;
     return {
-        successMessage: accountReducer['successMessage'],
-        errorMessage: accountReducer['errorMessage']
+        successMessage: deleteAccountReducer['successMessage'],
+        errorMessage: deleteAccountReducer['errorMessage']
     }
 };
 

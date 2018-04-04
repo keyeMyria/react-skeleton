@@ -1,5 +1,6 @@
-import {APP_NAME} from "../../config";
-import {post} from "../../utils/http";
+import {APP_NAME} from "../../../config";
+import {post} from "../../../utils/http";
+import {LOCATION_CHANGE} from "react-router-redux";
 
 const URI_CONFIRM_ACCOUNT =  '/auth/confirmation';
 
@@ -16,6 +17,8 @@ export default (state = initState, action) => {
             return {...state, confirmed: true, successMessage: action.message};
         case CONFIRM_ACCOUNT_ERROR:
             return {...state, errorMessage: action.error};
+        case LOCATION_CHANGE:
+            return initState;
         default :
             return state
     }

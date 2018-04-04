@@ -16,9 +16,10 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = ({authenticationReducer}) => {
+const mapStateToProps = ({authReducers}) => {
+    const {sessionReducer} = authReducers;
     return {
-        logged: authenticationReducer.logged
+        logged: sessionReducer.logged
     }
 };
 

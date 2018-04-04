@@ -94,11 +94,12 @@ class AccountInfoContainer extends Component {
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {accountInfoReducer} = accountReducers;
     return {
-        info: accountReducer['info'],
-        language: accountReducer['language'],
-        loading: accountReducer['loading']
+        info: accountInfoReducer['info'],
+        language: accountInfoReducer['language'],
+        loading: accountInfoReducer['loading']
     }
 };
 

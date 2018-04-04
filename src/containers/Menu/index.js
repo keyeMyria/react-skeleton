@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import Menu, {MenuItem, MenuGroup} from '../../components/Menu';
 import Dropdown, {DropdownMenu, DropdownItem} from '../../components/Dropdown';
 
-import {logout} from '../../redux/modules/authentication';
 import Text from '../../components/Text';
 import {withRouter} from "react-router-dom";
 import {isAdmin} from "../../utils/user-info";
+import {logout} from "../../redux/modules/auth/session";
 
 class MenuContainer extends Component {
 

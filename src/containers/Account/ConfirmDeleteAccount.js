@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import Grid, {GridColumn} from "../../components/Grid";
 import Container from "../../components/Container";
 import Message from "../../components/Message";
-import {deleteAccount} from "../../redux/modules/account";
 import Text from "../../components/Text";
+import {deleteAccount} from "../../redux/modules/account/deleteAccount";
 
 class ConfirmDeleteAccountContainer extends Component {
 
@@ -37,10 +37,11 @@ class ConfirmDeleteAccountContainer extends Component {
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {deleteAccountReducer} = accountReducers;
     return {
-        successMessage: accountReducer['successMessage'],
-        errorMessage: accountReducer['errorMessage']
+        successMessage: deleteAccountReducer['successMessage'],
+        errorMessage: deleteAccountReducer['errorMessage']
     }
 };
 

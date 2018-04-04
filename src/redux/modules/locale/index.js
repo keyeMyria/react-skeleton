@@ -1,5 +1,5 @@
-import {getLocaleData} from '../../i18n/utils';
-import {APP_NAME} from "../../config";
+import {getLocaleData} from '../../../i18n/utils';
+import {APP_NAME} from "../../../config";
 
 const SIGN_IN_SUCCESS = `${APP_NAME}/authentication/SIGN_IN_SUCCESS`;
 const LOGOUT = `${APP_NAME}/authentication/LOGOUT`;

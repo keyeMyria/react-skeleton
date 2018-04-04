@@ -4,12 +4,11 @@ import {connect} from 'react-redux';
 import Title from '../../components/Title';
 import Grid, {GridColumn} from '../../components/Grid';
 import Container from '../../components/Container';
-import {getAccountInfo} from '../../redux/modules/account';
 import MainPageContainer from './MainPage';
 import UsersContainer from './Users';
 import UserInfoContainer from './UserInfo';
 import {Route} from '../../utils/router';
-import {changeTitle} from '../../redux/modules/menu';
+import {changeTitle} from '../../redux/modules/menu/index';
 import AdminMenu from "./AdminMenu";
 
 class AdminPanelContainer extends Component {
@@ -22,7 +21,6 @@ class AdminPanelContainer extends Component {
 
     componentWillMount() {
         const {dispatch} = this.props;
-        dispatch(getAccountInfo());
         dispatch(changeTitle('admin.panel'));
     }
 

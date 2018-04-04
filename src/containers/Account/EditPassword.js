@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {changePassword, setChangePasswordFormFieldValue} from "../../redux/modules/account";
 import Button from "../../components/Button";
 import {FormField, FormGroup, Input} from "../../components/Form";
 import Form from "../../components/Form";
 import ErrorsContainer from "../../components/ErrorsContainer";
 import Text from "../../components/Text";
-
+import {changePassword, setChangePasswordFormFieldValue} from "../../redux/modules/account/changePassword";
 
 class EditPasswordContainer extends Component {
 
@@ -19,8 +18,8 @@ class EditPasswordContainer extends Component {
     }
 
     onSubmit() {
-        const {dispatch, newPasswordInfo} = this.props;
-        dispatch(changePassword(newPasswordInfo));
+        const {dispatch, formData} = this.props;
+        dispatch(changePassword(formData));
     }
 
     onChange(field, value) {
@@ -34,10 +33,13 @@ class EditPasswordContainer extends Component {
     }
 
     render() {
-        const {error, errors, incompletePasswordForm} = this.props;
+        const {errorMessage, errors, incompletePasswordForm, passwordsNotMatching, formData} = this.props;
         return (
             <div>
-                {error && <ErrorsContainer errors={errors}/>}
+                {passwordsNotMatching
+                    ? <ErrorsContainer message={<Text id='passwords.not.matching'/>} />
+                    : <ErrorsContainer message={errorMessage} errors={errors}/>
+                }
                 <Form onSubmit={this.onSubmit}>
                     <FormGroup widths='equal'>
                         <FormField width={6}>
@@ -47,6 +49,7 @@ class EditPasswordContainer extends Component {
                                 labelid='old.password'
                                 name='oldPassword'
                                 placeholderid='old.password'
+                                value={formData.oldPassword}
                                 onChange={this.onChange}
                             />
                         </FormField>
@@ -59,6 +62,7 @@ class EditPasswordContainer extends Component {
                                 labelid='new.password'
                                 name='password'
                                 placeholderid='new.password'
+                                value={formData.password}
                                 onChange={this.onChange}
                             />
                         </FormField>
@@ -71,6 +75,7 @@ class EditPasswordContainer extends Component {
                                 labelid='new.password.confirmation'
                                 name='passwordConfirmation'
                                 placeholderid='new.password.confirmation'
+                                value={formData.passwordConfirmation}
                                 onChange={this.onChange}
                             />
                         </FormField>
@@ -83,10 +88,14 @@ class EditPasswordContainer extends Component {
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {changePasswordReducer} = accountReducers;
     return {
-        newPasswordInfo: accountReducer['newPasswordInfo'],
-        incompletePasswordForm: accountReducer['incompletePasswordForm']
+        formData: changePasswordReducer['formData'],
+        incompletePasswordForm: changePasswordReducer['incompletePasswordForm'],
+        errorMessage: changePasswordReducer['errorMessage'],
+        errors: changePasswordReducer['errors'],
+        passwordsNotMatching: changePasswordReducer['passwordsNotMatching']
     }
 };
 

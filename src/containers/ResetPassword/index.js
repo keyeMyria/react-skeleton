@@ -6,7 +6,7 @@ import Container from "../../components/Container";
 import Form, {FormField, FormGroup, Input} from "../../components/Form";
 import Title from "../../components/Title";
 import Message from "../../components/Message";
-import {onChangeResetPasswordEmailField, requestResetPassword} from "../../redux/modules/resetPassword";
+import {onChangeResetPasswordEmailField, requestResetPassword} from "../../redux/modules/account/resetPassword";
 import Button from "../../components/Button";
 import ErrorsContainer from "../../components/ErrorsContainer";
 import Text from "../../components/Text";
@@ -17,11 +17,17 @@ class ResetPasswordContainer extends Component {
     constructor() {
         super();
         this.onChange = this.onChange.bind(this);
+        this.onClickCancelButton = this.onClickCancelButton.bind(this);
     }
 
     onChange(field, value) {
         const {dispatch} = this.props;
         dispatch(onChangeResetPasswordEmailField(value))
+    }
+
+    onClickCancelButton() {
+        const {history} = this.props;
+        history.push('/');
     }
 
     onSubmit() {
@@ -51,6 +57,7 @@ class ResetPasswordContainer extends Component {
                                 </FormField>
                             </FormGroup>
                             <Button primary type='submit' disabled={isIncomplete}><Text id='send.email'/></Button>
+                            <Button onClick={this.onClickCancelButton}><Text id='cancel'/></Button>
                         </Form>
                     </Container>
                 </GridColumn>
@@ -59,7 +66,8 @@ class ResetPasswordContainer extends Component {
     }
 }
 
-const mapStateToProps = ({resetPasswordReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {resetPasswordReducer} = accountReducers;
     return {
         email: resetPasswordReducer['email'],
         successMessage: resetPasswordReducer['successMessage'],

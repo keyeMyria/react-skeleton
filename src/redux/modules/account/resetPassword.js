@@ -1,5 +1,6 @@
-import {APP_NAME} from "../../config";
-import {post} from "../../utils/http";
+import {APP_NAME} from "../../../config";
+import {post} from "../../../utils/http";
+import {LOCATION_CHANGE} from "react-router-redux";
 
 const URI_RESET_PASSWORD = '/auth/reset-password';
 
@@ -13,7 +14,10 @@ const RESET_PASSWORD_SUCCESS = `${APP_NAME}/resetPassword/RESET_PASSWORD_SUCCESS
 const RESET_PASSWORD_ERROR = `${APP_NAME}/resetPassword/RESET_PASSWORD_ERROR`;
 
 const initState = {
-    email: null,
+    formData: {
+        password: null,
+        passwordConfirmation: null
+    },
     successMessage: null,
     errors: [],
     isIncomplete: true,
@@ -29,11 +33,17 @@ export default (state = initState, action) => {
         case SET_EMAIL_FIELD:
             return {...state, email: action.value, isIncomplete: action.isIncomplete};
         case SET_PASSWORD_FIELD:
-            return {...state, [action.field]: action.value, isIncomplete: action.isIncomplete};
+            return {
+                ...state,
+                formData: {...state.formData, [action.field]: action.value},
+                isIncomplete: action.isIncomplete
+            };
         case RESET_PASSWORD_SUCCESS:
-            return {...state, successMessage: action.message};
+            return {...initState, successMessage: action.message};
         case RESET_PASSWORD_ERROR:
             return {...state, errorMessage: action.error};
+        case LOCATION_CHANGE:
+            return initState;
         default :
             return state
     }
@@ -62,8 +72,8 @@ export const requestResetPassword = email => {
 
 export const onChangeResetPasswordPasswordField = (field, value) => {
     return (dispatch, getState) => {
-        const reducer = getState().resetPasswordReducer;
-        const completed = reducer['password'] && reducer['passwordConfirmation'];
+        const formData = getState().accountReducers.resetPasswordReducer.formData;
+        const completed = formData.password && formData.passwordConfirmation;
         dispatch({
             type: SET_PASSWORD_FIELD,
             field: field,
@@ -73,7 +83,8 @@ export const onChangeResetPasswordPasswordField = (field, value) => {
     }
 };
 
-export const resetPassword = (token, password, passwordConfirmation) => {
+export const resetPassword = (token, formData) => {
+    const {password, passwordConfirmation} = formData;
     if (password !== passwordConfirmation) {
         return {
             type: RESET_PASSWORD_ERROR, error: 'The passwords need to match'

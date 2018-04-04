@@ -5,7 +5,7 @@ import Grid, {GridColumn} from '../../components/Grid';
 import Title from '../../components/Title';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {changeTitle} from '../../redux/modules/menu';
+import {changeTitle} from '../../redux/modules/menu/index';
 
 class HomeContainer extends Component {
 

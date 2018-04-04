@@ -7,8 +7,8 @@ import Message from "../../components/Message";
 import Form, {FormField, FormGroup, Input} from "../../components/Form";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
-import {onChangeResetPasswordPasswordField} from "../../redux/modules/resetPassword";
-import {resetPassword} from "../../redux/modules/resetPassword";
+import {onChangeResetPasswordPasswordField} from "../../redux/modules/account/resetPassword";
+import {resetPassword} from "../../redux/modules/account/resetPassword";
 import Text from "../../components/Text";
 import Icon from "../../components/Icon";
 
@@ -25,8 +25,8 @@ class ConfirmResetPasswordContainer extends Component {
     }
 
     onSubmit() {
-        const {dispatch, match, password, passwordConfirmation} = this.props;
-        dispatch(resetPassword(match.params.token, password, passwordConfirmation));
+        const {dispatch, match, formData} = this.props;
+        dispatch(resetPassword(match.params.token, formData));
     }
 
     componentWillUpdate(nextProps) {
@@ -86,10 +86,10 @@ class ConfirmResetPasswordContainer extends Component {
 }
 
 const
-    mapStateToProps = ({resetPasswordReducer}) => {
+    mapStateToProps = ({accountReducers}) => {
+        const {resetPasswordReducer} = accountReducers;
         return {
-            password: resetPasswordReducer['password'],
-            passwordConfirmation: resetPasswordReducer['passwordConfirmation'],
+            formData: resetPasswordReducer['formData'],
             successMessage: resetPasswordReducer['successMessage'],
             errorMessage: resetPasswordReducer['errorMessage'],
             isIncomplete: resetPasswordReducer['isIncomplete']

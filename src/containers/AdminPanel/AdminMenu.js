@@ -40,7 +40,8 @@ class AdminMenu extends Component {
     }
 }
 
-const mapStateToProps = ({adminMenuReducer}) => {
+const mapStateToProps = ({adminReducers}) => {
+    const {adminMenuReducer} = adminReducers;
     return {
         title: adminMenuReducer['active']
     }

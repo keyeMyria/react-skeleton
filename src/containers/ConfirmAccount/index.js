@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {confirmAccount} from "../../redux/modules/confirmAccount";
+import {confirmAccount} from "../../redux/modules/account/confirmAccount";
 import Grid, {GridColumn} from "../../components/Grid";
 import Container from "../../components/Container";
 import Message from "../../components/Message";
@@ -36,7 +36,8 @@ class ConfirmAccountContainer extends Component {
     }
 }
 
-const mapStateToProps = ({confirmAccountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {confirmAccountReducer} = accountReducers;
     return {
         confirmed: confirmAccountReducer['confirmed'],
         successMessage: confirmAccountReducer['successMessage'],

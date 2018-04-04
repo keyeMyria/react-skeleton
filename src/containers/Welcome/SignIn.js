@@ -11,8 +11,7 @@ import Container from '../../components/Container';
 import Grid, {GridColumn} from '../../components/Grid';
 import Form, {Checkbox, FormField, FormGroup, Input} from '../../components/Form';
 import Title from '../../components/Title';
-
-import {signIn, setSignInFormFieldValue} from '../../redux/modules/authentication';
+import {setSignInFormFieldValue, signIn} from "../../redux/modules/auth/session";
 
 class SignInContainer extends React.Component {
 
@@ -38,7 +37,7 @@ class SignInContainer extends React.Component {
     }
 
     render() {
-        const {error, incompleteSignInForm} = this.props;
+        const {error, incompleteForm} = this.props;
 
         return (
             <Grid centered>
@@ -70,7 +69,7 @@ class SignInContainer extends React.Component {
                                     <Checkbox name='remember' labelid="remember.me" onChange={this.onChange}/>
                                 </FormField>
                                 <FormField width={1}>
-                                    <Button primary type='submit' disabled={incompleteSignInForm}><Text id='login'/></Button>
+                                    <Button primary type='submit' disabled={incompleteForm}><Text id='login'/></Button>
                                 </FormField>
                                 <FormField width={1}>
                                     <Text id='not.have.account.yet' values={{
@@ -88,13 +87,15 @@ class SignInContainer extends React.Component {
     }
 }
 
-const mapStateToProps = ({authenticationReducer}) => {
+const mapStateToProps = ({authReducers}) => {
+    const {sessionReducer} = authReducers;
+
     return {
-        email: authenticationReducer['email'],
-        password: authenticationReducer['password'],
-        remember: authenticationReducer['remember'],
-        incompleteSignInForm: authenticationReducer.incompleteSignInForm,
-        error: authenticationReducer.error
+        email: sessionReducer['email'],
+        password: sessionReducer['password'],
+        remember: sessionReducer['remember'],
+        incompleteForm: sessionReducer.incompleteForm,
+        error: sessionReducer.error
 
     }
 };

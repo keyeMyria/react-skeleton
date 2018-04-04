@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {
-    closeEditAvatarModal, editAvatar, onChangeAvatar,
-    openEditAvatarModal
-} from "../../redux/modules/account";
 import Button from "../../components/Button";
 import Modal, {ModalActions, ModalContent, ModalDescription, ModalHeader} from "../../components/Modal";
 import Image from "../../components/Image";
@@ -12,8 +8,12 @@ import Header, {HeaderContent} from "../../components/Header";
 import Text from "../../components/Text";
 import InputFile from "../../components/InputFile";
 import Grid, {GridColumn} from "../../components/Grid";
+import {
+    closeEditAvatarModal, editAvatar, onChangeAvatar,
+    openEditAvatarModal
+} from "../../redux/modules/account/editAvatar";
 
-class EditPasswordContainer extends Component {
+class EditAvatarContainer extends Component {
 
     constructor() {
         super();
@@ -71,7 +71,7 @@ class EditPasswordContainer extends Component {
                                         <GridColumn computer={7} tablet={7} mobile={14}>
                                             {newAvatar &&
                                             <Image src={this.generateImageUrl()} size='medium' alt='avatar'/>}
-                                            <p>{newAvatar && <Text id="photo.confirmation"/>}</p>
+                                            <p>{newAvatar && <Text id="photo.confirmation" values={{fileName: newAvatar.name}}/>}</p>
                                         </GridColumn>
                                     </Grid>
                                 </ModalDescription>
@@ -90,11 +90,12 @@ class EditPasswordContainer extends Component {
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {editAvatarReducer, accountInfoReducer} = accountReducers;
     return {
-        info: accountReducer['info'],
-        newAvatar: accountReducer['newAvatar'],
-        isEditAvatarModalOpened: accountReducer['isEditAvatarModalOpened']
+        info: accountInfoReducer['info'],
+        newAvatar: editAvatarReducer['newAvatar'],
+        isEditAvatarModalOpened: editAvatarReducer['isEditAvatarModalOpened']
     }
 };
 
@@ -107,4 +108,4 @@ const mapDispatchToProps = dispatch => {
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(EditPasswordContainer));
+)(EditAvatarContainer));

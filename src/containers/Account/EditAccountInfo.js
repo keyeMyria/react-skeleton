@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {editAccountInfo, setEditAccountFormFieldValue} from "../../redux/modules/account";
 import Button from "../../components/Button";
 import {FormField, FormGroup, Input, Select} from "../../components/Form";
 import Form from "../../components/Form";
 import ErrorsContainer from "../../components/ErrorsContainer";
 import EditAvatar from "./EditAvatar";
 import Text from "../../components/Text";
+import {editAccountInfo, setEditAccountFormFieldValue} from "../../redux/modules/account/accountInfo";
 
 const GENDER_OPTIONS = [
     {key: 'male', value: 'MALE', icon: 'man'},
@@ -46,11 +46,11 @@ class EditAccountInfoContainer extends Component {
     }
 
     render() {
-        const {info, language, error, errors, incompleteForm} = this.props;
+        const {info, language, errorMessage, errors, incompleteForm} = this.props;
         return (
             <div>
                 <EditAvatar/>
-                {error && <ErrorsContainer errors={errors}/>}
+                {errorMessage && <ErrorsContainer errors={errors}/>}
                 <Form onSubmit={this.onSubmit}>
                     <FormGroup widths='equal'>
                         <FormField width={6}>
@@ -110,11 +110,12 @@ class EditAccountInfoContainer extends Component {
     }
 }
 
-const mapStateToProps = ({accountReducer}) => {
+const mapStateToProps = ({accountReducers}) => {
+    const {accountInfoReducer} = accountReducers;
     return {
-        info: accountReducer['info'],
-        language: accountReducer['language'].toUpperCase(),
-        incompleteForm: accountReducer['incompleteForm']
+        info: accountInfoReducer['info'],
+        language: accountInfoReducer['language'].toUpperCase(),
+        incompleteForm: accountInfoReducer['incompleteForm']
     }
 };
 

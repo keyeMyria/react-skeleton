@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {signUp, setSignUpFormFieldValue} from '../../redux/modules/authentication';
 import Button from '../../components/Button';
 import Form, {FormField, FormGroup, Select, Input} from '../../components/Form';
 import Title from '../../components/Title';
 import ErrorsContainer from '../../components/ErrorsContainer';
 import Text from '../../components/Text';
+import {signUp, setSignUpFormFieldValue} from "../../redux/modules/auth/signUp";
 
 const GENDER_OPTIONS = [
     {key: 'male', value: 'MALE', icon: 'man'},
@@ -27,24 +27,20 @@ class SignUpContainer extends Component {
     }
 
     onSubmit() {
-        const {dispatch, email, password, passwordConfirmation, gender, name} = this.props;
-        let fields = {
-            email: email,
-            password: password,
-            passwordConfirmation: passwordConfirmation,
-            name: name,
-            gender: gender
-        };
-        dispatch(signUp(fields));
+        const {dispatch, formData} = this.props;
+        dispatch(signUp(formData));
     }
 
     render() {
-        const {signUpError, signUpErrors, incompleteSignUpForm} = this.props;
+        const {errorMessage, errors, incompleteForm, passwordsNotMatching} = this.props;
         return (
             <div>
                 <Title id='registration'/>
                 <p><Text id='registration.instructions'/></p>
-                {signUpError && <ErrorsContainer errors={signUpErrors}/>}
+                {passwordsNotMatching
+                    ? <ErrorsContainer message={<Text id='passwords.not.matching'/>}/>
+                    : <ErrorsContainer errors={errors} message={errorMessage}/>}
+
                 <Form onSubmit={this.onSubmit}>
                     <FormGroup widths='equal'>
                         <FormField width={6}>
@@ -97,24 +93,22 @@ class SignUpContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button primary type='submit' disabled={incompleteSignUpForm} size="big"><Text id='register'/></Button>
+                    <Button primary type='submit' disabled={incompleteForm} size="big"><Text id='register'/></Button>
                 </Form>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({authenticationReducer}) => {
+const mapStateToProps = ({authReducers}) => {
+    const {signUpReducer} = authReducers;
     return {
-        email: authenticationReducer['email'],
-        password: authenticationReducer['password'],
-        passwordConfirmation: authenticationReducer['passwordConfirmation'],
-        name: authenticationReducer['name'],
-        gender: authenticationReducer['gender'],
-        incompleteSignUpForm: authenticationReducer.incompleteSignUpForm,
-        signUpError: authenticationReducer.signUpError,
-        signUpErrors: authenticationReducer.signUpErrors,
-        logged: authenticationReducer.logged
+        formData: signUpReducer['formData'],
+        incompleteForm: signUpReducer.incompleteForm,
+        errorMessage: signUpReducer.errorMessage,
+        errors: signUpReducer.errors,
+        logged: signUpReducer.logged,
+        passwordsNotMatching: signUpReducer.passwordsNotMatching
     }
 };
 

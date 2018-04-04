@@ -4,26 +4,18 @@ import logger from 'redux-logger';
 import {reducer as form} from 'redux-form';
 import {routerReducer, routerMiddleware} from 'react-router-redux';
 
-import authenticationReducer from './modules/authentication';
 import localeReducer from './modules/locale';
-import adminUsersReducer from './modules/adminUsers';
-import adminUserReducer from './modules/adminUser';
-import adminMenuReducer from './modules/adminMenu';
-import accountReducer from './modules/account';
-import confirmAccountReducer from './modules/confirmAccount';
 import menuReducer from './modules/menu';
-import resetPasswordReducer from './modules/resetPassword';
+import adminReducers from './modules/administration';
+import authReducers from './modules/auth';
+import accountReducers from './modules/account';
 
 export default history => {
     const reducer = combineReducers({
+        adminReducers,
+        authReducers,
+        accountReducers,
         localeReducer,
-        authenticationReducer,
-        adminUsersReducer,
-        adminUserReducer,
-        adminMenuReducer,
-        accountReducer,
-        confirmAccountReducer,
-        resetPasswordReducer,
         menuReducer,
         form,
         router: routerReducer

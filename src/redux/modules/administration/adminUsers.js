@@ -1,5 +1,6 @@
-import {APP_NAME} from "../../config";
-import {get} from "../../utils/http";
+import {APP_NAME} from "../../../config";
+import {get} from "../../../utils/http";
+import {LOCATION_CHANGE} from "react-router-redux";
 
 const URI_USERS = '/users';
 
@@ -49,6 +50,8 @@ export default (state = initState, action) => {
                 numberOfPages: 1,
                 email: '',
                 filtered: false};
+        case LOCATION_CHANGE:
+            return initState;
         default :
             return state
     }

@@ -1,5 +1,5 @@
-import {APP_NAME} from "../../config";
-import {del, get} from "../../utils/http";
+import {APP_NAME} from "../../../config";
+import {del, get} from "../../../utils/http";
 
 const URI_USERS = '/users';
 
