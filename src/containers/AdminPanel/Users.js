@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {cleanFilters, getUsers, setEmailValue} from '../../redux/modules/administration/adminUsers';
-import {Item} from 'semantic-ui-react';
 import Button from '../../components/Button';
 import InfiniteScroll from '../../components/InfiniteScroll';
 import {Input} from '../../components/Form';
@@ -13,6 +12,7 @@ import Loader from "../../components/Loader";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
 import Message from "../../components/Message";
+import Item, {ItemContent, ItemGroup, ItemHeader, ItemImage, ItemSubHeader} from "../../components/Item";
 
 class UsersContainer extends Component {
 
@@ -83,28 +83,28 @@ class UsersContainer extends Component {
                     :
                     <div>
                         {filtered && <p><Text id='result.users.filtered' values={{email: email}}/></p>}
-                        <Item.Group divided>
+                        <ItemGroup divided>
                             {
                                 users.map(user => (
                                     <Item key={user.id}>
-                                        <Item.Image avatar size='tiny' src={user.avatar} alt='avatar'/>
-                                        <Item.Content floated='right'>
-                                            <Item.Header as='a' onClick={() => this.onClickOpenUserDetails(user.id)}>
+                                        <ItemImage avatar size='tiny' src={user.avatar} alt='avatar'/>
+                                        <ItemContent floated='right'>
+                                            <ItemHeader as='a' onClick={() => this.onClickOpenUserDetails(user.id)}>
                                                 {user.name}
-                                            </Item.Header>
-                                            <Item.Meta>
+                                            </ItemHeader>
+                                            <ItemSubHeader>
                                                 <span>{user.email}</span>
-                                            </Item.Meta>
+                                            </ItemSubHeader>
                                             <Button icon labelPosition='left' floated='right' primary
                                                     onClick={() => this.onClickOpenUserDetails(user.id)}>
                                                 <Icon name='info'/>
                                                 View details
                                             </Button>
-                                        </Item.Content>
+                                        </ItemContent>
                                     </Item>
                                 ))
                             }
-                        </Item.Group>
+                        </ItemGroup>
                     </div>
                 }
             </InfiniteScroll>

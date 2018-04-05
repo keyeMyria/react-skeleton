@@ -6,7 +6,10 @@ import Form from "../../components/Form";
 import ErrorsContainer from "../../components/ErrorsContainer";
 import EditAvatar from "./EditAvatar";
 import Text from "../../components/Text";
-import {editAccountInfo, setEditAccountFormFieldValue} from "../../redux/modules/account/accountInfo";
+import {
+    editAccountInfo, setEditAccountFormFieldValue,
+    setInitialAccountInfo
+} from "../../redux/modules/account/editAccountInfo";
 
 const GENDER_OPTIONS = [
     {key: 'male', value: 'MALE', icon: 'man'},
@@ -30,9 +33,15 @@ class EditAccountInfoContainer extends Component {
         this.onClickExitEditCredentialsButton = this.onClickExitEditCredentialsButton.bind(this);
     }
 
+    componentWillMount() {
+        const {dispatch, info, language} = this.props;
+        dispatch(setInitialAccountInfo({...info, language: language}));
+
+    }
+
     onSubmit() {
-        const {dispatch, info} = this.props;
-        dispatch(editAccountInfo(info));
+        const {dispatch, formData} = this.props;
+        dispatch(editAccountInfo(formData));
     }
 
     onChange(field, value) {
@@ -46,7 +55,7 @@ class EditAccountInfoContainer extends Component {
     }
 
     render() {
-        const {info, language, errorMessage, errors, incompleteForm} = this.props;
+        const {formData, errorMessage, errors, incompleteForm} = this.props;
         return (
             <div>
                 <EditAvatar/>
@@ -59,7 +68,7 @@ class EditAccountInfoContainer extends Component {
                                 icon='at'
                                 type='email'
                                 name='email'
-                                value={info.email}
+                                value={formData.email}
                                 placeholderid='email'
                                 onChange={this.onChange}
                             />
@@ -72,7 +81,7 @@ class EditAccountInfoContainer extends Component {
                                 icon='info'
                                 type='text'
                                 name='name'
-                                value={info.name}
+                                value={formData.name}
                                 placeholderid='name'
                                 onChange={this.onChange}
                             />
@@ -84,7 +93,7 @@ class EditAccountInfoContainer extends Component {
                             <Select
                                 type='select'
                                 name='gender'
-                                value={info.gender}
+                                value={formData.gender}
                                 placeholderid='gender'
                                 options={GENDER_OPTIONS}
                                 onChange={this.onChange}
@@ -95,7 +104,7 @@ class EditAccountInfoContainer extends Component {
                             <Select
                                 type='select'
                                 name='language'
-                                value={language}
+                                value={formData.language}
                                 placeholderid='language'
                                 options={LANGUAGE_OPTIONS}
                                 onChange={this.onChange}
@@ -111,11 +120,13 @@ class EditAccountInfoContainer extends Component {
 }
 
 const mapStateToProps = ({accountReducers}) => {
-    const {accountInfoReducer} = accountReducers;
+    const {accountInfoReducer, editAccountInfoReducer} = accountReducers;
     return {
         info: accountInfoReducer['info'],
         language: accountInfoReducer['language'].toUpperCase(),
-        incompleteForm: accountInfoReducer['incompleteForm']
+        incompleteForm: editAccountInfoReducer['incompleteForm'],
+        formData: editAccountInfoReducer['formData']
+
     }
 };
 

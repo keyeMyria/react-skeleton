@@ -50,8 +50,6 @@ export default (state = initState, action) => {
                 numberOfPages: 1,
                 email: '',
                 filtered: false};
-        case LOCATION_CHANGE:
-            return initState;
         default :
             return state
     }

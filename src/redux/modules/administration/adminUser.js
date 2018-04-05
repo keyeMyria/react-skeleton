@@ -1,5 +1,6 @@
 import {APP_NAME} from "../../../config";
 import {del, get} from "../../../utils/http";
+import {LOCATION_CHANGE} from "react-router-redux";
 
 const URI_USERS = '/users';
 
@@ -34,8 +35,10 @@ export default (state = initState, action) => {
             return {...state, deleted: true};
         case DELETE_USER_ERROR:
             return {...state, errorDeleteUser: action.error};
+        case LOCATION_CHANGE:
+            return initState;
         default :
-            return state
+            return state;
     }
 }
 

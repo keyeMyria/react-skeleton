@@ -4,14 +4,15 @@ import {connect} from 'react-redux';
 import Title from '../../components/Title';
 import Grid, {GridColumn} from '../../components/Grid';
 import Container from '../../components/Container';
-import AccountInfo from "./AccountInfo";
-import EditAccountInfo from "./EditAccountInfo";
-import EditPassword from "./EditPassword";
+import AccountInfoContainer from "./AccountInfo";
+import EditAccountInfoContainer from "./EditAccountInfo";
+import EditPasswordContainer from "./EditPassword";
 import {Route} from "../../utils/router";
 import DeleteAccountContainer from "./DeleteAccount";
 import ConfirmDeleteAccountContainer from "./ConfirmDeleteAccount";
 import {changeTitle} from "../../redux/modules/menu/index";
 import {getAccountInfo} from "../../redux/modules/account/accountInfo";
+import ConfirmChangeEmailContainer from "./ConfirmChangeEmail";
 
 class AccountContainer extends Component {
 
@@ -28,9 +29,10 @@ class AccountContainer extends Component {
                 <GridColumn computer={8} tablet={12} mobile={14}>
                     <Title id='account'/>
                     <Container>
-                        <Route exact match={match} path='/' component={AccountInfo}/>
-                        <Route exact match={match} path='/edit' component={EditAccountInfo}/>
-                        <Route exact match={match} path='/edit/password' component={EditPassword}/>
+                        <Route exact match={match} path='/' component={AccountInfoContainer}/>
+                        <Route exact match={match} path='/edit' component={EditAccountInfoContainer}/>
+                        <Route exact match={match} path='/edit/password' component={EditPasswordContainer}/>
+                        <Route exact match={match} path='/edit/email/:token' component={ConfirmChangeEmailContainer}/>
                         <Route exact match={match} path='/delete' component={DeleteAccountContainer}/>
                         <Route exact match={match} path='/delete/:token' component={ConfirmDeleteAccountContainer}/>
                     </Container>

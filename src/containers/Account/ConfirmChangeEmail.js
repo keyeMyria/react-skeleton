@@ -1,23 +1,22 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import Text from "../../components/Text";
 import Grid, {GridColumn} from "../../components/Grid";
 import Container from "../../components/Container";
 import Message from "../../components/Message";
-import Text from "../../components/Text";
-import {deleteAccount} from "../../redux/modules/account/deleteAccount";
+import {confirmChangeEmail} from "../../redux/modules/account/changeEmail";
 
-class ConfirmDeleteAccountContainer extends Component {
+class ConfirmChangeEmailContainer extends Component {
 
     componentWillMount() {
         const {dispatch, match} = this.props;
-        dispatch(deleteAccount(match.params.token));
+        dispatch(confirmChangeEmail(match.params.token));
     }
 
     componentDidMount() {
         const {history} = this.props;
         setTimeout(() => {
-            history.push('/welcome');
+            history.push('/account');
         }, 7000);
     }
 
@@ -38,10 +37,10 @@ class ConfirmDeleteAccountContainer extends Component {
 }
 
 const mapStateToProps = ({accountReducers}) => {
-    const {deleteAccountReducer} = accountReducers;
+    const {changeEmailReducer} = accountReducers;
     return {
-        successMessage: deleteAccountReducer['successMessage'],
-        errorMessage: deleteAccountReducer['errorMessage']
+        successMessage: changeEmailReducer['successMessage'],
+        errorMessage: changeEmailReducer['errorMessage']
     }
 };
 
@@ -51,7 +50,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default withRouter(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ConfirmDeleteAccountContainer));
+)(ConfirmChangeEmailContainer);
