@@ -1,27 +1,30 @@
-import {APP_NAME} from "../../../config";
-import {post} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {post} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_RESET_PASSWORD} from './constants';
 
-const URI_RESET_PASSWORD = '/auth/reset-password';
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/reset-password`;
 
-const RESET_PASSWORD_REQUEST_SUCCESS = `${APP_NAME}/resetPassword/RESET_PASSWORD_REQUEST_SUCCESS`;
-const RESET_PASSWORD_REQUEST_ERROR = `${APP_NAME}/resetPassword/RESET_PASSWORD_REQUEST_ERROR`;
+const RESET_PASSWORD_REQUEST_SUCCESS = `${REDUCER_NAME}/RESET_PASSWORD_REQUEST_SUCCESS`;
+const RESET_PASSWORD_REQUEST_ERROR = `${REDUCER_NAME}/RESET_PASSWORD_REQUEST_ERROR`;
 
-const SET_EMAIL_FIELD = `${APP_NAME}/resetPassword/SET_EMAIL_FIELD`;
-const SET_PASSWORD_FIELD = `${APP_NAME}/resetPassword/SET_PASSWORD_FIELD`;
+const SET_EMAIL_FIELD = `${REDUCER_NAME}/SET_EMAIL_FIELD`;
+const SET_PASSWORD_FIELD = `${REDUCER_NAME}/SET_PASSWORD_FIELD`;
 
-const RESET_PASSWORD_SUCCESS = `${APP_NAME}/resetPassword/RESET_PASSWORD_SUCCESS`;
-const RESET_PASSWORD_ERROR = `${APP_NAME}/resetPassword/RESET_PASSWORD_ERROR`;
+const RESET_PASSWORD_SUCCESS = `${REDUCER_NAME}/RESET_PASSWORD_SUCCESS`;
+const RESET_PASSWORD_ERROR = `${REDUCER_NAME}/RESET_PASSWORD_ERROR`;
+const PASSWORDS_NOT_MATCHING = `${REDUCER_NAME}/PASSWORDS_NOT_MATCHING`;
 
 const initState = {
+    email: '',
     formData: {
-        password: null,
-        passwordConfirmation: null
+        password: '',
+        passwordConfirmation: ''
     },
     successMessage: null,
     errors: [],
     isIncomplete: true,
-    errorMessage: null
+    errorMessage: null,
+    passwordsNotMatching: false
 };
 
 export default (state = initState, action) => {
@@ -29,19 +32,22 @@ export default (state = initState, action) => {
         case RESET_PASSWORD_REQUEST_SUCCESS:
             return {...state, successMessage: action.message, errorMessage: null};
         case RESET_PASSWORD_REQUEST_ERROR:
-            return {...state, errors: action.errors};
+            return {...state, errors: action.errors, errorMessage: action.error};
         case SET_EMAIL_FIELD:
             return {...state, email: action.value, isIncomplete: action.isIncomplete};
         case SET_PASSWORD_FIELD:
             return {
                 ...state,
+                passwordsNotMatching: false,
                 formData: {...state.formData, [action.field]: action.value},
-                isIncomplete: action.isIncomplete
+                isIncomplete: action.isIncomplete,
             };
         case RESET_PASSWORD_SUCCESS:
-            return {...initState, successMessage: action.message};
+            return {...initState, successMessage: action.message, passwordsNotMatching: false};
         case RESET_PASSWORD_ERROR:
-            return {...state, errorMessage: action.error};
+            return {...state, errorMessage: action.error, errors: action.errors, passwordsNotMatching: false};
+        case PASSWORDS_NOT_MATCHING:
+            return {...state, passwordsNotMatching: true};
         case LOCATION_CHANGE:
             return initState;
         default :
@@ -65,7 +71,7 @@ export const requestResetPassword = email => {
         post(`${URI_RESET_PASSWORD}`, body, null).then(response => {
             dispatch({type: RESET_PASSWORD_REQUEST_SUCCESS, message: response.data.message});
         }).catch(response => {
-            dispatch({type: RESET_PASSWORD_REQUEST_ERROR, errors: response.errors});
+            dispatch({type: RESET_PASSWORD_REQUEST_ERROR, error: response.message, errors: response.errors});
         });
     }
 };
@@ -87,7 +93,7 @@ export const resetPassword = (token, formData) => {
     const {password, passwordConfirmation} = formData;
     if (password !== passwordConfirmation) {
         return {
-            type: RESET_PASSWORD_ERROR, error: 'The passwords need to match'
+            type: PASSWORDS_NOT_MATCHING
         };
     }
     const body = {

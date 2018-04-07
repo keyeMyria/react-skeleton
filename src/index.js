@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 
-import {registerLocales} from "./i18n/utils";
-import store from "./redux/store";
-import createBrowserHistory from "history/createBrowserHistory";
-import IntlProvider from "./i18n/IntlProvider";
+import {registerLocales} from './i18n/utils';
+import store from './store';
+import createBrowserHistory from 'history/createBrowserHistory';
+import IntlProvider from './i18n/IntlProvider';
 import {Provider} from 'react-redux';
-import {ConnectedRouter} from "react-router-redux";
-import App from "./containers/App";
+import {ConnectedRouter} from 'react-router-redux';
+import App from './containers/App';
 
 registerLocales();
 

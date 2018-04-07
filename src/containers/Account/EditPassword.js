@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Button from "../../components/Button";
-import {FormField, FormGroup, Input} from "../../components/Form";
-import Form from "../../components/Form";
-import ErrorsContainer from "../../components/ErrorsContainer";
-import Text from "../../components/Text";
-import {changePassword, setChangePasswordFormFieldValue} from "../../redux/modules/account/changePassword";
+import Button from '../../components/Button';
+import {FormField, FormGroup, Input} from '../../components/Form';
+import Form from '../../components/Form';
+import ErrorsContainer from '../../components/ErrorsContainer';
+import Text from '../../components/Text';
+import {changePassword, setChangePasswordFormFieldValue} from '../../store/modules/account/changePassword';
+import PropTypes from 'prop-types';
 
 class EditPasswordContainer extends Component {
 
@@ -37,7 +38,7 @@ class EditPasswordContainer extends Component {
         return (
             <div>
                 {passwordsNotMatching
-                    ? <ErrorsContainer message={<Text id='passwords.not.matching'/>} />
+                    ? <ErrorsContainer message={<Text id='passwords.not.matching'/>}/>
                     : <ErrorsContainer message={errorMessage} errors={errors}/>
                 }
                 <Form onSubmit={this.onSubmit}>
@@ -80,8 +81,8 @@ class EditPasswordContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button primary type='submit' disabled={incompletePasswordForm}><Text id="confirm"/></Button>
-                    <Button type='submit' onClick={this.onClickExitChangePassword}><Text id="cancel"/></Button>
+                    <Button primary type='submit' disabled={incompletePasswordForm}><Text id='confirm'/></Button>
+                    <Button type='submit' onClick={this.onClickExitChangePassword}><Text id='cancel'/></Button>
                 </Form>
             </div>
         );
@@ -91,11 +92,11 @@ class EditPasswordContainer extends Component {
 const mapStateToProps = ({accountReducers}) => {
     const {changePasswordReducer} = accountReducers;
     return {
-        formData: changePasswordReducer['formData'],
-        incompletePasswordForm: changePasswordReducer['incompletePasswordForm'],
-        errorMessage: changePasswordReducer['errorMessage'],
-        errors: changePasswordReducer['errors'],
-        passwordsNotMatching: changePasswordReducer['passwordsNotMatching']
+        formData: changePasswordReducer.formData,
+        incompletePasswordForm: changePasswordReducer.incompletePasswordForm,
+        errorMessage: changePasswordReducer.errorMessage,
+        errors: changePasswordReducer.errors,
+        passwordsNotMatching: changePasswordReducer.passwordsNotMatching
     }
 };
 
@@ -104,6 +105,18 @@ const mapDispatchToProps = dispatch => {
         dispatch
     }
 };
+
+EditPasswordContainer.propTypes = {
+    formData: PropTypes.shape({
+        password: PropTypes.string.isRequired,
+        passwordConfirmation: PropTypes.string.isRequired
+    }),
+    incompletePasswordForm: PropTypes.bool.isRequired,
+    passwordsNotMatching: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string,
+    errors: PropTypes.array
+};
+
 
 export default withRouter(connect(
     mapStateToProps,

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import {userHasRole, isUserLogged} from "./user-info";
+import {userHasRole, isUserLogged} from './user-info';
 
 export const WithAuth = (WrappedComponent, allowedRoles) => {
     return class BaseAuth extends Component {

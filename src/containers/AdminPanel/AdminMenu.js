@@ -3,7 +3,8 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Menu, {MenuItem} from '../../components/Menu';
 import Icon from '../../components/Icon';
-import Text from "../../components/Text";
+import Text from '../../components/Text';
+import PropTypes from 'prop-types';
 
 class AdminMenu extends Component {
 
@@ -43,7 +44,7 @@ class AdminMenu extends Component {
 const mapStateToProps = ({adminReducers}) => {
     const {adminMenuReducer} = adminReducers;
     return {
-        title: adminMenuReducer['active']
+        title: adminMenuReducer.active
     }
 };
 
@@ -52,6 +53,10 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+AdminMenu.propTypes = {
+    title: PropTypes.string.isRequired
 };
 
 export default withRouter(connect(

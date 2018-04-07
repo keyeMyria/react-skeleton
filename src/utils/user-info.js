@@ -1,9 +1,9 @@
 import {getCookie} from './cookies';
-import {ROLE_ADMIN} from "../config";
+import {ROLE_ADMIN} from '../config';
 
-const USER_INFO_KEY = "USER_INFO";
-const ROLES_ATTRIBUTE = "ROLES";
-const LANGUAGE_ATTRIBUTE = "LANGUAGE";
+const USER_INFO_KEY = 'USER_INFO';
+const ROLES_ATTRIBUTE = 'ROLES';
+const LANGUAGE_ATTRIBUTE = 'LANGUAGE';
 
 export const getUserLanguage = () => {
     return getAttributeFromUserInfoCookie(LANGUAGE_ATTRIBUTE);

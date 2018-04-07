@@ -6,7 +6,8 @@ import Form, {FormField, FormGroup, Select, Input} from '../../components/Form';
 import Title from '../../components/Title';
 import ErrorsContainer from '../../components/ErrorsContainer';
 import Text from '../../components/Text';
-import {signUp, setSignUpFormFieldValue} from "../../redux/modules/auth/signUp";
+import {signUp, setSignUpFormFieldValue} from '../../store/modules/auth/signUp';
+import PropTypes from 'prop-types';
 
 const GENDER_OPTIONS = [
     {key: 'male', value: 'MALE', icon: 'man'},
@@ -93,7 +94,7 @@ class SignUpContainer extends Component {
                             />
                         </FormField>
                     </FormGroup>
-                    <Button primary type='submit' disabled={incompleteForm} size="big"><Text id='register'/></Button>
+                    <Button primary type='submit' disabled={incompleteForm}><Text id='register'/></Button>
                 </Form>
             </div>
         );
@@ -103,11 +104,10 @@ class SignUpContainer extends Component {
 const mapStateToProps = ({authReducers}) => {
     const {signUpReducer} = authReducers;
     return {
-        formData: signUpReducer['formData'],
+        formData: signUpReducer.formData,
         incompleteForm: signUpReducer.incompleteForm,
         errorMessage: signUpReducer.errorMessage,
         errors: signUpReducer.errors,
-        logged: signUpReducer.logged,
         passwordsNotMatching: signUpReducer.passwordsNotMatching
     }
 };
@@ -116,6 +116,20 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+SignUpContainer.propTypes = {
+    formData: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+        passwordConfirmation: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired
+    }),
+    incompleteForm: PropTypes.bool.isRequired,
+    passwordsNotMatching: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string,
+    errors: PropTypes.array,
 };
 
 export default withRouter(connect(

@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Grid, {GridColumn} from "../../components/Grid";
-import Container from "../../components/Container";
-import Form, {FormField, FormGroup, Input} from "../../components/Form";
-import Title from "../../components/Title";
-import Message from "../../components/Message";
-import {onChangeResetPasswordEmailField, requestResetPassword} from "../../redux/modules/account/resetPassword";
-import Button from "../../components/Button";
-import ErrorsContainer from "../../components/ErrorsContainer";
-import Text from "../../components/Text";
-import Icon from "../../components/Icon";
+import Grid, {GridColumn} from '../../components/Grid';
+import Container from '../../components/Container';
+import Form, {FormField, FormGroup, Input} from '../../components/Form';
+import Title from '../../components/Title';
+import Message from '../../components/Message';
+import {onChangeResetPasswordEmailField, requestResetPassword} from '../../store/modules/auth/resetPassword';
+import Button from '../../components/Button';
+import ErrorsContainer from '../../components/ErrorsContainer';
+import Text from '../../components/Text';
+import Icon from '../../components/Icon';
+import PropTypes from 'prop-types';
 
 class ResetPasswordContainer extends Component {
 
@@ -36,14 +37,14 @@ class ResetPasswordContainer extends Component {
     }
 
     render() {
-        const {successMessage, errors, isIncomplete} = this.props;
+        const {successMessage, errorMessage, errors, isIncomplete} = this.props;
         return (
             <Grid centered>
                 <GridColumn computer={8} tablet={12} mobile={14}>
                     <Container>
                         <Title id='login'/>
                         {successMessage && <Message info><Icon name='info'/>{successMessage}</Message>}
-                        {errors && <ErrorsContainer errors={errors}/>}
+                        <ErrorsContainer message={errorMessage} errors={errors}/>
                         <Form onSubmit={this.onSubmit.bind(this)}>
                             <FormGroup widths='equal'>
                                 <FormField width={2}>
@@ -69,9 +70,10 @@ class ResetPasswordContainer extends Component {
 const mapStateToProps = ({accountReducers}) => {
     const {resetPasswordReducer} = accountReducers;
     return {
-        email: resetPasswordReducer['email'],
-        successMessage: resetPasswordReducer['successMessage'],
-        errors: resetPasswordReducer['errors']
+        email: resetPasswordReducer.email,
+        successMessage: resetPasswordReducer.successMessage,
+        errorMessage: resetPasswordReducer.errorMessage,
+        errors: resetPasswordReducer.errors
     }
 };
 
@@ -79,6 +81,13 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+ResetPasswordContainer.propTypes = {
+    email: PropTypes.string.isRequired,
+    successMessage: PropTypes.string,
+    errorMessage: PropTypes.string,
+    errors: PropTypes.array
 };
 
 export default withRouter(connect(

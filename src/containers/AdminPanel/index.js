@@ -8,8 +8,8 @@ import MainPageContainer from './MainPage';
 import UsersContainer from './Users';
 import UserInfoContainer from './UserInfo';
 import {Route} from '../../utils/router';
-import {changeTitle} from '../../redux/modules/menu/index';
-import AdminMenu from "./AdminMenu";
+import {changeTitle} from '../../store/modules/menu/index';
+import AdminMenu from './AdminMenu';
 
 class AdminPanelContainer extends Component {
 

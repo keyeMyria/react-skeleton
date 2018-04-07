@@ -1,6 +1,6 @@
 import React from 'react';
-import {Image as SemanticImage} from "semantic-ui-react";
-import {injectIntl} from "react-intl";
+import {Image as SemanticImage} from 'semantic-ui-react';
+import {injectIntl} from 'react-intl';
 
 export default injectIntl(props => (
     <SemanticImage

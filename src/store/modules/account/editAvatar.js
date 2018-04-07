@@ -1,10 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {post} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {post} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_ACCOUNT} from './constants';
 
-const URI_ACCOUNT = '/account';
-
-const REDUCER_NAME = `${APP_NAME}/account`;
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/edit-avatar`;
 
 const SET_NEW_AVATAR = `${REDUCER_NAME}/SET_NEW_AVATAR`;
 const EDIT_AVATAR_SUCCESS = `${REDUCER_NAME}/EDIT_AVATAR_SUCCESS`;

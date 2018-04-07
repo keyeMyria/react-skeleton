@@ -1,10 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {get} from "../../../utils/http";
-import {getLocale} from "../../../i18n/utils";
+import {get} from '../../../utils/http';
+import {getLocale} from '../../../i18n/utils';
+import {REDUCERS_GROUP_PREFIX, URI_ACCOUNT} from './constants';
 
-const URI_ACCOUNT = '/account';
-
-const REDUCER_NAME = `${APP_NAME}/account`;
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/info`;
 
 const GET_ACCOUNT_INFO_SUCCESS = `${REDUCER_NAME}/GET_ACCOUNT_INFO_SUCCESS`;
 const GET_ACCOUNT_INFO_ERROR = `${REDUCER_NAME}/GET_ACCOUNT_INFO_ERROR`;
@@ -15,8 +13,8 @@ const initState = {
         name: '',
         gender: '',
         avatar: '',
-        createdAt: '',
-        updatedAt: ''
+        createdAt: 0,
+        updatedAt: 0
     },
     language: getLocale().toUpperCase(),
     loading: true

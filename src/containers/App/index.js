@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import AppRoutes from '../AppRoutes';
 import {withRouter} from 'react-router-dom';
 import MenuContainer from '../Menu';
+import PropTypes from 'prop-types';
 
 class App extends Component {
     render() {
@@ -21,6 +22,10 @@ const mapStateToProps = ({authReducers}) => {
     return {
         logged: sessionReducer.logged
     }
+};
+
+App.propTypes = {
+    logged: PropTypes.bool.isRequired
 };
 
 export default withRouter(connect(

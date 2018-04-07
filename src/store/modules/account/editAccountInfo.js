@@ -1,9 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {patch} from "../../../utils/http";
+import {patch} from '../../../utils/http';
+import {getAccountInfo} from './accountInfo';
+import {REDUCERS_GROUP_PREFIX, URI_ACCOUNT} from './constants';
 
-const URI_ACCOUNT = '/account';
-
-const REDUCER_NAME = `${APP_NAME}/account`;
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/edit`;
 
 const SET_INITIAL_ACCOUNT_INFO = `${REDUCER_NAME}/SET_INITIAL_ACCOUNT_INFO`;
 const SET_ACCOUNT_FORM_FIELD = `${REDUCER_NAME}/SET_ACCOUNT_FORM_FIELD`;
@@ -30,14 +29,17 @@ export default (state = initState, action) => {
     switch (action.type) {
         case SET_INITIAL_ACCOUNT_INFO: {
             const {info} = action;
-            return {...state, formData: {email: info.email, name: info.name, gender: info.gender, language: info.language}};
+            return {
+                ...state,
+                formData: {email: info.email, name: info.name, gender: info.gender, language: info.language}
+            };
         }
         case EDIT_ACCOUNT_ERROR:
             return {...state, errorMessage: action.error, errors: action.errors, loading: false};
-        case SET_ACCOUNT_FORM_FIELD: {
-            const refreshNeeded = action.refreshNeeded ? action.refreshNeeded : state.refreshNeeded;
-            return {...state, formData: {...state.formData, [action.field]: action.value}, refreshNeeded: refreshNeeded};
-        }
+        case SET_ACCOUNT_FORM_FIELD:
+            return {
+                ...state, formData: {...state.formData, [action.field]: action.value}, refreshNeeded: action.refreshNeeded
+            };
         case ACCOUNT_COMPLETED_FORM:
             return {...state, incompleteForm: false};
         case ACCOUNT_INCOMPLETE_FORM:
@@ -49,7 +51,7 @@ export default (state = initState, action) => {
 }
 
 export const setInitialAccountInfo = info => {
-    return {type: SET_INITIAL_ACCOUNT_INFO, info: info}
+    return {type: SET_INITIAL_ACCOUNT_INFO, info: info};
 };
 
 export const setEditAccountFormFieldValue = (field, value) => {
@@ -63,15 +65,18 @@ export const setEditAccountFormFieldValue = (field, value) => {
     }
 };
 
-export const editAccountInfo = credentials => {
+export const editAccountInfo = formData => {
     return (dispatch, getState) => {
-        patch(URI_ACCOUNT, credentials, null).then(response => {
+        const {info} = getState().accountReducers.accountInfoReducer;
+        const fieldsChanged = {};
+        Object.keys(formData).filter(key => formData[key] !== info[key]).forEach(key => {
+            fieldsChanged[key] = formData[key];
+        });
+        patch(URI_ACCOUNT, fieldsChanged, null).then(response => {
             dispatch({type: EDIT_ACCOUNT_SUCCESS});
-            if (getState().accountReducers.accountInfoReducer['refreshNeeded']) {
-                window.location.reload();
-            }
+            getState().accountReducers.editAccountInfoReducer.refreshNeeded ? window.location.reload() : dispatch(getAccountInfo());
         }).catch(response => {
-            dispatch({type: EDIT_ACCOUNT_ERROR, error: response.data.message});
+            dispatch({type: EDIT_ACCOUNT_ERROR, error: response.message});
         });
     }
 };

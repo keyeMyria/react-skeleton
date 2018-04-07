@@ -1,11 +1,11 @@
-import {APP_NAME} from "../../../config";
-import {post} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {post} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_CONFIRM_ACCOUNT} from './constants';
 
-const URI_CONFIRM_ACCOUNT =  '/auth/confirmation';
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/confirm`;
 
-const CONFIRM_SUCCESS = `${APP_NAME}/confirmAccount/CONFIRM_ACCOUNT_SUCCESS`;
-const CONFIRM_ACCOUNT_ERROR = `${APP_NAME}/confirmAccount/CONFIRM_ACCOUNT_ERROR`;
+const CONFIRM_SUCCESS = `${REDUCER_NAME}/CONFIRM_ACCOUNT_SUCCESS`;
+const CONFIRM_ACCOUNT_ERROR = `${REDUCER_NAME}/CONFIRM_ACCOUNT_ERROR`;
 
 const initState = {
     confirmed: false

@@ -4,7 +4,7 @@ import ja from 'react-intl/locale-data/ja';
 import en from 'react-intl/locale-data/en';
 import es from 'react-intl/locale-data/es';
 
-import {getUserLanguage} from "../utils/user-info";
+import {getUserLanguage} from '../utils/user-info';
 
 export const registerLocales = () => {
     addLocaleData([...en, ...es, ...ja, ...fr]);

@@ -1,8 +1,8 @@
 import React from 'react';
 import Label from './Label';
 import Icon from './Icon';
-import styled from "styled-components";
-import Text from "./Text";
+import styled from 'styled-components';
+import Text from './Text';
 
 const FileInput = styled.input`
     display: none;

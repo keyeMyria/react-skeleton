@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {changeActivePage} from "../../redux/modules/administration/adminMenu";
+import {changeActivePage} from '../../store/modules/administration/adminMenu';
 
 class MainPageContainer extends Component {
 

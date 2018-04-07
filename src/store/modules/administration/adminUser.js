@@ -1,11 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {del, get} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {del, get} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_USERS} from './constants';
 
-const URI_USERS = '/users';
-
-const REDUCER_NAME = `${APP_NAME}/admin-user`;
-
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/user`;
 
 const GET_USER_SUCCESS = `${REDUCER_NAME}/GET_USER_SUCCESS`;
 const GET_USER_ERROR = `${REDUCER_NAME}/GET_USER_ERROR`;
@@ -14,7 +11,14 @@ const DELETE_USER_SUCCESS = `${REDUCER_NAME}/DELETE_USER_SUCCESS`;
 const DELETE_USER_ERROR = `${REDUCER_NAME}/DELETE_USER_ERROR`;
 
 const initState = {
-    info: {},
+    info: {
+        email: '',
+        name: '',
+        gender: '',
+        avatar: '',
+        createdAt: 0,
+        updatedAt: 0
+    },
     error: null,
     errorCode: null,
     deleteUserModalOpened: false,

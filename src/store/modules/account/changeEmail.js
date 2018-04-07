@@ -1,10 +1,10 @@
-import {APP_NAME} from "../../../config";
-import {put} from "../../../utils/http";
+import {put} from '../../../utils/http';
+import {REDUCERS_GROUP_PREFIX, URI_CHANGE_EMAIL} from './constants';
 
-const URI_CHANGE_EMAIL =  '/account/email';
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/change-email`;
 
-const CHANGE_EMAIL_SUCCESS = `${APP_NAME}/confirmAccount/CHANGE_EMAIL_SUCCESS`;
-const CHANGE_EMAIL_ERROR = `${APP_NAME}/confirmAccount/CHANGE_EMAIL_ERROR`;
+const CHANGE_EMAIL_SUCCESS = `${REDUCER_NAME}/CHANGE_EMAIL_SUCCESS`;
+const CHANGE_EMAIL_ERROR = `${REDUCER_NAME}/CHANGE_EMAIL_ERROR`;
 
 const initState = {
     confirmed: false

@@ -5,9 +5,10 @@ import Menu, {MenuItem, MenuGroup} from '../../components/Menu';
 import Dropdown, {DropdownMenu, DropdownItem} from '../../components/Dropdown';
 
 import Text from '../../components/Text';
-import {withRouter} from "react-router-dom";
-import {isAdmin} from "../../utils/user-info";
-import {logout} from "../../redux/modules/auth/session";
+import {withRouter} from 'react-router-dom';
+import {isAdmin} from '../../utils/user-info';
+import {logout} from '../../store/modules/auth/session';
+import PropTypes from 'prop-types';
 
 class MenuContainer extends Component {
 
@@ -64,7 +65,7 @@ class MenuContainer extends Component {
 
 const mapStateToProps = ({menuReducer}) => {
     return {
-        title: menuReducer['title']
+        title: menuReducer.title
     }
 };
 
@@ -72,6 +73,10 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+MenuContainer.propTypes = {
+    title: PropTypes.string.isRequired
 };
 
 export default withRouter(connect(

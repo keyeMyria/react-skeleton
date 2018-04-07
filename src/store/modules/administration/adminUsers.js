@@ -1,11 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {get} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {get} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_USERS} from './constants';
 
-const URI_USERS = '/users';
-
-const REDUCER_NAME = `${APP_NAME}/admin-users`;
-
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/users`;
 
 const GET_USERS_SUCCESS = `${REDUCER_NAME}/GET_USERS_SUCCESS`;
 const GET_USERS_ERROR = `${REDUCER_NAME}/GET_USERS_ERROR`;

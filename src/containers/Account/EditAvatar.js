@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Button from "../../components/Button";
-import Modal, {ModalActions, ModalContent, ModalDescription, ModalHeader} from "../../components/Modal";
-import Image from "../../components/Image";
-import Header, {HeaderContent} from "../../components/Header";
-import Text from "../../components/Text";
-import InputFile from "../../components/InputFile";
-import Grid, {GridColumn} from "../../components/Grid";
+import Button from '../../components/Button';
+import Modal, {ModalActions, ModalContent, ModalDescription, ModalHeader} from '../../components/Modal';
+import Image from '../../components/Image';
+import Header, {HeaderContent} from '../../components/Header';
+import Text from '../../components/Text';
+import InputFile from '../../components/InputFile';
+import Grid, {GridColumn} from '../../components/Grid';
 import {
     closeEditAvatarModal, editAvatar, onChangeAvatar,
     openEditAvatarModal
-} from "../../redux/modules/account/editAvatar";
+} from '../../store/modules/account/editAvatar';
+import PropTypes from 'prop-types';
 
 class EditAvatarContainer extends Component {
 
@@ -71,16 +72,16 @@ class EditAvatarContainer extends Component {
                                         <GridColumn computer={7} tablet={7} mobile={14}>
                                             {newAvatar &&
                                             <Image src={this.generateImageUrl()} size='medium' alt='avatar'/>}
-                                            <p>{newAvatar && <Text id="photo.confirmation" values={{fileName: newAvatar.name}}/>}</p>
+                                            <p>{newAvatar && <Text id='photo.confirmation' values={{fileName: newAvatar.name}}/>}</p>
                                         </GridColumn>
                                     </Grid>
                                 </ModalDescription>
                             </ModalContent>
                             <ModalActions>
                                 <Button primary onClick={this.onEditAvatar} disabled={!newAvatar}><Text
-                                    id="confirm"/></Button>
+                                    id='confirm'/></Button>
                                 <Button onClick={this.onClickCancelButton}><Text
-                                    id="cancel"/></Button>
+                                    id='cancel'/></Button>
                             </ModalActions>
                         </Modal>
                     </HeaderContent>
@@ -93,9 +94,9 @@ class EditAvatarContainer extends Component {
 const mapStateToProps = ({accountReducers}) => {
     const {editAvatarReducer, accountInfoReducer} = accountReducers;
     return {
-        info: accountInfoReducer['info'],
-        newAvatar: editAvatarReducer['newAvatar'],
-        isEditAvatarModalOpened: editAvatarReducer['isEditAvatarModalOpened']
+        info: accountInfoReducer.info,
+        newAvatar: editAvatarReducer.newAvatar,
+        isEditAvatarModalOpened: editAvatarReducer.isEditAvatarModalOpened
     }
 };
 
@@ -103,6 +104,19 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+EditAvatarContainer.propTypes = {
+    info: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+        createdAt: PropTypes.number.isRequired,
+        updatedAt: PropTypes.number.isRequired
+    }),
+    isEditAvatarModalOpened: PropTypes.bool.isRequired,
+    newAvatar: PropTypes.object
 };
 
 export default withRouter(connect(

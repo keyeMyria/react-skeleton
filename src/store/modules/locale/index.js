@@ -1,15 +1,15 @@
 import {getLocaleData} from '../../../i18n/utils';
-import {APP_NAME} from "../../../config";
+import {APP_NAME} from '../../../config';
 
-const SIGN_IN_SUCCESS = `${APP_NAME}/authentication/SIGN_IN_SUCCESS`;
-const LOGOUT = `${APP_NAME}/authentication/LOGOUT`;
+const REDUCER_NAME = `${APP_NAME}/locale`;
+
+const CHANGE_LOCALE_DATA = `${REDUCER_NAME}/CHANGE_LOCALE_DATA`;
 
 const initState = getLocaleData();
 
 export default (state = initState, action) => {
     switch (action.type) {
-        case SIGN_IN_SUCCESS:
-        case LOGOUT: {
+        case CHANGE_LOCALE_DATA: {
             let newLocale = getLocaleData();
             return {...state, locale: newLocale.locale, key: newLocale.key, messages: newLocale.messages};
         }
@@ -17,3 +17,8 @@ export default (state = initState, action) => {
             return state;
     }
 }
+
+
+export const updateLocaleData = () => {
+    return {type: CHANGE_LOCALE_DATA}
+};

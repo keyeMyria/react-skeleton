@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {confirmAccount} from "../../redux/modules/account/confirmAccount";
-import Grid, {GridColumn} from "../../components/Grid";
-import Container from "../../components/Container";
-import Message from "../../components/Message";
-import Text from "../../components/Text";
+import {confirmAccount} from '../../store/modules/account/confirmAccount';
+import Grid, {GridColumn} from '../../components/Grid';
+import Container from '../../components/Container';
+import Message from '../../components/Message';
+import Text from '../../components/Text';
+import PropTypes from 'prop-types';
 
 class ConfirmAccountContainer extends Component {
 
@@ -27,7 +28,8 @@ class ConfirmAccountContainer extends Component {
             <Grid centered>
                 <GridColumn computer={8} tablet={12} mobile={14} textAlign='center'>
                     <Container>
-                        {confirmed ? <Message success>{successMessage}</Message> : <Message error>{errorMessage}</Message>}
+                        {confirmed ? <Message success>{successMessage}</Message> :
+                            <Message error>{errorMessage}</Message>}
                         <div><Text id='redirecting'/></div>
                     </Container>
                 </GridColumn>
@@ -39,9 +41,9 @@ class ConfirmAccountContainer extends Component {
 const mapStateToProps = ({accountReducers}) => {
     const {confirmAccountReducer} = accountReducers;
     return {
-        confirmed: confirmAccountReducer['confirmed'],
-        successMessage: confirmAccountReducer['successMessage'],
-        errorMessage: confirmAccountReducer['errorMessage']
+        confirmed: confirmAccountReducer.confirmed,
+        successMessage: confirmAccountReducer.successMessage,
+        errorMessage: confirmAccountReducer.errorMessage
     }
 };
 
@@ -49,6 +51,12 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+ConfirmAccountContainer.propTypes = {
+    confirmed: PropTypes.bool.isRequired,
+    successMessage: PropTypes.string,
+    errorMessage: PropTypes.string
 };
 
 export default withRouter(connect(

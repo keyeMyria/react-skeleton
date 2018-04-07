@@ -1,11 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {put} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {put} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_CHANGE_PASSWORD} from './constants';
 
-const URI_ACCOUNT = '/account';
-const URI_PASSWORD = '/password';
-
-const REDUCER_NAME = `${APP_NAME}/account`;
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/change-password`;
 
 const PASSWORD_FORM_COMPLETED = `${REDUCER_NAME}/PASSWORD_FORM_COMPLETED`;
 const PASSWORD_FORM_INCOMPLETE = `${REDUCER_NAME}/PASSWORD_FORM_INCOMPLETE`;
@@ -63,7 +60,7 @@ export const changePassword = credentials => {
         if (password !== passwordConfirmation) {
             dispatch({type: CHANGE_PASSWORD_PASSWORDS_NOT_MATCHING_ERROR});
         } else {
-            put(URI_ACCOUNT + URI_PASSWORD, {
+            put(URI_CHANGE_PASSWORD, {
                 oldPassword: oldPassword,
                 password: password
             }, null).then(response => {

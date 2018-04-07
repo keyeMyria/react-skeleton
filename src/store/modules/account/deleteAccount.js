@@ -1,10 +1,8 @@
-import {APP_NAME} from "../../../config";
-import {del} from "../../../utils/http";
-import {LOCATION_CHANGE} from "react-router-redux";
+import {del} from '../../../utils/http';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {REDUCERS_GROUP_PREFIX, URI_ACCOUNT} from './constants';
 
-const URI_ACCOUNT = '/account';
-
-const REDUCER_NAME = `${APP_NAME}/account`;
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/delete`;
 
 const DELETE_ACCOUNT_REQUEST_SUCCESS = `${REDUCER_NAME}/DELETE_ACCOUNT_REQUEST_SUCCESS`;
 const DELETE_ACCOUNT_REQUEST_ERROR = `${REDUCER_NAME}/DELETE_ACCOUNT_REQUEST_ERROR`;

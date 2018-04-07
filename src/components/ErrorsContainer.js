@@ -2,7 +2,7 @@ import React from 'react';
 import {Message} from 'semantic-ui-react';
 
 export default ({message, errors}) => {
-    if (!message && errors.length === 0) {
+    if ((!message && !errors) || errors.length === 0) {
         return '';
     }
     return errors && errors.length > 0

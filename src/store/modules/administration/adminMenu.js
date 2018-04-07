@@ -1,6 +1,6 @@
-import {APP_NAME} from "../../../config";
+import {REDUCERS_GROUP_PREFIX} from './constants';
 
-const REDUCER_NAME = `${APP_NAME}/admin-menu`;
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/menu`;
 
 const CHANGE_ACTIVE_PAGE = `${REDUCER_NAME}/CHANGE_ACTIVE_PAGE`;
 

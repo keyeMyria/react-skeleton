@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {cleanFilters, getUsers, setEmailValue} from '../../redux/modules/administration/adminUsers';
+import {cleanFilters, getUsers, setEmailValue} from '../../store/modules/administration/adminUsers';
 import Button from '../../components/Button';
 import InfiniteScroll from '../../components/InfiniteScroll';
 import {Input} from '../../components/Form';
 import Form from '../../components/Form';
-import Container from "../../components/Container";
-import {changeActivePage} from "../../redux/modules/administration/adminMenu";
-import Loader from "../../components/Loader";
-import Icon from "../../components/Icon";
-import Text from "../../components/Text";
-import Message from "../../components/Message";
-import Item, {ItemContent, ItemGroup, ItemHeader, ItemImage, ItemSubHeader} from "../../components/Item";
+import Container from '../../components/Container';
+import {changeActivePage} from '../../store/modules/administration/adminMenu';
+import Loader from '../../components/Loader';
+import Icon from '../../components/Icon';
+import Text from '../../components/Text';
+import Message from '../../components/Message';
+import Item, {ItemContent, ItemGroup, ItemHeader, ItemImage, ItemSubHeader} from '../../components/Item';
+import PropTypes from 'prop-types';
 
 class UsersContainer extends Component {
 
@@ -115,14 +116,14 @@ class UsersContainer extends Component {
 const mapStateToProps = ({adminReducers}) => {
     const {adminUsersReducer} = adminReducers;
     return {
-        users: adminUsersReducer['users'],
-        page: adminUsersReducer['page'],
-        size: adminUsersReducer['size'],
-        numberOfPages: adminUsersReducer['numberOfPages'],
-        isLast: adminUsersReducer['isLast'],
-        email: adminUsersReducer['email'],
-        filtered: adminUsersReducer['filtered'],
-        loading: adminUsersReducer['loading']
+        users: adminUsersReducer.users,
+        page: adminUsersReducer.page,
+        size: adminUsersReducer.size,
+        numberOfPages: adminUsersReducer.numberOfPages,
+        isLast: adminUsersReducer.isLast,
+        email: adminUsersReducer.email,
+        filtered: adminUsersReducer.filtered,
+        loading: adminUsersReducer.loading
     }
 };
 
@@ -130,6 +131,17 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+UsersContainer.propTypes = {
+    users: PropTypes.array.isRequired,
+    page: PropTypes.number.isRequired,
+    size: PropTypes.number.isRequired,
+    numberOfPages: PropTypes.number.isRequired,
+    isLast: PropTypes.bool.isRequired,
+    email: PropTypes.string.isRequired,
+    filtered: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 
 export default withRouter(connect(

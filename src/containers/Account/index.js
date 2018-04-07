@@ -4,15 +4,15 @@ import {connect} from 'react-redux';
 import Title from '../../components/Title';
 import Grid, {GridColumn} from '../../components/Grid';
 import Container from '../../components/Container';
-import AccountInfoContainer from "./AccountInfo";
-import EditAccountInfoContainer from "./EditAccountInfo";
-import EditPasswordContainer from "./EditPassword";
-import {Route} from "../../utils/router";
-import DeleteAccountContainer from "./DeleteAccount";
-import ConfirmDeleteAccountContainer from "./ConfirmDeleteAccount";
-import {changeTitle} from "../../redux/modules/menu/index";
-import {getAccountInfo} from "../../redux/modules/account/accountInfo";
-import ConfirmChangeEmailContainer from "./ConfirmChangeEmail";
+import AccountInfoContainer from './AccountInfo';
+import EditAccountInfoContainer from './EditAccountInfo';
+import EditPasswordContainer from './EditPassword';
+import {Route} from '../../utils/router';
+import DeleteAccountContainer from './DeleteAccount';
+import ConfirmDeleteAccountContainer from './ConfirmDeleteAccount';
+import {changeTitle} from '../../store/modules/menu/index';
+import {getAccountInfo} from '../../store/modules/account/accountInfo';
+import ConfirmChangeEmailContainer from './ConfirmChangeEmail';
 
 class AccountContainer extends Component {
 

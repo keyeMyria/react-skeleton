@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Text from "../../components/Text";
-import Grid, {GridColumn} from "../../components/Grid";
-import Container from "../../components/Container";
-import Message from "../../components/Message";
-import {confirmChangeEmail} from "../../redux/modules/account/changeEmail";
+import PropTypes from 'prop-types';
+import Text from '../../components/Text';
+import Grid, {GridColumn} from '../../components/Grid';
+import Container from '../../components/Container';
+import Message from '../../components/Message';
+import {confirmChangeEmail} from '../../store/modules/account/changeEmail';
 
 class ConfirmChangeEmailContainer extends Component {
 
@@ -39,8 +40,8 @@ class ConfirmChangeEmailContainer extends Component {
 const mapStateToProps = ({accountReducers}) => {
     const {changeEmailReducer} = accountReducers;
     return {
-        successMessage: changeEmailReducer['successMessage'],
-        errorMessage: changeEmailReducer['errorMessage']
+        successMessage: changeEmailReducer.successMessage,
+        errorMessage: changeEmailReducer.errorMessage
     }
 };
 
@@ -48,6 +49,11 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+ConfirmChangeEmailContainer.propTypes = {
+    successMessage: PropTypes.string,
+    errorMessage: PropTypes.string
 };
 
 export default connect(

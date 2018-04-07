@@ -1,7 +1,7 @@
 import adminMenuReducer from './adminMenu';
 import adminUserReducer from './adminUser';
 import adminUsersReducer from './adminUsers';
-import {combineReducers} from "redux";
+import {combineReducers} from 'redux';
 
 export default combineReducers({
     adminMenuReducer,

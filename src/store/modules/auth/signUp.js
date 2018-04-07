@@ -1,26 +1,25 @@
 import {LOCATION_CHANGE, push} from 'react-router-redux';
-import {APP_NAME} from "../../../config";
-import {post} from "../../../utils/http";
+import {post} from '../../../utils/http';
+import {REDUCERS_GROUP_PREFIX, URI_SIGN_UP} from './constants';
 
-const URI_AUTH = '/auth';
-const URI_SIGN_UP = URI_AUTH + '/sign-up';
+const REDUCER_NAME = `${REDUCERS_GROUP_PREFIX}/sign-up`;
 
-const SIGN_UP_SUCCESS = `${APP_NAME}/authentication/SIGN_UP_SUCCESS`;
-const SIGN_UP_ERROR = `${APP_NAME}/authentication/SIGN_UP_ERROR`;
-const COMPLETED_SIGN_UP_FORM = `${APP_NAME}/authentication/COMPLETED_SIGN_UP_FORM`;
-const INCOMPLETE_SIGN_UP_FORM = `${APP_NAME}/authentication/INCOMPLETE_SIGN_UP_FORM`;
-const SET_SIGN_UP_FORM_FIELD = `${APP_NAME}/authentication/SET_SIGN_UP_FORM_FIELD`;
-const SIGN_UP_PASSWORDS_NOT_MATCHING_ERROR = `${APP_NAME}/authentication/SIGN_UP_PASSWORDS_NOT_MATCHING_ERROR`;
+const SIGN_UP_SUCCESS = `${REDUCER_NAME}/SIGN_UP_SUCCESS`;
+const SIGN_UP_ERROR = `${REDUCER_NAME}/SIGN_UP_ERROR`;
+const COMPLETED_SIGN_UP_FORM = `${REDUCER_NAME}/COMPLETED_SIGN_UP_FORM`;
+const INCOMPLETE_SIGN_UP_FORM = `${REDUCER_NAME}/INCOMPLETE_SIGN_UP_FORM`;
+const SET_SIGN_UP_FORM_FIELD = `${REDUCER_NAME}/SET_SIGN_UP_FORM_FIELD`;
+const SIGN_UP_PASSWORDS_NOT_MATCHING_ERROR = `${REDUCER_NAME}/SIGN_UP_PASSWORDS_NOT_MATCHING_ERROR`;
 
 const initState = {
     formData: {
-        email: null,
-        password: null,
-        passwordConfirmation: null,
-        passwordsNotMatching: false,
-        name: null,
-        gender: null
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+        name: '',
+        gender: ''
     },
+    passwordsNotMatching: false,
     error: null,
     incompleteForm: true,
     errors: [],

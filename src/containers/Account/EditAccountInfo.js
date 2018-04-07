@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Button from "../../components/Button";
-import {FormField, FormGroup, Input, Select} from "../../components/Form";
-import Form from "../../components/Form";
-import ErrorsContainer from "../../components/ErrorsContainer";
-import EditAvatar from "./EditAvatar";
-import Text from "../../components/Text";
+import Button from '../../components/Button';
+import {FormField, FormGroup, Input, Select} from '../../components/Form';
+import Form from '../../components/Form';
+import ErrorsContainer from '../../components/ErrorsContainer';
+import EditAvatar from './EditAvatar';
+import Text from '../../components/Text';
 import {
     editAccountInfo, setEditAccountFormFieldValue,
     setInitialAccountInfo
-} from "../../redux/modules/account/editAccountInfo";
+} from '../../store/modules/account/editAccountInfo';
+import PropTypes from 'prop-types';
 
 const GENDER_OPTIONS = [
     {key: 'male', value: 'MALE', icon: 'man'},
@@ -34,9 +35,10 @@ class EditAccountInfoContainer extends Component {
     }
 
     componentWillMount() {
-        const {dispatch, info, language} = this.props;
-        dispatch(setInitialAccountInfo({...info, language: language}));
-
+        const {dispatch, info, language, history} = this.props;
+        info.email !== ''
+            ? dispatch(setInitialAccountInfo({...info, language: language}))
+            : history.push('/account');
     }
 
     onSubmit() {
@@ -122,11 +124,12 @@ class EditAccountInfoContainer extends Component {
 const mapStateToProps = ({accountReducers}) => {
     const {accountInfoReducer, editAccountInfoReducer} = accountReducers;
     return {
-        info: accountInfoReducer['info'],
-        language: accountInfoReducer['language'].toUpperCase(),
-        incompleteForm: editAccountInfoReducer['incompleteForm'],
-        formData: editAccountInfoReducer['formData']
-
+        info: accountInfoReducer.info,
+        language: accountInfoReducer.language.toUpperCase(),
+        incompleteForm: editAccountInfoReducer.incompleteForm,
+        formData: editAccountInfoReducer.formData,
+        errorMessage: editAccountInfoReducer.errorMessage,
+        errors: editAccountInfoReducer.errors
     }
 };
 
@@ -134,6 +137,27 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+EditAccountInfoContainer.propTypes = {
+    info: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+        createdAt: PropTypes.number.isRequired,
+        updatedAt: PropTypes.number.isRequired
+    }),
+    formData: PropTypes.shape({
+        email: PropTypes.string,
+        name: PropTypes.string,
+        gender: PropTypes.string,
+        avatar: PropTypes.string
+    }),
+    language: PropTypes.string.isRequired,
+    incompleteForm: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string,
+    errors: PropTypes.array,
 };
 
 export default connect(

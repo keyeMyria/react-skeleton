@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Button from "../../components/Button";
-import Image from "../../components/Image";
-import Divider from "../../components/Divider";
-import {GridColumn} from "../../components/Grid";
-import Grid from "../../components/Grid";
-import Date from "../../components/Date";
-import Header, {HeaderContent} from "../../components/Header";
-import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from "../../redux/modules/administration/adminUser";
-import ConfirmationModal from "../../components/ConfirmationModal";
-import Loader from "../../components/Loader";
-import Icon from "../../components/Icon";
-import GenderIcon from "../../components/GenderIcon";
-import Text from "../../components/Text";
+import Button from '../../components/Button';
+import Image from '../../components/Image';
+import Divider from '../../components/Divider';
+import {GridColumn} from '../../components/Grid';
+import Grid from '../../components/Grid';
+import Date from '../../components/Date';
+import Header, {HeaderContent} from '../../components/Header';
+import {openDeleteUserModal, getUser, closeDeleteUserModal, deleteUser} from '../../store/modules/administration/adminUser';
+import ConfirmationModal from '../../components/ConfirmationModal';
+import Loader from '../../components/Loader';
+import Icon from '../../components/Icon';
+import GenderIcon from '../../components/GenderIcon';
+import Text from '../../components/Text';
+import PropTypes from 'prop-types';
 
 class UserInfoContainer extends Component {
 
@@ -69,9 +70,9 @@ class UserInfoContainer extends Component {
             ? <Loader active inline='centered'/>
             : (
                 <div>
-                    <Header size="huge" textAlign='center'>
+                    <Header size='huge' textAlign='center'>
                         <HeaderContent>
-                            <Image src={info.avatar} size='small' alt="avatar" avatar/>
+                            <Image src={info.avatar} size='small' alt='avatar' avatar/>
                             <br/>
                             <b>{info.name}</b>
                         </HeaderContent>
@@ -79,7 +80,7 @@ class UserInfoContainer extends Component {
                     <Divider/>
                     <Grid>
                         <GridColumn computer={8} tablet={8} mobile={14}>
-                            <b><Icon name="mail"/><Text id='email'/></b>: {info.email}
+                            <b><Icon name='mail'/><Text id='email'/></b>: {info.email}
                         </GridColumn>
                         <GridColumn computer={8} tablet={8} mobile={14}>
                             <b><Icon name='intergender'/><Text id='gender'/></b>: {gender}<GenderIcon gender={gender}/>
@@ -124,11 +125,11 @@ class UserInfoContainer extends Component {
 const mapStateToProps = ({adminReducers}) => {
     const {adminUserReducer} = adminReducers;
     return {
-        info: adminUserReducer['info'],
-        errorCode: adminUserReducer['errorCode'],
-        deleteUserModalOpened: adminUserReducer['deleteUserModalOpened'],
-        deleted: adminUserReducer['deleted'],
-        loading: adminUserReducer['loading']
+        info: adminUserReducer.info,
+        errorCode: adminUserReducer.errorCode,
+        deleteUserModalOpened: adminUserReducer.deleteUserModalOpened,
+        deleted: adminUserReducer.deleted,
+        loading: adminUserReducer.loading
     }
 };
 
@@ -136,6 +137,21 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+UserInfoContainer.propTypes = {
+    info: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+        createdAt: PropTypes.number.isRequired,
+        updatedAt: PropTypes.number.isRequired
+    }),
+    deleteUserModalOpened: PropTypes.bool.isRequired,
+    deleted: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    errorCode: PropTypes.string
 };
 
 export default withRouter(connect(

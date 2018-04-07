@@ -11,7 +11,8 @@ import Container from '../../components/Container';
 import Grid, {GridColumn} from '../../components/Grid';
 import Form, {Checkbox, FormField, FormGroup, Input} from '../../components/Form';
 import Title from '../../components/Title';
-import {setSignInFormFieldValue, signIn} from "../../redux/modules/auth/session";
+import {setSignInFormFieldValue, signIn} from '../../store/modules/auth/session';
+import PropTypes from 'prop-types';
 
 class SignInContainer extends React.Component {
 
@@ -22,11 +23,11 @@ class SignInContainer extends React.Component {
     }
 
     onSubmit() {
-        const {dispatch, email, password, remember} = this.props;
+        const {dispatch, formData} = this.props;
         let loginCredentials = {
-            email: email,
-            password: password,
-            remember: remember
+            email: formData.email,
+            password: formData.password,
+            remember: formData.remember
         };
         dispatch(signIn(loginCredentials));
     }
@@ -37,13 +38,12 @@ class SignInContainer extends React.Component {
     }
 
     render() {
-        const {error, incompleteForm} = this.props;
-
+        const {errorMessage, incompleteForm, formData} = this.props;
         return (
             <Grid centered>
                 <GridColumn textAlign='center'>
                     <Container>
-                        {error && <Message negative>{error}</Message>}
+                        {errorMessage && <Message negative>{errorMessage}</Message>}
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup widths='equal'>
                                 <Title id='login'/>
@@ -53,6 +53,7 @@ class SignInContainer extends React.Component {
                                         type='email'
                                         name='email'
                                         placeholderid='email'
+                                        value={formData.email}
                                         onChange={this.onChange}
                                     />
                                 </FormField>
@@ -62,19 +63,20 @@ class SignInContainer extends React.Component {
                                         type='password'
                                         name='password'
                                         placeholderid='password'
+                                        value={formData.password}
                                         onChange={this.onChange}
                                     />
                                 </FormField>
                                 <FormField width={1}>
-                                    <Checkbox name='remember' labelid="remember.me" onChange={this.onChange}/>
+                                    <Checkbox value={formData.remember} name='remember' labelid='remember.me' onChange={this.onChange}/>
                                 </FormField>
                                 <FormField width={1}>
                                     <Button primary type='submit' disabled={incompleteForm}><Text id='login'/></Button>
                                 </FormField>
                                 <FormField width={1}>
-                                    <Text id='not.have.account.yet' values={{
+                                    <Text id='not.remember.password' values={{
                                         icon: <Icon name='help'/>,
-                                        link: <Link to='/reset-password'><Text id='register.here'/></Link>
+                                        link: <Link to='/reset-password'><Text id='here'/></Link>
                                     }}/>
                                 </FormField>
                             </FormGroup>
@@ -89,14 +91,10 @@ class SignInContainer extends React.Component {
 
 const mapStateToProps = ({authReducers}) => {
     const {sessionReducer} = authReducers;
-
     return {
-        email: sessionReducer['email'],
-        password: sessionReducer['password'],
-        remember: sessionReducer['remember'],
+        formData: sessionReducer.formData,
         incompleteForm: sessionReducer.incompleteForm,
-        error: sessionReducer.error
-
+        errorMessage: sessionReducer.errorMessage
     }
 };
 
@@ -104,6 +102,16 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatch
     }
+};
+
+SignInContainer.propTypes = {
+    formData: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+        remember: PropTypes.bool
+    }),
+    incompleteForm: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string
 };
 
 export default withRouter(connect(
